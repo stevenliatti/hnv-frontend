@@ -5,7 +5,7 @@ fetch(env.API_URL + "?limitMovie=2&limitActor=1&limitActorFriends=1")
   .then(graph => {
     console.log(graph)
     graph.nodes.forEach(node => {
-      const actor = node.properties
+      const actor = node.data
 
       let link = document.createElement("a")
       link.href = "https://www.themoviedb.org/person/" + actor.tmdbId
@@ -17,7 +17,7 @@ fetch(env.API_URL + "?limitMovie=2&limitActor=1&limitActorFriends=1")
       image.alt = actor.name
 
       let p = document.createElement("p")
-      
+
       p.appendChild(image)
       p.appendChild(link)
 
