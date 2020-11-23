@@ -1,6 +1,6 @@
 let actorsDiv = document.getElementById("actors")
 
-fetch(env.API_URL + "?limitMovie=2&limitActor=1&limitActorFriends=1")
+fetch(env.API_BASE_URL + "?limitMovie=2&limitActor=1&limitActorFriends=1")
   .then(res => res.json())
   .then(graph => {
     console.log(graph)
