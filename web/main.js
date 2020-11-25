@@ -1,34 +1,20 @@
-let actorsDiv = document.getElementById("actors")
-
+// API call to get actors with KNWOS rels as graph(nodes, rels)
 function getActors(limitMovie, limitActor, limitActorFriends) {
   return fetch(env.API_BASE_URL + `/actors?limitMovie=${limitMovie}&limitActor=${limitActor}&limitActorFriends=${limitActorFriends}`)
     .then(res => res.json())
 }
 
-// let actors = getActors(1, 1, 1)
-//   .then(graph => {
-//     console.log(graph)
-//     graph.nodes.forEach(node => {
-//       const actor = node.data
-
-//       let link = document.createElement("a")
-//       link.href = "https://www.themoviedb.org/person/" + actor.tmdbId
-//       link.target = "_blank"
-//       link.innerText = actor.name
-
-//       let image = document.createElement("img")
-//       image.src = "https://image.tmdb.org/t/p/w154/" + actor.profile_path
-//       image.alt = actor.name
-
-//       let p = document.createElement("p")
-
-//       p.appendChild(image)
-//       p.appendChild(link)
-
-//       actorsDiv.appendChild(p)
-//     });
-//   })
-//   .catch(err => console.error(err))
+// Node mouseover / mouseout management, to show popup with more infos
+function popupManagement(cy, popupFn, ms) {
+  let overTimer
+  cy.on('mouseout', 'node', function () {
+    console.log('clearTimeout')
+    clearTimeout(overTimer)
+  })
+  cy.on('mouseover', 'node', function (evt) {
+    overTimer = setTimeout(() => { popupFn(evt) }, ms)
+  })
+}
 
 Promise.all([
   fetch('cy-style.json').then(res => res.json()),
@@ -37,14 +23,23 @@ Promise.all([
   let style = data[0]
   let graph = data[1]
 
-  var cy = window.cy = cytoscape({
+  let cy = cytoscape({
     container: document.getElementById('cy'),
-
+    minZoom: 0.1,
+    maxZoom: 10,
+    style: style,
+    elements: graph,
     layout: {
       name: 'cise',
       clusters: function (node) {
         return node.data('knowsCommunity')
       },
+
+      // -------- Optional parameters --------
+      // Whether to animate the layout
+      // - true : Animate while the layout is running
+      // - false : Just show the end result
+      // - 'end' : Animate directly to the end result
       animate: false,
 
       // number of ticks per frame; higher is faster but more jerky
@@ -61,7 +56,7 @@ Promise.all([
       fit: true,
 
       // Padding in rendered co-ordinates around the layout
-      padding: 300,
+      padding: 100,
 
       // separation amount between nodes in a cluster
       // note: increasing this amount will also increase the simulation time 
@@ -69,7 +64,7 @@ Promise.all([
 
       // Inter-cluster edge length factor 
       // (2.0 means inter-cluster edges should be twice as long as intra-cluster edges)
-      idealInterClusterEdgeLengthCoefficient: 1.4,
+      idealInterClusterEdgeLengthCoefficient: 3,
 
       // Whether to pull on-circle nodes inside of the circle
       allowNodesInsideCircle: false,
@@ -93,15 +88,14 @@ Promise.all([
       // Layout event callbacks; equivalent to `layout.one('layoutready', callback)` for example
       ready: function () { }, // on layoutready
       stop: function () { }, // on layoutstop
-    },
-
-    style: style,
-
-    elements: graph
-
+    }
   })
   console.log(graph)
 
-  // cy.layout.run()
+  popupManagement(cy, (evt) => {
+    let node = evt.target
+    console.log('mouseover ' + cy.$id(node.id()).data()['name'])
+  }, 1000)
+
 })
   .catch(err => console.error(err))
