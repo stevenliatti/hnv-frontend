@@ -1,3 +1,4 @@
+
 // API call to get actors with KNWOS rels as graph(nodes, rels)
 function getActors(limitMovie, limitActor, limitActorFriends) {
   return fetch(env.API_BASE_URL + `/actors?limitMovie=${limitMovie}&limitActor=${limitActor}&limitActorFriends=${limitActorFriends}`)
@@ -9,6 +10,7 @@ function popupManagement(cy, popupFn, ms) {
   let overTimer
   cy.on('mouseout', 'node', function () {
     console.log('clearTimeout')
+    unshowPopup();
     clearTimeout(overTimer)
   })
   cy.on('mouseover', 'node', function (evt) {
@@ -100,8 +102,33 @@ Promise.all([
 
   popupManagement(cy, (evt) => {
     let node = evt.target
-    console.log('mouseover ' + cy.$id(node.id()).data()['name'])
-  }, 1000)
+    // console.log('mouseover ' + cy.$id(node.id()).data()['name'])
+    showPopupAtNode(evt, cy);
+  }, 400)
 
 })
   .catch(err => console.error(err))
+
+
+function showPopupAtNode(evt, cy) {
+  let node = evt.target
+  let name = cy.$id(node.id()).data()['name'];
+
+  node.qtip({
+    content: name,
+    show: {
+       event: evt.type,
+       ready: true
+    },
+    hide: {
+       event: 'mouseout unfocus'
+    }
+  }, evt);
+}
+
+$(document).ready(function () {
+  $('#sidebarCollapse').on('click', function () {
+    $('#sidebar').toggleClass('active');
+    $(this).toggleClass('active');
+  });
+});
