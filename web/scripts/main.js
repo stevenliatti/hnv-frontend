@@ -10,7 +10,6 @@ function popupManagement(cy, popupFn, ms) {
   let overTimer
   cy.on('mouseout', 'node', function () {
     console.log('clearTimeout')
-    unshowPopup();
     clearTimeout(overTimer)
   })
   cy.on('mouseover', 'node', function (evt) {
