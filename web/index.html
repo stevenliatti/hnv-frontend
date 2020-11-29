@@ -2,264 +2,269 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hollywood Network Visualizer</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <!-- qtip -->
-    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/jquery.qtip.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hollywood Network Visualizer</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <!-- qtip -->
+  <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/jquery.qtip.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
 
-    <!-- Font Awesome JS -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+  <!-- Font Awesome JS -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
 
 </head>
 
 <body>
-    <!-- <h1>Hollywood Network Analyzer</h1> -->
+  <!-- <h1>Hollywood Network Analyzer</h1> -->
 
-    <div class="wrapper">
-        <!-- Sidebar Holder -->
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <h5>Hollywood Network Analyzer</h5>
-            </div>
+  <div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+      <div class="sidebar-header">
+        <h5>Hollywood Network Analyzer</h5>
+      </div>
 
-            <ul class="list-unstyled components">
-                <p>Menu</p>
-                <li>
-                    <a href="#movieSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Movie</a>
-                    <ul class="collapse list-unstyled" id="movieSubmenu">
-                        <li>
-                            <a onclick="bestMovies();">Best movies</a>
-                        </li>
-                        <li>
-                            <a onclick="movieGenre();">Movies & genre</a>
-                        </li>
-                        <li>
-                            <a onclick="moviePeoplePlayIn();">Actors</a>
-                        </li>
-                        <li>
-                            <a onclick="moviePeopleWorkIn();">Movie makers</a>
-                        </li>
-                        <li>
-                            <a onclick="movieSimilar();">Similar movies</a>
-                        </li>
-                        <li>
-                            <a onclick="movieRecommendations();">Recommended movies</a>
-                        </li>
-                        <li>
-                            <select class="form-control basicAutoSelectMovie mt-2 searchInput" id="searchMovie" name="simple_select"
-                                    placeholder="Search movie" autocomplete="off"></select>
-                            <p>Included relations :</p>
-                            <div class="text-center mt-2">
-                                <label class="ml-2">
+      <ul class="list-unstyled components">
+        <p>Menu</p>
+        <li>
+          <a href="#movieSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Movie</a>
+          <ul class="collapse list-unstyled" id="movieSubmenu">
+            <li>
+              <a onclick="bestMovies();">Best movies</a>
+            </li>
+            <li>
+              <a onclick="movieGenre();">Movies & genre</a>
+            </li>
+            <li>
+              <a onclick="moviePeoplePlayIn();">Actors</a>
+            </li>
+            <li>
+              <a onclick="moviePeopleWorkIn();">Movie makers</a>
+            </li>
+            <li>
+              <a onclick="movieSimilar();">Similar movies</a>
+            </li>
+            <li>
+              <a onclick="movieRecommendations();">Recommended movies</a>
+            </li>
+            <li>
+              <select class="form-control basicAutoSelectMovie mt-2 searchInput" id="searchMovie" name="simple_select" placeholder="Search movie" autocomplete="off"></select>
+              <p>Included relations :</p>
+              <div class="text-center mt-2">
+                <label class="ml-2">
                                     <input type="checkbox" name="rbGenre" id="rdGenre">   Genre
                                     <span class="checkmark"></span>
                                 </label>
-                                <br/>
-                                <label class="ml-2">
+                <br/>
+                <label class="ml-2">
                                     <input type="checkbox" name="rbPeople" id="rdPeople">   People
                                     <span class="checkmark"></span>
                                 </label>
-                                <label class="ml-2">
+                <label class="ml-2">
                                     <input type="checkbox" name="rbRecommendation" id="rdRecommendations">   Recommendations
                                     <span class="checkmark"></span>
                                 </label>
-                                <label class="ml-2">
+                <label class="ml-2">
                                     <input type="checkbox" name="rbSimilar" id="rbSimilar">   Similar
                                     <span class="checkmark"></span>
                                 </label>
-                                <label class="ml-2">
+                <label class="ml-2">
                                     <input type="checkbox" name="rbSimilarJaccard" id="rbSimilarJaccard">   Similar Jaccard
                                     <span class="checkmark"></span>
                                 </label>
-                                <button class="btn btn-success mt-2" onclick="onSearchMovie();">Show movie</button>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#peopleSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">People</a>
-                    <ul class="collapse list-unstyled" id="peopleSubmenu">
-                        <li>
-                            <a onclick="bestPeoples();">Best peoples</a>
-                        </li>
-                        <li>
-                            <a onclick="knowledgePeople();">Knowledge between people</a>
-                        </li>
-                        <li>
-                            <a onclick="peopleKnownFor();">People known for</a>
-                        </li>
-                        <li>
-                            <select class="form-control basicAutoSelectPeople mt-2 searchInput" id="searchPeople" name="simple_select"
-                                    placeholder="Search people" autocomplete="off"></select>
-                            <p>Included relations :</p>
-                            <div class="text-center mt-2">
-                                <label class="ml-2">
+                <button class="btn btn-success mt-2" onclick="onSearchMovie();">Show movie</button>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#peopleSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">People</a>
+          <ul class="collapse list-unstyled" id="peopleSubmenu">
+            <li>
+              <a onclick="bestPeoples();">Best peoples</a>
+            </li>
+            <li>
+              <a onclick="knowledgePeople();">Knowledge between people</a>
+            </li>
+            <li>
+              <a onclick="peopleKnownFor();">People known for</a>
+            </li>
+            <li>
+              <select class="form-control basicAutoSelectPeople mt-2 searchInput" id="searchPeople" name="simple_select" placeholder="Search people" autocomplete="off"></select>
+              <p>Included relations :</p>
+              <div class="text-center mt-2">
+                <label class="ml-2">
                                     <input type="checkbox" name="rbGenre" id="rdMovies">   Known for genre
                                     <span class="checkmark"></span>
                                 </label>
-                                <br/>
-                                <label class="ml-2">
+                <br/>
+                <label class="ml-2">
                                     <input type="checkbox" name="rbPeople" id="rdPeopleKnown">   Relationships
                                     <span class="checkmark"></span>
                                 </label>
-                                <label class="ml-2">
+                <label class="ml-2">
                                     <input type="checkbox" name="rdSimilarForActing" id="rdSimilarForActing">   Similar for acting
                                     <span class="checkmark"></span>
                                 </label>
-                                <label class="ml-2">
+                <label class="ml-2">
                                     <input type="checkbox" name="rdSimilarForWorking" id="rdSimilarForWorking">   Similar for working
                                     <span class="checkmark"></span>
                                 </label>
-                                <button class="btn btn-success mt-2" onclick="onSearchPeople();">Show people</button>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Genre</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a onclick="allGenres();">All genres</a>
-                        </li>
-                        <li>
-                            <select class="form-control basicAutoSelectGenre mt-2 searchInput" id="searchGenre" name="simple_select"
-                                    placeholder="Search genre" autocomplete="off"></select>
-                            <p>Included relations :</p>
-                            <div class="text-center mt-2">
-                                <label class="ml-2">
+                <button class="btn btn-success mt-2" onclick="onSearchPeople();">Show people</button>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Genre</a>
+          <ul class="collapse list-unstyled" id="pageSubmenu">
+            <li>
+              <a onclick="allGenres();">All genres</a>
+            </li>
+            <li>
+              <select class="form-control basicAutoSelectGenre mt-2 searchInput" id="searchGenre" name="simple_select" placeholder="Search genre" autocomplete="off"></select>
+              <p>Included relations :</p>
+              <div class="text-center mt-2">
+                <label class="ml-2">
                                     <input type="checkbox" name="rbGenre" id="rdMoviesAssociated">   Movies
                                     <span class="checkmark"></span>
                                 </label>
-                                <br/>
-                                <label class="ml-2">
+                <br/>
+                <label class="ml-2">
                                     <input type="checkbox" name="rbPeople" id="rdPeopleAssociated">   People associated
                                     <span class="checkmark"></span>
                                 </label>
-                                <button class="btn btn-success mt-2" onclick="onSearchGenre();">Show genre</button>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#pageShortestPathSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Shortest path</a>
-                    <ul class="collapse list-unstyled" id="pageShortestPathSubmenu">
-                        <li class="mt-1">
-                            <select class="form-control basicAutoSelectPeople searchInput" id="SPP1" name="simple_select"
-                                    placeholder="People 1" autocomplete="off"></select>
-                        </li>
-                        <li class="mt-1">
-                            <select class="form-control basicAutoSelectPeople searchInput" id="SPP2" name="simple_select"
-                                    placeholder="People 2" autocomplete="off"></select>
-                        </li>
-                        <li class="text-center mt-2">
-                            <button class="btn btn-success btn-sm mt-1" onclick="shortestPath();">Compute shortest path</button>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#pageTextualReqSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Textual request</a>
-                    <ul class="collapse list-unstyled" id="pageTextualReqSubmenu">
-                        <li>
-                            <a onclick="bestScoreMovies();" data-toggle="modal" data-target="#exampleModalLong">Best movies by score</a>
-                        </li>
-                        <li>
-                            <a onclick="bestScorePeoples();" data-toggle="modal" data-target="#exampleModalLong">Best peoples by score</a>
-                        </li>
-                        <li>
-                            <a onclick="bestDegreePeoples();" data-toggle="modal" data-target="#exampleModalLong">Best peoples by degree</a>
-                        </li>
-                        <li>
-                            <a onclick="bestDegreeGenres();" data-toggle="modal" data-target="#exampleModalLong">Best genres by degree</a>
-                        </li>
-                    </ul>
-                </li>
+                <button class="btn btn-success mt-2" onclick="onSearchGenre();">Show genre</button>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#pageShortestPathSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Shortest path</a>
+          <ul class="collapse list-unstyled" id="pageShortestPathSubmenu">
+            <li class="mt-1">
+              <select class="form-control basicAutoSelectPeople searchInput" id="SPP1" name="simple_select" placeholder="People 1" autocomplete="off"></select>
+            </li>
+            <li class="mt-1">
+              <select class="form-control basicAutoSelectPeople searchInput" id="SPP2" name="simple_select" placeholder="People 2" autocomplete="off"></select>
+            </li>
+            <li class="text-center mt-2">
+              <button class="btn btn-success btn-sm mt-1" onclick="shortestPath();">Compute shortest path</button>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#pageTextualReqSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Textual request</a>
+          <ul class="collapse list-unstyled" id="pageTextualReqSubmenu">
+            <li>
+              <a onclick="bestScoreMovies();" data-toggle="modal" data-target="#exampleModalLong">Best movies by score</a>
+            </li>
+            <li>
+              <a onclick="bestScorePeoples();" data-toggle="modal" data-target="#exampleModalLong">Best peoples by score</a>
+            </li>
+            <li>
+              <a onclick="bestDegreePeoples();" data-toggle="modal" data-target="#exampleModalLong">Best peoples by degree</a>
+            </li>
+            <li>
+              <a onclick="bestDegreeGenres();" data-toggle="modal" data-target="#exampleModalLong">Best genres by degree</a>
+            </li>
+          </ul>
+        </li>
 
-            </ul>
+      </ul>
 
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a onclick="();" class="download">Write your request</a>
-                </li>
-                <li>
-                    <a onclick="initialQuery();" class="article">Go to initial request</a>
-                </li>
-            </ul>
-        </nav>
+      <ul class="list-unstyled CTAs">
+        <li>
+          <a onclick="();" class="download">Write your request</a>
+        </li>
+        <li>
+          <a onclick="initialQuery();" class="article">Go to initial request</a>
+        </li>
+      </ul>
+    </nav>
 
-        <!-- Page Content Holder -->
-        <div id="content">
+    <!-- Page Content Holder -->
+    <div id="content">
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
 
-                    <button type="button" id="sidebarCollapse" class="navbar-btn">
+          <button type="button" id="sidebarCollapse" class="navbar-btn">
                         <span></span>
                         <span></span>
                         <span></span>
                     </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>
                     </button>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <input type="text" id="searchBar" style="margin-left: 70px; width: 1000px;" placeholder="Search" autocomplete=off>
-                        <!-- MENU DES PAGES PAS UTILISE
-                        <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                        </ul> -->
-                    </div>
-                </div>
-            </nav>
-             <div id="cy"></div>
-            <div style="display:none;height:200px;width:200px;border:3px solid green;" id="popup">Hi</div>
-
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- <input type="text" id="searchBar" style="margin-left: 70px; width: 1000px;" placeholder="Search" autocomplete=off> -->
+            <select class="form-control basicAutoSelectSearch mt-2" id="searchInput2" name="simple_select" placeholder="Search" autocomplete="off" style="margin-left: 70px; width: 1000px;"></select>
+          </div>
         </div>
+      </nav>
+
+      <div style="width: 80%; float: left;" id="cy"></div>
+
+      <!-- Loading side bar -->
+      <div style="text-align: center; width: 20%; float: right;" id="loading-slideshow">
+        <p style="font-size: 80%;">While you wait, learn about</p>
+        <p id="loading-slideshow-name">{...}</p>
+        <!-- <p style="font-size: 60%;">Click on the picture to see someone else</p> -->
+        <img id="loading-slideshow-picture" src="favicon-32x32.png" onclick="loadingAnother()" width="154" height="232">
+        <p style="text-align: justify; font-size: 50%;" id="loading-slideshow-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+          dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <a style="font-size: 80%;" target="_blank" href="https://www.themoviedb.org/" id="loading-slideshow-url">Go to their TBDb page</a>
+      </div>
+
+      <div style="display:none;height:200px;width:200px;border:3px solid green;" id="popup">Hi</div>
+
     </div>
- 
-    <!-- jQuery CDN - Slim version (=without AJAX) -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <!-- Popper.JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.17.0/cytoscape.min.js" integrity="sha512-IawH7O9E5azuuGrjPfWpcrniP8gqS0BL9Dr0zw/1cK81cGSgBcABfJUgHi9YvychZt+5SkQYEFeCvBOs0tilxA==" crossorigin="anonymous"></script>
-    
-    <script src="https://unpkg.com/layout-base/layout-base.js"></script>
-    <script src="https://unpkg.com/avsdf-base/avsdf-base.js"></script>
-    <script src="https://unpkg.com/cose-base/cose-base.js"></script>
-        
-    <script src="https://rawcdn.githack.com/iVis-at-Bilkent/cytoscape.js-cise/37f42b6a3c70f1c1641c10537f041b3df8aa65fb/cytoscape-cise.js"></script>
-  
+  <!-- jQuery CDN - Slim version (=without AJAX) -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <!-- Popper.JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  <!-- Bootstrap autocomplete CDN -->
+  <script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@v2.3.5/dist/latest/bootstrap-autocomplete.min.js"></script>
 
-     <!-- qtip -->
-     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-     <script src="http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/jquery.qtip.js"></script>
- 
-     <script src="https://rawcdn.githack.com/cytoscape/cytoscape.js-qtip/f1069de3636c8e27b4842f339fae41c63ff0b7a5/cytoscape-qtip.js"></script>
-     
-    <script src="env.js"></script>
-    <script src="scripts/main.js"></script>
+  <!-- qtip -->
+  <!-- <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/jquery.qtip.js"></script>
+  <script src="https://rawcdn.githack.com/cytoscape/cytoscape.js-qtip/f1069de3636c8e27b4842f339fae41c63ff0b7a5/cytoscape-qtip.js"></script> -->
+
+  <!-- Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.5/dist/umd/popper.min.js"></script>
+
+  <!-- Cytoscape -->
+  <script src="https://unpkg.com/layout-base/layout-base.js"></script>
+  <script src="https://unpkg.com/avsdf-base/avsdf-base.js"></script>
+  <script src="https://unpkg.com/cose-base/cose-base.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.17.0/cytoscape.min.js" integrity="sha512-IawH7O9E5azuuGrjPfWpcrniP8gqS0BL9Dr0zw/1cK81cGSgBcABfJUgHi9YvychZt+5SkQYEFeCvBOs0tilxA==" crossorigin="anonymous"></script>
+  <!-- Cytoscape CiSE -->
+  <script src="https://rawcdn.githack.com/iVis-at-Bilkent/cytoscape.js-cise/37f42b6a3c70f1c1641c10537f041b3df8aa65fb/cytoscape-cise.js"></script>
+  <!-- Cytoscape Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/cytoscape-popper@1.0.2/cytoscape-popper.min.js"></script>
+
+  <script src="env.js"></script>
+  <script src="scripts/global.js"></script>
+  <script src="scripts/request-api.js"></script>
+  <script src="scripts/loading-slideshow.js"></script>
+  <script src="scripts/popups.js"></script>
+  <script src="scripts/graph-cise.js"></script>
+  <script src="scripts/main.js"></script>
+  <script src="scripts/search.js"></script>
 </body>
 
 </html>
