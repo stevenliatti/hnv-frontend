@@ -18,7 +18,7 @@ $('.basicAutoSelectSearch').autoComplete({
         .then(res =>
           res.json().then(json => {
             // console.log(json.res);
-            callback(json.res);
+            callback(json);
           }))
     }
   }

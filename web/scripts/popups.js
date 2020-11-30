@@ -17,22 +17,6 @@ function popupManagement(cy, popupFn, ms) {
   })
 }
 
-function showPopupAtNode(evt, cy) {
-  let node = evt.target
-  let name = cy.$id(node.id()).data()["name"]
-
-  node.qtip({
-    content: name,
-    show: {
-      event: evt.type,
-      ready: true
-    },
-    hide: {
-      event: "mouseout unfocus"
-    }
-  }, evt);
-}
-
 function popupAtNode(node, type, cy) {
 
   switch (type) {
