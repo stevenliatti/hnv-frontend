@@ -59,7 +59,9 @@ function popupAtNode(node, type, cy) {
           },
           popper: {
             removeOnDestroy: true
-          }
+          },
+          renderedPosition: () => ({ x: 0, y: 0 }),
+          renderedDimensions: () => ({ w: 515, h: 10 }),
         })
         break
       }
