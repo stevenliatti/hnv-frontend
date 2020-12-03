@@ -33,92 +33,105 @@
 
       <ul class="list-unstyled components">
         <p>Menu</p>
-        <li>
-          <a href="#movieSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Movie</a>
-          <ul class="collapse list-unstyled" id="movieSubmenu">
+        <li class="liStyle">
+          <a aria-expanded="false" class="dropdown-toggle">
+            People filters 
+            <button type="button" class="btn btn-info btnHead">Reset filters</button>
+          </a>
+          <ul class="list-unstyled ulContent" id="movieSubmenu">
             <li>
-              <a onclick="bestMovies();">Best movies</a>
+              <label class="ml-1 check">
+                <input type="checkbox" name="rbPeople" id="rdPeopleKnown">   Actors
+                <span class="checkmark"></span>
+              </label>
+              <span class="txtOnly ml-3">Country of origin:</span>
             </li>
             <li>
-              <a onclick="movieGenre();">Movies & genre</a>
+              <label class="ml-1 check">
+                <input type="checkbox" name="rbPeople" id="rdPeopleKnown">   Actresses
+                <span class="checkmark"></span>
+              </label>
+              <input type="text" id="searchBar" style="width: 150px; height: 30px;" placeholder="Search" autocomplete=off>
             </li>
             <li>
-              <a onclick="moviePeoplePlayIn();">Actors</a>
+              <span class="txtOnly ml-1">Born between</span>
+              <input type="date" id="start" name="trip-start"
+                value="2018-07-22"
+                min="2020-01-01" max="2020-12-31"
+                class="picker"
+                >
+              <span class="txtOnly ml-1">and</span>
+              <input type="date" id="start" name="trip-start"
+              value="2018-07-22"
+              min="2020-01-01" max="2020-12-31"
+              class="picker"
+              >
             </li>
-            <li>
-              <a onclick="moviePeopleWorkIn();">Movie makers</a>
-            </li>
-            <li>
-              <a onclick="movieSimilar();">Similar movies</a>
-            </li>
-            <li>
-              <a onclick="movieRecommendations();">Recommended movies</a>
-            </li>
-            <li>
-              <select class="form-control basicAutoSelectMovie mt-2 searchInput" id="searchMovie" name="simple_select" placeholder="Search movie" autocomplete="off"></select>
-              <p>Included relations :</p>
-              <div class="text-center mt-2">
-                <label class="ml-2">
-                                    <input type="checkbox" name="rbGenre" id="rdGenre">   Genre
-                                    <span class="checkmark"></span>
-                                </label>
-                <br/>
-                <label class="ml-2">
-                                    <input type="checkbox" name="rbPeople" id="rdPeople">   People
-                                    <span class="checkmark"></span>
-                                </label>
-                <label class="ml-2">
-                                    <input type="checkbox" name="rbRecommendation" id="rdRecommendations">   Recommendations
-                                    <span class="checkmark"></span>
-                                </label>
-                <label class="ml-2">
-                                    <input type="checkbox" name="rbSimilar" id="rbSimilar">   Similar
-                                    <span class="checkmark"></span>
-                                </label>
-                <label class="ml-2">
-                                    <input type="checkbox" name="rbSimilarJaccard" id="rbSimilarJaccard">   Similar Jaccard
-                                    <span class="checkmark"></span>
-                                </label>
-                <button class="btn btn-success mt-2" onclick="onSearchMovie();">Show movie</button>
-              </div>
+            <li> 
+              <span class="txtOnly ml-1">Still alive</span>
+              <label class="check">
+                <input type="checkbox" name="rbPeople" id="rdPeopleKnown"> Don't care
+                <span class="checkmark"></span>
+              </label>
+              <label class="check">
+                <input type="checkbox" name="rbPeople" id="rdPeopleKnown"> Yes
+                <span class="checkmark"></span>
+              </label>
+              <label class="check">
+                <input type="checkbox" name="rbPeople" id="rdPeopleKnown"> No
+                <span class="checkmark"></span>
+              </label>
             </li>
           </ul>
         </li>
-        <li>
-          <a href="#peopleSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">People</a>
-          <ul class="collapse list-unstyled" id="peopleSubmenu">
+    
+        <li class="liStyle">
+          <a aria-expanded="false" class="dropdown-toggle">
+            Movie filters
+            <button type="button" class="btn btn-info btnHead">Reset filters</button>
+          </a>
+          <ul class="list-unstyled ulContent" id="movieSubmenu">
             <li>
-              <a onclick="bestPeoples();">Best peoples</a>
+              <span class="txtOnly ml-1">Mad between</span>
+              <input type="date" id="start" name="trip-start"
+                value="2018-07-22"
+                min="2020-01-01" max="2020-12-31"
+                class="picker"
+                >
+              <span class="txtOnly ml-1">and</span>
+              <input type="date" id="start" name="trip-start"
+              value="2018-07-22"
+              min="2020-01-01" max="2020-12-31"
+              class="picker"
+              >
             </li>
             <li>
-              <a onclick="knowledgePeople();">Knowledge between people</a>
-            </li>
-            <li>
-              <a onclick="peopleKnownFor();">People known for</a>
-            </li>
-            <li>
-              <select class="form-control basicAutoSelectPeople mt-2 searchInput" id="searchPeople" name="simple_select" placeholder="Search people" autocomplete="off"></select>
-              <p>Included relations :</p>
-              <div class="text-center mt-2">
-                <label class="ml-2">
-                                    <input type="checkbox" name="rbGenre" id="rdMovies">   Known for genre
-                                    <span class="checkmark"></span>
-                                </label>
-                <br/>
-                <label class="ml-2">
-                                    <input type="checkbox" name="rbPeople" id="rdPeopleKnown">   Relationships
-                                    <span class="checkmark"></span>
-                                </label>
-                <label class="ml-2">
-                                    <input type="checkbox" name="rdSimilarForActing" id="rdSimilarForActing">   Similar for acting
-                                    <span class="checkmark"></span>
-                                </label>
-                <label class="ml-2">
-                                    <input type="checkbox" name="rdSimilarForWorking" id="rdSimilarForWorking">   Similar for working
-                                    <span class="checkmark"></span>
-                                </label>
-                <button class="btn btn-success mt-2" onclick="onSearchPeople();">Show people</button>
+              <span class="ml-1 txtOnly">Budget above</span>
+              <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
               </div>
+            </li>
+            <li>
+              <span class="ml-1 txtOnly">Revenue above</span>
+              <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+              </div>
+            </li>
+            <li>
+              <span class="ml-1 txtOnly">Movie length</span>
+              <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+              </div>
+            </li>
+            <li>
+              <span class="ml-1 txtOnly">Genre</span>
+              <select name="pets" id="pet-select" class="ml-2 mb-2" style="width: 180px; height: 30px; font-size: 15px;">
+                <option value="">--Please choose a genre--</option>
+                <option value="dog">Action</option>
+                <option value="cat">Horror</option>
+                <option value="hamster">Adventure</option>
+                <option value="parrot">...</option>
+            </select>
             </li>
           </ul>
         </li>
