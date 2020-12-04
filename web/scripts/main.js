@@ -1,4 +1,4 @@
-getActors(3, 5, 2)
+getActors(10, 10, 5)
   .then((result) => {
     graph = result
     loadingSlideshow(graph)
