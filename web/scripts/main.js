@@ -1,4 +1,4 @@
-getActors(10, 10, 5)
+getActors(10, 5, 5)
   .then((result) => {
     graph = result
     loadingSlideshow(graph)
@@ -9,10 +9,3 @@ getActors(10, 10, 5)
     }, 300)
   })
   .catch(err => console.error(err))
-
-$(document).ready(() => {
-  $('#sidebarCollapse').on('click', () => {
-    $('#sidebar').toggleClass('active');
-    $(this).toggleClass('active');
-  });
-});

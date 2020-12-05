@@ -25,180 +25,153 @@
   <!-- <h1>Hollywood Network Visualizer</h1> -->
 
   <div class="wrapper">
+
     <!-- Sidebar Holder -->
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h5>Hollywood Network Visualizer</h5>
+        <h5 class="mt-1">Hollywood Network Analyzer</h5>
       </div>
 
       <ul class="list-unstyled components">
-        <p>Menu</p>
+        <span class="txtOnly ml-1"> Use this visualizer to explore and discover realtionships....</span>
+        <!-- ACTORS SECTION -->
         <li class="liStyle">
-          <a aria-expanded="false" class="dropdown-toggle">
-            People filters 
-            <button type="button" class="btn btn-info btnHead">Reset filters</button>
+          <a aria-expanded="false" class="dropdown-toggle aHeader">
+            People filters
+            <button type="button" class="btn btn-success btn-sm rounded-sm" onclick="peopleFilters();">
+              <i class="fas fa-check fa-xs"></i>
+            </button>
+            <button type="button" class="btn btn-danger btn-sm rounded-sm" onclick="resetPeopleFilters();">
+              <i class="fas fa-times fa-sm"></i>
+            </button>
           </a>
           <ul class="list-unstyled ulContent" id="movieSubmenu">
             <li>
               <label class="ml-1 check">
-                <input type="checkbox" name="rbPeople" id="rdPeopleKnown">   Actors
+                <input type="checkbox" name="cbxActorsFilter" id="cbxActorsFilter">   Actors
                 <span class="checkmark"></span>
               </label>
-              <span class="txtOnly ml-3">Country of origin:</span>
+              <span class="txtOnly" style="margin-left: 38px;">Country of origin:</span>
             </li>
             <li>
               <label class="ml-1 check">
-                <input type="checkbox" name="rbPeople" id="rdPeopleKnown">   Actresses
+                <input type="checkbox" name="cbxActressesFilter" id="cbxActressesFilter">   Actresses
                 <span class="checkmark"></span>
               </label>
-              <input type="text" id="searchBar" style="width: 150px; height: 30px;" placeholder="Search" autocomplete=off>
+              <select class="inputSearchCountry form-control basicAutoSelectSearchPeopleOnly" id="searchCountryFilter" name="searchCountryFilter" placeholder="USA" autocomplete="off">
+              </select>
             </li>
-            <li>
-              <span class="txtOnly ml-1">Born between</span>
-              <input type="date" id="start" name="trip-start"
-                value="2018-07-22"
-                min="2020-01-01" max="2020-12-31"
-                class="picker"
-                >
-              <span class="txtOnly ml-1">and</span>
-              <input type="date" id="start" name="trip-start"
-              value="2018-07-22"
-              min="2020-01-01" max="2020-12-31"
-              class="picker"
-              >
+            <li class="ml-1">
+              <span class="txtOnly">Born between</span>
             </li>
-            <li> 
-              <span class="txtOnly ml-1">Still alive</span>
-              <label class="check">
-                <input type="checkbox" name="rbPeople" id="rdPeopleKnown"> Don't care
-                <span class="checkmark"></span>
-              </label>
-              <label class="check">
-                <input type="checkbox" name="rbPeople" id="rdPeopleKnown"> Yes
-                <span class="checkmark"></span>
-              </label>
-              <label class="check">
-                <input type="checkbox" name="rbPeople" id="rdPeopleKnown"> No
-                <span class="checkmark"></span>
-              </label>
+            <li class="ml-1">
+              <input type="date" id="bornBetweenStartFilter" name="bornBetweenStartFilter" min="2020-01-01" max="2020-12-31" class="picker">
+              <span class="txtOnly">and</span>
+              <input type="date" id="bornBetweenEndFilter" name="bornBetweenEndFilter" min="2020-01-01" max="2020-12-31" class="picker">
+            </li>
+            <li class="ml-1 mt-2 txtOnly">
+              Still alive
+              <input type="radio" id="rbDontCare" name="rbStillAliveChoice" value="dontCare">
+              <label for="rbDontCare"> Don't care</label>
+              <input type="radio" id="rbYes" name="rbStillAliveChoice" value="yes">
+              <label for="rbYes">Yes</label>
+              <input type="radio" id="rbNo" name="rbStillAliveChoice" value="no">
+              <label for="rbNo">No</label>
             </li>
           </ul>
         </li>
-    
+
+        <!-- MOVIE SECTION -->
         <li class="liStyle">
-          <a aria-expanded="false" class="dropdown-toggle">
+          <a aria-expanded="false" class="dropdown-toggle aHeader">
             Movie filters
-            <button type="button" class="btn btn-info btnHead">Reset filters</button>
+            <button type="button" class="btn btn-success btn-sm rounded-sm" onclick="movieFilters();">
+              <i class="fas fa-check fa-xs"></i>
+            </button>
+            <button type="button" class="btn btn-danger btn-sm rounded-sm">
+              <i class="fas fa-times fa-sm"></i>
+            </button>
           </a>
           <ul class="list-unstyled ulContent" id="movieSubmenu">
-            <li>
-              <span class="txtOnly ml-1">Mad between</span>
-              <input type="date" id="start" name="trip-start"
-                value="2018-07-22"
-                min="2020-01-01" max="2020-12-31"
-                class="picker"
-                >
-              <span class="txtOnly ml-1">and</span>
-              <input type="date" id="start" name="trip-start"
-              value="2018-07-22"
-              min="2020-01-01" max="2020-12-31"
-              class="picker"
-              >
+            <li class="ml-1">
+              <span class="txtOnly">Made between</span>
             </li>
-            <li>
-              <span class="ml-1 txtOnly">Budget above</span>
+            <li class="ml-1">
+              <input type="date" id="start" name="trip-start" value="2020-07-22" min="2020-01-01" max="2020-12-31" class="picker">
+              <span class="txtOnly">and</span>
+              <input type="date" id="start" name="trip-start" value="2020-07-22" min="2020-01-01" max="2020-12-31" class="picker">
+            </li>
+            <li class="ml-1">
+              <span class="txtOnly">Budget above</span>
+            </li>
+            <li class="ml-1">
               <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                <input type="range" min="1" max="100" value="50" class="slider" id="slider-buget" oninput="sliderChange(this);">
               </div>
+              <input type="number" min="1" max="100" value="50" id="input-slider-buget" class="inputSlider" name="input-slider-buget" oninput="InputSliderChange(this);"> M$
             </li>
-            <li>
-              <span class="ml-1 txtOnly">Revenue above</span>
+            <li class="ml-1">
+              <span class="txtOnly">Revenue above</span>
+            </li>
+            <li class="ml-1">
               <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                <input type="range" min="1" max="100" value="50" class="slider" id="slider-revenue" oninput="sliderChange(this);">
               </div>
+              <input type="number" min="1" max="100" value="50" id="input-slider-revenue" class="inputSlider" name="input-slider-revenue" value="test" oninput="InputSliderChange(this);"> M$
             </li>
-            <li>
-              <span class="ml-1 txtOnly">Movie length</span>
+            <li class="ml-1">
+              <span class="txtOnly">Movie length</span>
+            </li>
+            <li class="ml-1 pb-1">
               <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                <input type="range" min="1" max="100" value="50" class="slider" id="slider-length" oninput="sliderChange(this);">
               </div>
-            </li>
-            <li>
-              <span class="ml-1 txtOnly">Genre</span>
-              <select name="pets" id="pet-select" class="ml-2 mb-2" style="width: 180px; height: 30px; font-size: 15px;">
-                <option value="">--Please choose a genre--</option>
-                <option value="dog">Action</option>
-                <option value="cat">Horror</option>
-                <option value="hamster">Adventure</option>
-                <option value="parrot">...</option>
-            </select>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Genre</a>
-          <ul class="collapse list-unstyled" id="pageSubmenu">
-            <li>
-              <a onclick="allGenres();">All genres</a>
-            </li>
-            <li>
-              <select class="form-control basicAutoSelectGenre mt-2 searchInput" id="searchGenre" name="simple_select" placeholder="Search genre" autocomplete="off"></select>
-              <p>Included relations :</p>
-              <div class="text-center mt-2">
-                <label class="ml-2">
-                                    <input type="checkbox" name="rbGenre" id="rdMoviesAssociated">   Movies
-                                    <span class="checkmark"></span>
-                                </label>
-                <br/>
-                <label class="ml-2">
-                                    <input type="checkbox" name="rbPeople" id="rdPeopleAssociated">   People associated
-                                    <span class="checkmark"></span>
-                                </label>
-                <button class="btn btn-success mt-2" onclick="onSearchGenre();">Show genre</button>
-              </div>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="#pageShortestPathSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Shortest path</a>
-          <ul class="collapse list-unstyled" id="pageShortestPathSubmenu">
-            <li class="mt-1">
-              <select class="form-control basicAutoSelectPeople searchInput" id="SPP1" name="simple_select" placeholder="People 1" autocomplete="off"></select>
-            </li>
-            <li class="mt-1">
-              <select class="form-control basicAutoSelectPeople searchInput" id="SPP2" name="simple_select" placeholder="People 2" autocomplete="off"></select>
-            </li>
-            <li class="text-center mt-2">
-              <button class="btn btn-success btn-sm mt-1" onclick="shortestPath();">Compute shortest path</button>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="#pageTextualReqSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Textual request</a>
-          <ul class="collapse list-unstyled" id="pageTextualReqSubmenu">
-            <li>
-              <a onclick="bestScoreMovies();" data-toggle="modal" data-target="#exampleModalLong">Best movies by score</a>
-            </li>
-            <li>
-              <a onclick="bestScorePeoples();" data-toggle="modal" data-target="#exampleModalLong">Best peoples by score</a>
-            </li>
-            <li>
-              <a onclick="bestDegreePeoples();" data-toggle="modal" data-target="#exampleModalLong">Best peoples by degree</a>
-            </li>
-            <li>
-              <a onclick="bestDegreeGenres();" data-toggle="modal" data-target="#exampleModalLong">Best genres by degree</a>
+              <input type="number" min="1" max="100" value="50" id="input-slider-length" class="inputSlider" name="input-slider-length" value="test" oninput="InputSliderChange(this);"> M
             </li>
           </ul>
         </li>
 
-      </ul>
 
-      <ul class="list-unstyled CTAs">
-        <li>
-          <a onclick="();" class="download">Write your request</a>
+
+        <!-- SHORTEST PATH SECTION -->
+        <li class="liStyle">
+          <a aria-expanded="false" class="dropdown-toggle aHeader">
+            Shortest path
+            <button type="button" class="btn btn-success btn-sm rounded-sm">
+              <i class="fas fa-check fa-xs"></i>
+            </button>
+            <button type="button" class="btn btn-danger btn-sm rounded-sm">
+              <i class="fas fa-times fa-sm"></i>
+            </button>
+          </a>
+          <ul class="list-unstyled ulContent" id="movieSubmenu">
+            <li class="ml-1">
+              From
+              <select class="inputShortestPathSideMenu form-control basicAutoSelectSearchPeopleOnly" id="searchInput2" name="simple_select" placeholder="Search" autocomplete="off">
+              </select>
+            </li>
+            <li class="ml-1 pb-2">
+              To
+              <select class="inputShortestPathSideMenu form-control basicAutoSelectSearchPeopleOnly" id="searchInput2" name="simple_select" placeholder="Search" autocomplete="off">
+              </select>
+            </li>
+          </ul>
         </li>
-        <li>
-          <a onclick="initialQuery();" class="article">Go to initial request</a>
+
+        <!-- MORE INFO SECTION -->
+
+        <li class="liStyle">
+          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle aHeader">
+            More info
+          </a>
+          <ul class="collapse list-unstyled ulContent" id="pageSubmenu">
+            <li class="txtMoreInfo ml-1">
+              Using the <a href="https://www.themoviedb.org">The Movie Database</a> data - Backed by <a href="https://neo4j.com">Neo4j</a>
+            </li>
+            <li class="txtMoreInfo ml-1 mt-2">
+              Based on the Cytoscape <a href="https://js.cytoscape.org/">Cytoscape.js</a> library - Code on <a href="https://github.com/stevenliatti/hollywood-network-visualizer">Github</a>
+            </li>
+          </ul>
         </li>
       </ul>
     </nav>
@@ -206,18 +179,17 @@
     <!-- Page Content Holder -->
     <div id="content">
 
+      <button type="button" id="sidebarCollapse" class="navbar-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-align-justify"></i>
+      </button>
+
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-
-          <button type="button" id="sidebarCollapse" class="navbar-btn">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-          <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                    </button>
-
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- <input type="text" id="searchBar" style="margin-left: 70px; width: 1000px;" placeholder="Search" autocomplete=off> -->
             <select class="form-control basicAutoSelectSearch mt-2" id="searchInput2" name="simple_select" placeholder="Search" autocomplete="off" style="margin-left: 70px; width: 1000px;"></select>
@@ -225,21 +197,83 @@
         </div>
       </nav>
 
-      <div style="width: 80%; float: left;" id="cy"></div>
+      <!-- CiSE graph -->
+      <div style="width: 80%; height: 700px; float: left;" id="main-loading">
+        <p id="main-loading-text" style="text-align: center; font-size: 60%; margin-top: 100px">Building the relations graph...</p>
+        <img id="main-loading-icon" src="loading-icon.gif" style="display: block; width: 20%; margin-right: auto; margin-left: auto; margin-top: 50px">
+      </div>
+      <div style="width: 80%; height: 700px; float: left; display: none;" id="cy-cise"></div>
 
       <!-- Loading side bar -->
       <div style="text-align: center; width: 20%; float: right;" id="loading-slideshow">
         <p style="font-size: 80%;">While you wait, learn about</p>
         <p id="loading-slideshow-name">{...}</p>
         <!-- <p style="font-size: 60%;">Click on the picture to see someone else</p> -->
-        <img id="loading-slideshow-picture" src="favicon-32x32.png" onclick="loadingAnother()" width="154" height="232">
+        <img id="loading-slideshow-picture" src="loading-icon.gif" onclick="loadingAnother()" width="154" height="auto">
         <p style="text-align: justify; font-size: 50%;" id="loading-slideshow-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
           dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <a style="font-size: 80%;" target="_blank" href="https://www.themoviedb.org/" id="loading-slideshow-url">Go to their TBDb page</a>
+        <a style="font-size: 80%;" target="_blank" href="https://www.themoviedb.org/" id="loading-slideshow-url">Go to their TMDb page</a>
       </div>
 
-      <div style="display:none;height:200px;width:200px;border:3px solid green;" id="popup">Hi</div>
+      <!-- <div style="display:none;height:200px;width:200px;border:3px solid green;" id="popup">Hi</div> -->
 
+      <style type="text/css">
+        a.hovertext {
+          position: relative;
+          font-size: 50%;
+          text-decoration: none !important;
+          text-align: center;
+        }
+        
+        a.hovertext::after {
+          content: attr(title);
+          position: absolute;
+          left: 0;
+          top: 500%;
+          width: 154px;
+          background: rgba(117, 169, 249, 0.8);
+          text-decoration: none !important;
+          color: #000;
+          opacity: 0;
+          -webkit-transition: 0.5s;
+          -moz-transition: 0.5s;
+          -o-transition: 0.5s;
+          -ms-transition: 0.5s;
+        }
+        
+        a.hovertext:hover::after,
+        a.hovertext:focus::after {
+          opacity: 1.0;
+        }
+      </style>
+
+      <!-- Second panel -->
+      <div style="width: 0%; float: right; overflow: hidden;" id="side">
+        <table style="width: 100%">
+          <tr>
+            <td valign="top">
+              <p>
+                <a class="hovertext" target="_blank" id="side-url" ref="https://www.themoviedb.org/" title="Go to their TMDb">
+                  <img id="side-picture" src="favicon-32x32.png" width="154" height="auto" title=""></a>
+              </p>
+              <!-- <img id="side-picture" src="favicon-32x32.png" width="154" height="auto">
+              <div style="position: absolute; text-align: center; left: 50%; font-size: 60%">Go to their TMDb</div>
+              <p><a style="font-size: 50%; display: block; text-align: center;" target="_blank" href="https://www.themoviedb.org/" id="side-url">Go to their TMDb page</a></p> -->
+            </td>
+            <td valign="top">
+              <p style="text-align: center; font-size: 50%;" id="side-top-info">NAME</p>
+              <p style="font-size: 60%; text-align: justify" id="side-biography">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+                aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </td>
+          </tr>
+        </table>
+
+        <p id="side-loading-text" style="text-align: center; font-size: 60%">Building their 1st and 2nd degree relations graph...</p>
+        <img id="side-loading-icon" src="loading-icon.gif" style="display: block; width: 10%; margin-right: auto; margin-left: auto; margin-top: 50px">
+
+        <div style="width: 100%; height: 500px;" id="cy-cose"> </div>
+      </div>
     </div>
   </div>
 
@@ -275,8 +309,11 @@
   <script src="scripts/request-api.js"></script>
   <script src="scripts/loading-slideshow.js"></script>
   <script src="scripts/popups.js"></script>
+  <script src="scripts/side-view.js"></script>
   <script src="scripts/graph-cise.js"></script>
+  <script src="scripts/graph-cose.js"></script>
   <script src="scripts/main.js"></script>
+  <script src="scripts/menu.js"></script>
   <script src="scripts/search.js"></script>
 </body>
 

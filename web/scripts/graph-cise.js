@@ -8,13 +8,16 @@ function computeHSL(h, s, l) {
 }
 
 function graphCise(graph) {
-  let cy = cytoscape({
-    container: document.getElementById('cy')
+  document.getElementById("main-loading").style.display = "none"
+  document.getElementById('cy-cise').style.display = "block"
+
+  let cyCise = cytoscape({
+    container: document.getElementById('cy-cise')
   })
 
-  cy.json(graph)
-  cy.zoom(1)
-  cy.center()
+  cyCise.json(graph)
+  cyCise.zoom(1)
+  cyCise.center()
 
   const communities = Array.from(
     new Set(graph.elements.nodes.map(n => n.data.knowsCommunity))
@@ -22,7 +25,7 @@ function graphCise(graph) {
   const s = 60
   const l = 70
 
-  cy.style()
+  cyCise.style()
     .selector('node')
     .style(
       'background-color',
@@ -30,11 +33,17 @@ function graphCise(graph) {
     )
     .update()
 
-  console.log(graph)
+  // console.log(graph)
 
-  popupManagement(cy, (evt) => {
-    // console.log('mouseover ' + cy.$id(node.id()).data()['name'])
-    // popupPopper(evt, cy);
-    popupAtNode(evt.target, evt.type, cy)
+  popupNodeManagement(cyCise, (evt) => {
+    popupAtNode(evt.target, evt.type, cyCise)
   }, 400)
+
+  showSideView(cyCise, (evt) => {
+    createSideView(evt.target, cyCise)
+  })
+
+  hideSideView(cyCise, (evt) => {
+    closeSideView(evt.target, cyCise)
+  })
 }
