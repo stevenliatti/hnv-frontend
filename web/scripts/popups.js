@@ -1,4 +1,4 @@
-let dummyFriends = ['Tohru', 'Yuki', 'Kyo', 'Arisa', 'Saki']
+let currentNodeSelected
 
 let popupInstance = false
 let divPopup
@@ -16,10 +16,43 @@ function popupNodeManagement(cy, popupFn, ms) {
   let overTimer
   cy.on("mouseout", "node", function(evt) {
     clearTimeout(overTimer)
+    if (currentNodeSelected) {
+      cy.elements()
+        .difference(currentNodeSelected.outgoers()
+          .union(currentNodeSelected.incomers()))
+        .not(currentNodeSelected)
+        .addClass('unfocused')
+      currentNodeSelected.addClass('focused')
+        .outgoers()
+        .union(currentNodeSelected.incomers())
+        .addClass('focused')
+    }
+    var sel = evt.target
+    cy.elements()
+      .removeClass('unhighlighted')
+    sel.removeClass('highlighted')
+      .outgoers()
+      .union(sel.incomers())
+      .removeClass('highlighted')
     popupFn(evt)
   })
   cy.on("mouseover", "node", function(evt) {
     overTimer = setTimeout(ms)
+    let sel = evt.target
+    if (currentNodeSelected != sel) {
+      cy.elements().removeClass('unfocused')
+      cy.elements().removeClass('focused')
+
+      cy.elements()
+        .difference(sel.outgoers()
+          .union(sel.incomers()))
+        .not(sel)
+        .addClass('unhighlighted')
+      sel.addClass('highlighted')
+        .outgoers()
+        .union(sel.incomers())
+        .addClass('highlighted')
+    }
     popupFn(evt)
   })
 }

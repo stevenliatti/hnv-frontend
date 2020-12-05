@@ -2,7 +2,24 @@ let sideLoading
 
 // Create sideview on click
 function showSideView(cy, sideViewFn) {
+  cy.on("click", function(evt) {
+    if ((currentNodeSelected) && (evt.target === cy)) {
+      cy.elements().removeClass('unfocused')
+      cy.elements().removeClass('focused')
+    }
+  })
   cy.on("click", "node", function(evt) {
+      let sel = evt.target
+      currentNodeSelected = sel
+      cy.elements()
+        .difference(sel.outgoers()
+          .union(sel.incomers()))
+        .not(sel)
+        .addClass('unfocused')
+      sel.addClass('focused')
+        .outgoers()
+        .union(sel.incomers())
+        .addClass('focused')
       sideViewFn(evt)
     })
     // cy.on("cxttapstart", "node", function(evt) {
@@ -43,14 +60,14 @@ function createSideView(node, cy) {
   document.getElementById("side-loading-text").style.display = "block"
   document.getElementById('side').setAttribute("style", "width: 50%; float: right;")
 
-  let sideID = cy.$id(node.id()).data()["tmdbId"]
+  let sideLink = cy.$id(node.id()).data()["tmdbId"]
+  let sideID = cy.$id(node.id()).data()["id"]
   let sideName = cy.$id(node.id()).data()["name"]
   let sideBirthday = cy.$id(node.id()).data()["birthday"]
   let sideDeathday = cy.$id(node.id()).data()["deathday"]
   let sidePlace = cy.$id(node.id()).data()["place_of_birth"]
   let sideBiography = textExtract(cy.$id(node.id()).data()["biography"], 300)
   let sidePicture = cy.$id(node.id()).data()["profile_path"]
-  let sideLink = cy.$id(node.id()).data()["tmdbId"]
 
   sideBirthday = sideBirthday.split("-")
   sideBirthday = sideBirthday[2] + "." + sideBirthday[1] + "." + sideBirthday[0]
@@ -68,5 +85,5 @@ function createSideView(node, cy) {
   document.getElementById('side-biography').innerHTML = sideBiography
   document.getElementById("side-url").href = "https://www.themoviedb.org/person/" + sideLink
 
-  graphCose(sideID)
+  graphCose(sideLink, sideID)
 }
