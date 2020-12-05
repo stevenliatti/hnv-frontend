@@ -1,5 +1,5 @@
 getActors(10, 5, 5)
-  .then((result) => {
+  .then((result) => {   
     graph = result
     loadingSlideshow(graph)
   })

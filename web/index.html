@@ -29,7 +29,7 @@
     <!-- Sidebar Holder -->
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h5 class="mt-1">Hollywood Network Analyzer</h5>
+        <h5 class="mt-1">Hollywood Network Visualizer</h5>
       </div>
 
       <ul class="list-unstyled components">
@@ -88,7 +88,7 @@
             <button type="button" class="btn btn-success btn-sm rounded-sm" onclick="movieFilters();">
               <i class="fas fa-check fa-xs"></i>
             </button>
-            <button type="button" class="btn btn-danger btn-sm rounded-sm">
+            <button type="button" class="btn btn-danger btn-sm rounded-sm" onclick="resetMovieFilters();">
               <i class="fas fa-times fa-sm"></i>
             </button>
           </a>
@@ -97,9 +97,9 @@
               <span class="txtOnly">Made between</span>
             </li>
             <li class="ml-1">
-              <input type="date" id="start" name="trip-start" value="2020-07-22" min="2020-01-01" max="2020-12-31" class="picker">
+              <input type="date" id="madeBetweenStartFilter" name="trip-start" min="2020-01-01" max="2020-12-31" class="picker">
               <span class="txtOnly">and</span>
-              <input type="date" id="start" name="trip-start" value="2020-07-22" min="2020-01-01" max="2020-12-31" class="picker">
+              <input type="date" id="madeBetweenStopFilter" name="trip-start" min="2020-01-01" max="2020-12-31" class="picker">
             </li>
             <li class="ml-1">
               <span class="txtOnly">Budget above</span>
@@ -137,23 +137,26 @@
         <li class="liStyle">
           <a aria-expanded="false" class="dropdown-toggle aHeader">
             Shortest path
-            <button type="button" class="btn btn-success btn-sm rounded-sm">
+            <button type="button" class="btn btn-success btn-sm rounded-sm" onclick="computeSP();">
               <i class="fas fa-check fa-xs"></i>
             </button>
-            <button type="button" class="btn btn-danger btn-sm rounded-sm">
+            <button type="button" class="btn btn-danger btn-sm rounded-sm" onclick="clearSP();">
               <i class="fas fa-times fa-sm"></i>
             </button>
           </a>
           <ul class="list-unstyled ulContent" id="movieSubmenu">
             <li class="ml-1">
               From
-              <select class="inputShortestPathSideMenu form-control basicAutoSelectSearchPeopleOnly" id="searchInput2" name="simple_select" placeholder="Search" autocomplete="off">
+              <select class="inputShortestPathSideMenu form-control basicAutoSelectSearchPeopleOnly" id="searchActorSP1" name="simple_select" placeholder="Search" autocomplete="off">
               </select>
             </li>
             <li class="ml-1 pb-2">
               To
-              <select class="inputShortestPathSideMenu form-control basicAutoSelectSearchPeopleOnly" id="searchInput2" name="simple_select" placeholder="Search" autocomplete="off">
+              <select class="inputShortestPathSideMenu form-control basicAutoSelectSearchPeopleOnly" id="searchActorSP2" name="simple_select" placeholder="Search" autocomplete="off">
               </select>
+              <div class="alert alert-danger mt-3" id="errorSP"  style="font-size: 12px; display: none;" role="alert">
+                Please inquire the two fields
+              </div>
             </li>
           </ul>
         </li>
