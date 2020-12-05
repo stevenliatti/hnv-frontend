@@ -11,9 +11,10 @@ function getFriends(actor) {
 }
 
 function getFriendsGraph(actor, limitFriends, limitFriendsFriends) {
-  // return fetch(env.API_BASE_URL + `/graph/friendsOf/${actor}?friends=${limitFriends}&limitFriendsOfFriendsActor=${limitFriendsFriends}`)
-  return fetch(env.API_BASE_URL + `/graph/friendsOf/${actor}`)
+  return fetch(env.API_BASE_URL + `/graph/friendsOf/${actor}?friends=${limitFriends}&friendsOfFriends=${limitFriendsFriends}`)
     .then(res => res.json())
+    // return fetch(env.API_BASE_URL + `/graph/friendsOf/${actor}`)
+    //   .then(res => res.json())
 }
 
 function getMovies(movies) {

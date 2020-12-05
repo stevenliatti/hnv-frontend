@@ -1,13 +1,22 @@
-function graphCose(sideID) {
+function graphCose(sideTmdbId, sideId) {
   Promise.all([
       fetch('cy-style-cose.json')
       .then(function(res) {
         return res.json()
       }),
-      getFriendsGraph(sideID)
+      // console.log(sideID),
+      getFriendsGraph(sideTmdbId, 10, 3)
     ])
     .then(function(dataArray) {
-      console.log(dataArray[1])
+      // console.log(dataArray[1].elements.nodes)
+
+      let dataActors = dataArray[1].elements.nodes.map((dataActor) => { return { data: dataActor.data } })
+        // console.log(dataActors)
+
+      let centerActor = dataActors.find(actor => { return actor.data.id === sideId })
+      console.log(centerActor)
+      console.log(centerActor.data.id)
+      console.log(centerActor.data.name)
 
       document.getElementById("side-loading-icon").style.display = "none"
       document.getElementById("side-loading-text").style.display = "none"
@@ -31,7 +40,14 @@ function graphCose(sideID) {
 
         layout: {
           name: 'cose',
-          idealEdgeLength: 100,
+          // idealEdgeLength: 100,
+          idealEdgeLength: function(edge) {
+            let edgeLength = 100
+            if ((edge.data.source == sideId) || (edge.data.target == sideId)) {
+              edgeLength = 1000
+            }
+            return edgeLength
+          },
           nodeOverlap: 20,
           refresh: 20,
           fit: true,
@@ -49,7 +65,7 @@ function graphCose(sideID) {
         },
 
         style: dataArray[0],
-        elements: dataArray[1].elements //.elements
+        elements: dataArray[1].elements // with api-cache
       });
 
       cyCose.zoom(2)
