@@ -55,11 +55,20 @@ let cbxActressesFilter = $('#cbxActressesFilter')[0];
 let bornBetweenStartFilter = $('#bornBetweenStartFilter')[0];
 let bornBetweenEndFilter = $('#bornBetweenEndFilter')[0];
 
+let tmp_graph = [];
+
 function peopleFilters() {
   let rbStillAliveChoice = $('[name ="rbStillAliveChoice"]:checked')[0];
   let searchCountryFilter = $('#searchCountryFilter')[0];
-  let tmp_graph = Object.assign({}, graph);
-  let all_ids_to_rm = []
+  if(tmp_graph.length === 0 ) {
+    tmp_graph.push(JSON.parse( JSON.stringify( graph ) ));
+    // console.log("SAVE FIRST");
+  }
+  else {
+    graph = (JSON.parse( JSON.stringify( tmp_graph[0] ) ));
+    // console.log("USE EXISTING");
+  }
+  let all_ids_to_take = []
 
   /*
   
@@ -70,49 +79,57 @@ console.log(graph.elements.nodes.filter(x => x.data.birthday >= "1974-11-11" && 
 console.log(graph.elements.nodes.filter(x => x.data.deathday === "")); // Vivants
 console.log(graph.elements.nodes.filter(x => x.data.deathday !== "")); // Morts
 */
-  console.log(tmp_graph);
 
-  if (cbxActorsFilter.checked)
-    all_ids_to_rm = all_ids_to_rm
+  if (cbxActorsFilter.checked) {
+    all_ids_to_take = all_ids_to_take
     .concat(graph.elements.nodes
-      .filter(x => x.data.gender !== "Male").map(x => x.data.id));
-  if (cbxActressesFilter.checked)
-    all_ids_to_rm = all_ids_to_rm.concat(graph.elements.nodes
-      .filter(x => x.data.gender !== "Female").map(x => x.data.id));
+      .filter(x => x.data.gender === "Male").map(x => x.data.id));
+  }
+  if (cbxActressesFilter.checked) {
+    all_ids_to_take = all_ids_to_take.concat(graph.elements.nodes
+      .filter(x => x.data.gender === "Female").map(x => x.data.id));
+  }
   if (searchCountryFilter.value) {
-    
-    all_ids_to_rm = all_ids_to_rm
+    all_ids_to_take = all_ids_to_take
     .concat(graph.elements.nodes
       .filter(x => {
         let pobFormat = x.data.place_of_birth.split(' ');
-        return pobFormat[pobFormat.length-1] !== searchCountryFilter.value
+        return pobFormat[pobFormat.length-1] === searchCountryFilter.value
       }).map(x => x.data.id));
   }
-  if (bornBetweenStartFilter.value)
-    all_ids_to_rm = all_ids_to_rm.concat(graph.elements.nodes
-    .filter(x => x.data.birthday < bornBetweenStartFilter.valu).map(x => x.data.id));
-  if (bornBetweenEndFilter.value)
-    all_ids_to_rm = all_ids_to_rm.concat(graph.elements.nodes
-    .filter(x => x.data.birthday > bornBetweenStartFilter.valu).map(x => x.data.id));
+  if (bornBetweenStartFilter.value) {
+    all_ids_to_take = all_ids_to_take.concat(graph.elements.nodes
+    .filter(x => x.data.birthday > bornBetweenStartFilter.value).map(x => x.data.id));
+    console.log(graph.elements.nodes.filter(x => x.data.birthday > bornBetweenStartFilter.value));
+  }
+  if (bornBetweenEndFilter.value) {
+    all_ids_to_take = all_ids_to_take.concat(graph.elements.nodes
+    .filter(x => x.data.birthday < bornBetweenStartFilter.value).map(x => x.data.id));
+  }
   if (rbStillAliveChoice) {
     if(rbStillAliveChoice.value === "yes")
-    all_ids_to_rm = all_ids_to_rm.concat(graph.elements.nodes
-    .filter(x => x.data.deathday !== "").map(x => x.data.id));
+      all_ids_to_take = all_ids_to_take.concat(graph.elements.nodes
+      .filter(x => x.data.deathday === "").map(x => x.data.id));
     else if (rbStillAliveChoice.value === "no")
-    all_ids_to_rm = all_ids_to_rm.concat(graph.elements.nodes
-    .filter(x => x.data.deathday === "").map(x => x.data.id));
+      all_ids_to_take = all_ids_to_take.concat(graph.elements.nodes
+      .filter(x => x.data.deathday !== "").map(x => x.data.id));
   }
-  if (inputSliderCollab.value)
+  if (inputSliderCollab.value) {
     console.log("INPUT COLLAB : " + inputSliderCollab.value);
-  if (inputSliderAppearences.value)
+  }
+  if (inputSliderAppearences.value) {
     console.log("INPUT APPARENCES : " + inputSliderAppearences.value);
+  }
 
-  graph.elements.nodes = graph.elements.nodes.filter(x => !all_ids_to_rm.includes(x.data.id));
-  graph.elements.edges = graph.elements.edges.filter(x => !all_ids_to_rm.includes(x.data.source) && !all_ids_to_rm.includes(x.data.target))
 
-  console.log(graph);
-  graphCise(graph);
+  if(all_ids_to_take.length > 0) {
+    graph.elements.nodes = graph.elements.nodes.filter(x => all_ids_to_take.includes(x.data.id));
+    graph.elements.edges = graph.elements.edges.filter(x => all_ids_to_take.includes(x.data.source) && all_ids_to_take.includes(x.data.target))
   
+    // console.log(graph);
+    graphCise(graph);
+  }
+
 }
 
 function resetPeopleFilters() {
@@ -130,6 +147,11 @@ function resetPeopleFilters() {
   sliderCollab.value = 50;
   inputSliderAppearences.value = 50;
   sliderAppearences.value = 50;
+
+  if(tmp_graph[0]) {
+    graphCise(tmp_graph[0]);
+    graph = tmp_graph[0];
+  }
 }
 
 //// Shortest path
