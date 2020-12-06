@@ -40,8 +40,8 @@ function closeSideView(node, cy) {
       y: 0
     });
   }
-  document.getElementById('cy-cise').setAttribute("style", "width: 100%; height: 700px; float: left;")
-  document.getElementById('side').setAttribute("style", "width: 0%; overflow: hidden; float: right;")
+  document.getElementById('cy-cise').setAttribute("style", "width: 100%; height: 85%; float: left;")
+  document.getElementById('side').setAttribute("style", "width: 0%; height: 90%; overflow: hidden; float: right;")
 }
 
 function createSideView(node, cy) {
@@ -54,7 +54,7 @@ function createSideView(node, cy) {
   }
 
   document.getElementById('loading-slideshow').style.display = "none"
-  document.getElementById('cy-cise').setAttribute("style", "width: 50%; float: left;")
+  document.getElementById('cy-cise').setAttribute("style", "width: 50%; height: 85%; float: left;")
   document.getElementById('cy-cose').style.display = "none"
   document.getElementById('side-loading-icon').style.display = "block"
   document.getElementById("side-loading-text").style.display = "block"

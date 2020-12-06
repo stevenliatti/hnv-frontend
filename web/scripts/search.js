@@ -28,7 +28,7 @@ $('.basicAutoSelectSearchPeopleOnly').autoComplete({
   formatResult: function(item) {
     return {
       value: item.id,
-      text: item.name,
+      text: item.tmdbId+"",
       html: [
         item.name
       ]

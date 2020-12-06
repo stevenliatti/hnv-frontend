@@ -29,7 +29,7 @@ p {
   background: #fff;
   border: none;
   border-radius: 0;
-  margin-bottom: 40px;
+  margin-bottom: 15px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -107,7 +107,9 @@ p {
   font-size: 15px;
 }
 
-.btnH {
+.mainSearchBar {
+  font-size: 17px;
+  width: 500px;
 }
 
 .btnApplyFilters:hover {
@@ -116,6 +118,12 @@ p {
 
 .btnResetFilters:hover {
   background-color: red;
+}
+
+.graphSizeConfig {
+  margin-left: 25px;
+  font-size: 20px;
+
 }
 
 

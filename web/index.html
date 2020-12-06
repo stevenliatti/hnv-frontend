@@ -39,10 +39,10 @@
         <li class="liStyle">
           <a aria-expanded="false" class="dropdown-toggle aHeader">
             People filters
-            <button type="button" class="btn btn-sm rounded-sm btnH btnApplyFilters" onclick="peopleFilters();">
+            <button type="button" class="btn btn-sm rounded-sm btnApplyFilters" onclick="peopleFilters();">
               <i class="fas fa-check fa-xs"></i>
             </button>
-            <button type="button" class="btn btn-sm rounded-sm btnH btnResetFilters" onclick="resetPeopleFilters();">
+            <button type="button" class="btn btn-sm rounded-sm btnResetFilters" onclick="resetPeopleFilters();">
               <span style="font-size: 13px;">Reset</span>
               <i class="fas fa-times fa-xs"></i>
             </button>
@@ -64,11 +64,10 @@
               </select>
             </li>
             <li class="ml-1">
-              <span class="txtOnly">Born between</span>
+              <span class="txtOnly">Born between  and</span>
             </li>
             <li class="ml-1">
               <input type="date" id="bornBetweenStartFilter" name="bornBetweenStartFilter" min="2020-01-01" max="2020-12-31" class="picker">
-              <span class="txtOnly">and</span>
               <input type="date" id="bornBetweenEndFilter" name="bornBetweenEndFilter" min="2020-01-01" max="2020-12-31" class="picker">
             </li>
             <li class="ml-1 mt-2 txtOnly">
@@ -80,59 +79,43 @@
               <input type="radio" id="rbNo" name="rbStillAliveChoice" value="no">
               <label for="rbNo">No</label>
             </li>
+            <hr width="100%" style="margin: inherit">
+            <li class="ml-1 mt-1">
+              <span class="txtOnly">Collaborations</span>
+            </li>
+            <li class="ml-1">
+              <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="50" class="slider" id="slider-collab" oninput="sliderChange(this);">
+              </div>
+              <input type="number" min="1" max="100" value="50" id="input-slider-collab" class="inputSlider" name="input-slider-buget" oninput="InputSliderChange(this);">
+            </li>
+            <li class="ml-1">
+              <span class="txtOnly">Appearences</span>
+            </li>
+            <li class="ml-1 pb-2">
+              <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="50" class="slider" id="slider-appearences" oninput="sliderChange(this);">
+              </div>
+              <input type="number" min="1" max="100" value="50" id="input-slider-appearences" class="inputSlider" name="input-slider-revenue" value="test" oninput="InputSliderChange(this);">
+            </li>
           </ul>
         </li>
 
         <!-- MOVIE SECTION -->
-        <li class="liStyle">
+        <!-- <li class="liStyle">
           <a aria-expanded="false" class="dropdown-toggle aHeader">
             Movie filters
-            <button type="button" class="btn btn-sm rounded-sm btnH btnApplyFilters" onclick="movieFilters();">
+            <button type="button" class="btn btn-sm rounded-sm btnApplyFilters" onclick="movieFilters();">
               <i class="fas fa-check fa-xs"></i>
             </button>
-            <button type="button" class="btn btn-sm rounded-sm btnH btnResetFilters" onclick="resetMovieFilters();">
+            <button type="button" class="btn btn-sm rounded-sm btnResetFilters" onclick="resetMovieFilters();">
               <span style="font-size: 13px;">Reset</span>
               <i class="fas fa-times fa-xs"></i>
             </button>
           </a>
           <ul class="list-unstyled ulContent" id="movieSubmenu">
-            <li class="ml-1">
-              <span class="txtOnly">Made between</span>
-            </li>
-            <li class="ml-1">
-              <input type="date" id="madeBetweenStartFilter" name="trip-start" min="2020-01-01" max="2020-12-31" class="picker">
-              <span class="txtOnly">and</span>
-              <input type="date" id="madeBetweenStopFilter" name="trip-start" min="2020-01-01" max="2020-12-31" class="picker">
-            </li>
-            <li class="ml-1">
-              <span class="txtOnly">Budget above</span>
-            </li>
-            <li class="ml-1">
-              <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="slider-buget" oninput="sliderChange(this);">
-              </div>
-              <input type="number" min="1" max="100" value="50" id="input-slider-buget" class="inputSlider" name="input-slider-buget" oninput="InputSliderChange(this);"> M$
-            </li>
-            <li class="ml-1">
-              <span class="txtOnly">Revenue above</span>
-            </li>
-            <li class="ml-1">
-              <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="slider-revenue" oninput="sliderChange(this);">
-              </div>
-              <input type="number" min="1" max="100" value="50" id="input-slider-revenue" class="inputSlider" name="input-slider-revenue" value="test" oninput="InputSliderChange(this);"> M$
-            </li>
-            <li class="ml-1">
-              <span class="txtOnly">Movie length</span>
-            </li>
-            <li class="ml-1 pb-1">
-              <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="slider-length" oninput="sliderChange(this);">
-              </div>
-              <input type="number" min="1" max="100" value="50" id="input-slider-length" class="inputSlider" name="input-slider-length" value="test" oninput="InputSliderChange(this);"> M
-            </li>
           </ul>
-        </li>
+        </li> -->
 
 
 
@@ -140,10 +123,10 @@
         <li class="liStyle">
           <a aria-expanded="false" class="dropdown-toggle aHeader">
             Shortest path
-            <button type="button" class="btn btn-sm rounded-sm btnH btnApplyFilters" onclick="computeSP();">
+            <button type="button" class="btn btn-sm rounded-sm btnApplyFilters" onclick="computeSP();">
               <i class="fas fa-check fa-xs"></i>
             </button>
-            <button type="button" class="btn btn-sm rounded-sm btnH btnResetFilters" onclick="clearSP();">
+            <button type="button" class="btn btn-sm rounded-sm btnResetFilters" onclick="clearSP();">
               <span style="font-size: 13px;">Clear</span>
               <i class="fas fa-times fa-xs"></i>
             </button>
@@ -186,20 +169,42 @@
     <!-- Page Content Holder -->
     <div id="content">
 
-      <button type="button" id="sidebarCollapse" class="navbar-btn">
+      <!-- <button type="button" id="sidebarCollapse" class="navbar-btn">
         <span></span>
         <span></span>
         <span></span>
       </button>
       <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-align-justify"></i>
-      </button>
+      </button> -->
 
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- <input type="text" id="searchBar" style="margin-left: 70px; width: 1000px;" placeholder="Search" autocomplete=off> -->
-            <select class="form-control basicAutoSelectSearch mt-2" name="simple_select" placeholder="Search" autocomplete="off" style="margin-left: 70px; width: 1000px;"></select>
+            <select 
+            class="form-control basicAutoSelectSearch mainSearchBar" 
+            name="simple_select" placeholder="Search" autocomplete="off" 
+            >
+          </select>
+          <div class="graphSizeConfig">
+            <span style="color: blue; font-size: smaller;">Want a bigger graph ? </span>
+            <div class="slidecontainer">
+              Movies
+              <input type="range" min="1" max="100" value="50" class="slider" id="sliderNbMovies" oninput="sliderChange(this);">
+            </div>
+            <input type="number" min="1" max="100" value="50" id="input-sliderNbMovies" class="inputSlider" name="input-slider-buget" oninput="InputSliderChange(this);">
+            <div class="slidecontainer">
+              Acotrs
+              <input type="range" min="1" max="100" value="50" class="slider" id="sliderNbAcors" oninput="sliderChange(this);">
+            </div>
+            <input type="number" min="1" max="100" value="50" id="input-sliderNbAcors" class="inputSlider" name="input-slider-buget" oninput="InputSliderChange(this);">
+            <div class="slidecontainer">
+              Friends
+              <input type="range" min="1" max="100" value="50" class="slider" id="sliderNbFriends" oninput="sliderChange(this);">
+            </div>
+            <input type="number" min="1" max="100" value="50" id="input-sliderNbFriends" class="inputSlider" name="input-slider-buget" oninput="InputSliderChange(this);">
+          </div>
           </div>
         </div>
       </nav>
@@ -255,7 +260,7 @@
       </style>
 
       <!-- Second panel -->
-      <div style="width: 0%; float: right; overflow: hidden;" id="side">
+      <div style="width: 0%; height: 50%; float: right; overflow: hidden;" id="side">
         <table style="width: 100%">
           <tr>
             <td valign="top">
