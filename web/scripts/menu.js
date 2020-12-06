@@ -58,23 +58,61 @@ let bornBetweenEndFilter = $('#bornBetweenEndFilter')[0];
 function peopleFilters() {
   let rbStillAliveChoice = $('[name ="rbStillAliveChoice"]:checked')[0];
   let searchCountryFilter = $('#searchCountryFilter')[0];
+  let tmp_graph = Object.assign({}, graph);
+  let all_ids_to_rm = []
+
+  /*
+  
+console.log(graph.elements.nodes.filter(x => x.data.gender === "Female")); // Femme
+console.log(graph.elements.nodes.filter(x => x.data.gender === "Male")); // Homme
+console.log(graph.elements.nodes.filter(x => x.data.place_of_birth === "USA")); // Lieux de naissance
+console.log(graph.elements.nodes.filter(x => x.data.birthday >= "1974-11-11" && x.data.birthday <= "2000-11-11")); // Nés entre X et X
+console.log(graph.elements.nodes.filter(x => x.data.deathday === "")); // Vivants
+console.log(graph.elements.nodes.filter(x => x.data.deathday !== "")); // Morts
+*/
+  console.log(tmp_graph);
 
   if (cbxActorsFilter.checked)
-    console.log("ACTORSFILTERCHECKD");
+    all_ids_to_rm = all_ids_to_rm
+    .concat(graph.elements.nodes
+      .filter(x => x.data.gender !== "Male").map(x => x.data.id));
   if (cbxActressesFilter.checked)
-    console.log("ACTRESSES CHECKED");
-  if (searchCountryFilter.value)
-    console.log("COUNTRy : " + searchCountryFilter.value);
+    all_ids_to_rm = all_ids_to_rm.concat(graph.elements.nodes
+      .filter(x => x.data.gender !== "Female").map(x => x.data.id));
+  if (searchCountryFilter.value) {
+    
+    all_ids_to_rm = all_ids_to_rm
+    .concat(graph.elements.nodes
+      .filter(x => {
+        let pobFormat = x.data.place_of_birth.split(' ');
+        return pobFormat[pobFormat.length-1] !== searchCountryFilter.value
+      }).map(x => x.data.id));
+  }
   if (bornBetweenStartFilter.value)
-    console.log("STARTDATE: " + bornBetweenStartFilter.value);
+    all_ids_to_rm = all_ids_to_rm.concat(graph.elements.nodes
+    .filter(x => x.data.birthday < bornBetweenStartFilter.valu).map(x => x.data.id));
   if (bornBetweenEndFilter.value)
-    console.log("ENDDATE: " + bornBetweenEndFilter.value);
-  if (rbStillAliveChoice)
-    console.log("VALUERB: " + rbStillAliveChoice.value);
+    all_ids_to_rm = all_ids_to_rm.concat(graph.elements.nodes
+    .filter(x => x.data.birthday > bornBetweenStartFilter.valu).map(x => x.data.id));
+  if (rbStillAliveChoice) {
+    if(rbStillAliveChoice.value === "yes")
+    all_ids_to_rm = all_ids_to_rm.concat(graph.elements.nodes
+    .filter(x => x.data.deathday !== "").map(x => x.data.id));
+    else if (rbStillAliveChoice.value === "no")
+    all_ids_to_rm = all_ids_to_rm.concat(graph.elements.nodes
+    .filter(x => x.data.deathday === "").map(x => x.data.id));
+  }
   if (inputSliderCollab.value)
     console.log("INPUT COLLAB : " + inputSliderCollab.value);
   if (inputSliderAppearences.value)
     console.log("INPUT APPARENCES : " + inputSliderAppearences.value);
+
+  graph.elements.nodes = graph.elements.nodes.filter(x => !all_ids_to_rm.includes(x.data.id));
+  graph.elements.edges = graph.elements.edges.filter(x => !all_ids_to_rm.includes(x.data.source) && !all_ids_to_rm.includes(x.data.target))
+
+  console.log(graph);
+  graphCise(graph);
+  
 }
 
 function resetPeopleFilters() {

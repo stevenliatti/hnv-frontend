@@ -1,3 +1,6 @@
+let placesOfBirth = [];
+getAllPlacesOfBirth();
+
 let cyCise = cytoscape({
   container: document.getElementById('cy-cise')
 })
@@ -43,14 +46,44 @@ $('.basicAutoSelectSearchPeopleOnly').autoComplete({
   }
 });
 
+$('.basicAutoSelectSearchCountry').autoComplete({
+  resolver: 'custom',
+  formatResult: function(item) {
+    return {
+      value: item,
+      text: item,
+      html: [
+        item
+      ]
+    };
+  },
+  events: {
+    search: function(query, callback) {
+      searchCountryQuery(query, callback);
+    }
+  }
+});
+
+function searchCountryQuery(query, callback) {
+  callback(placesOfBirth.filter(x => x.toLowerCase().includes(query.toLowerCase())));
+}
+
+
 function searchRequest(query, limitActors, limitMovies, callback) {
   fetch(env.API_BASE_URL + `/search?criteria=${query}&limitActors=${limitActors}&limitMovies=${limitMovies}`)
     .then(res =>
       res.json().then(json => {
-        // console.log(json.res);
         callback(json);
       }))
 }
+
+function getAllPlacesOfBirth() {
+  fetch(env.API_BASE_URL + `/placesOfBirth`)
+  .then(res =>
+    res.json().then(json => {
+       placesOfBirth = json;
+    }))
+} 
 
 function formatLabel(label) {
   if (label === "Actor") {
@@ -119,14 +152,4 @@ function createSideViewSearch(actorInfos, cy) {
   graphCose(sideLink, sideID.toString())
 }
 
-/*console.log(graph.elements.nodes.filter(x => x.data.gender === "Female")); // Femme
-console.log(graph.elements.nodes.filter(x => x.data.gender === "Male")); // Homme
-console.log(graph.elements.nodes.filter(x => x.data.place_of_birth === "USA")); // Lieux de naissance
-console.log(graph.elements.nodes.filter(x => x.data.birthday >= "1974-11-11" && x.data.birthday <= "2000-11-11")); // Nés entre X et X
-console.log(graph.elements.nodes.filter(x => x.data.deathday === "")); // Vivants
-console.log(graph.elements.nodes.filter(x => x.data.deathday !== "")); // Morts
 
-
-graph.elements.edges.forEach(element => {
-  console.log(element)
-});*/
