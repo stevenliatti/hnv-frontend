@@ -13,7 +13,7 @@ function graphCose(sideTmdbId, sideId) {
       let dataActors = dataArray[1].elements.nodes.map((dataActor) => { return { data: dataActor.data } })
         // console.log(dataActors)
 
-      let centerActor = dataActors.find(actor => { return actor.data.id === sideId })
+      let centerActor = dataActors.find(actor => { return actor.data.id == sideId })
       console.log(centerActor)
       console.log(centerActor.data.id)
       console.log(centerActor.data.name)

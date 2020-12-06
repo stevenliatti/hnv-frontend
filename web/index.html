@@ -39,23 +39,24 @@
         <li class="liStyle">
           <a aria-expanded="false" class="dropdown-toggle aHeader">
             People filters
-            <button type="button" class="btn btn-success btn-sm rounded-sm" onclick="peopleFilters();">
+            <button type="button" class="btn btn-sm rounded-sm btnH btnApplyFilters" onclick="peopleFilters();">
               <i class="fas fa-check fa-xs"></i>
             </button>
-            <button type="button" class="btn btn-danger btn-sm rounded-sm" onclick="resetPeopleFilters();">
-              <i class="fas fa-times fa-sm"></i>
+            <button type="button" class="btn btn-sm rounded-sm btnH btnResetFilters" onclick="resetPeopleFilters();">
+              <span style="font-size: 13px;">Reset</span>
+              <i class="fas fa-times fa-xs"></i>
             </button>
           </a>
           <ul class="list-unstyled ulContent" id="movieSubmenu">
-            <li>
-              <label class="ml-1 check">
+            <li class="ml-1">
+              <label class="check">
                 <input type="checkbox" name="cbxActorsFilter" id="cbxActorsFilter">   Actors
                 <span class="checkmark"></span>
               </label>
               <span class="txtOnly" style="margin-left: 38px;">Country of origin:</span>
             </li>
-            <li>
-              <label class="ml-1 check">
+            <li class="ml-1">
+              <label class="check">
                 <input type="checkbox" name="cbxActressesFilter" id="cbxActressesFilter">   Actresses
                 <span class="checkmark"></span>
               </label>
@@ -86,11 +87,12 @@
         <li class="liStyle">
           <a aria-expanded="false" class="dropdown-toggle aHeader">
             Movie filters
-            <button type="button" class="btn btn-success btn-sm rounded-sm" onclick="movieFilters();">
+            <button type="button" class="btn btn-sm rounded-sm btnH btnApplyFilters" onclick="movieFilters();">
               <i class="fas fa-check fa-xs"></i>
             </button>
-            <button type="button" class="btn btn-danger btn-sm rounded-sm" onclick="resetMovieFilters();">
-              <i class="fas fa-times fa-sm"></i>
+            <button type="button" class="btn btn-sm rounded-sm btnH btnResetFilters" onclick="resetMovieFilters();">
+              <span style="font-size: 13px;">Reset</span>
+              <i class="fas fa-times fa-xs"></i>
             </button>
           </a>
           <ul class="list-unstyled ulContent" id="movieSubmenu">
@@ -138,11 +140,12 @@
         <li class="liStyle">
           <a aria-expanded="false" class="dropdown-toggle aHeader">
             Shortest path
-            <button type="button" class="btn btn-success btn-sm rounded-sm" onclick="computeSP();">
+            <button type="button" class="btn btn-sm rounded-sm btnH btnApplyFilters" onclick="computeSP();">
               <i class="fas fa-check fa-xs"></i>
             </button>
-            <button type="button" class="btn btn-danger btn-sm rounded-sm" onclick="clearSP();">
-              <i class="fas fa-times fa-sm"></i>
+            <button type="button" class="btn btn-sm rounded-sm btnH btnResetFilters" onclick="clearSP();">
+              <span style="font-size: 13px;">Clear</span>
+              <i class="fas fa-times fa-xs"></i>
             </button>
           </a>
           <ul class="list-unstyled ulContent" id="movieSubmenu">
@@ -196,7 +199,7 @@
         <div class="container-fluid">
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- <input type="text" id="searchBar" style="margin-left: 70px; width: 1000px;" placeholder="Search" autocomplete=off> -->
-            <select class="form-control basicAutoSelectSearch mt-2" id="searchInput2" name="simple_select" placeholder="Search" autocomplete="off" style="margin-left: 70px; width: 1000px;"></select>
+            <select class="form-control basicAutoSelectSearch mt-2" name="simple_select" placeholder="Search" autocomplete="off" style="margin-left: 70px; width: 1000px;"></select>
           </div>
         </div>
       </nav>
@@ -288,7 +291,7 @@
   <!-- Bootstrap JS -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
   <!-- Bootstrap autocomplete CDN -->
-  <script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@v2.3.5/dist/latest/bootstrap-autocomplete.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@v2.3.7/dist/latest/bootstrap-autocomplete.min.js"></script>
 
   <!-- qtip -->
   <!-- <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>

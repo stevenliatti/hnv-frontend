@@ -107,6 +107,17 @@ p {
   font-size: 15px;
 }
 
+.btnH {
+}
+
+.btnApplyFilters:hover {
+  background-color: rgb(45, 248, 42);
+}
+
+.btnResetFilters:hover {
+  background-color: red;
+}
+
 
 /* ---------------------------------------------------
     SLIDER STYLE
@@ -217,7 +228,7 @@ p {
 }
 
 #sidebar ul li .aHeader {
-  padding: 10px;
+  padding: 5px;
   font-size: 1.1em;
   display: block;
 }

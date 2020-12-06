@@ -1,9 +1,13 @@
+let cyCise = cytoscape({
+  container: document.getElementById('cy-cise')
+})
+
 $('.basicAutoSelectSearch').autoComplete({
   resolver: 'custom',
   formatResult: function(item) {
     return {
-      value: item.id,
-      text: item.name,
+      value: item.tmdbId,
+      text: item.tmdbId+"",
       html: [
         item.name, ' ',
         formatLabel(item.label)
@@ -55,3 +59,74 @@ function formatLabel(label) {
     return $("<span>").append(label).css("color", "blue").css("float", "right");
   }
 }
+
+$('.basicAutoSelectSearch').on('change', (event) => {
+  console.log(event.target.value);
+  findInfos(event.target.value);
+  // createSideView(node, cy)
+});
+
+function findInfos(tmdbId) {
+  fetch(env.API_BASE_URL + `/actor/${tmdbId}`)
+  .then(res =>
+    res.json().then(json => {
+      console.log(json);
+      createSideViewSearch(json['actor'], cyCise);
+    }))
+}
+
+function createSideViewSearch(actorInfos, cy) {
+
+  if ((document.getElementById('cy-cise').style.width == "80%") || (document.getElementById('cy-cise').style.width == "100%")) {
+    cy.panBy({
+      x: -230,
+      y: 0
+    });
+  }
+
+  document.getElementById('loading-slideshow').style.display = "none"
+  document.getElementById('cy-cise').setAttribute("style", "width: 50%; float: left;")
+  document.getElementById('cy-cose').style.display = "none"
+  document.getElementById('side-loading-icon').style.display = "block"
+  document.getElementById("side-loading-text").style.display = "block"
+  document.getElementById('side').setAttribute("style", "width: 50%; float: right;")
+
+  let sideLink = actorInfos["tmdbId"]
+  let sideID = actorInfos["id"]
+  let sideName = actorInfos["name"]
+  let sideBirthday = actorInfos["birthday"]
+  let sideDeathday = actorInfos["deathday"]
+  let sidePlace = actorInfos["place_of_birth"]
+  let sideBiography = actorInfos["biography"];
+  let sidePicture = actorInfos["profile_path"]
+
+  sideBirthday = sideBirthday.split("-")
+  sideBirthday = sideBirthday[2] + "." + sideBirthday[1] + "." + sideBirthday[0]
+  let sideTopInfo = sideName + " (" + sideBirthday
+  if (sideDeathday) {
+    sideDeathday = sideDeathday.split("-")
+    sideDeathday = sideDeathday[2] + "." + sideDeathday[1] + "." + sideDeathday[0]
+    sideTopInfo += " - " + sideDeathday + ")"
+  } else { sideTopInfo += ", " + (new Date().getFullYear() - sideBirthday.split(".")[2]) + ")" }
+  if (sidePlace) { sideTopInfo += ", " + sidePlace.split(",").slice(-1).pop() }
+
+  document.getElementById('side-top-info').innerHTML = sideTopInfo
+  document.getElementById('side-top-info').setAttribute("style", "text-align: center; font-size: 120%, font-weight: 900")
+  document.getElementById('side-picture').src = "https://image.tmdb.org/t/p/w154/" + sidePicture
+  document.getElementById('side-biography').innerHTML = sideBiography
+  document.getElementById("side-url").href = "https://www.themoviedb.org/person/" + sideLink
+
+  graphCose(sideLink, sideID.toString())
+}
+
+/*console.log(graph.elements.nodes.filter(x => x.data.gender === "Female")); // Femme
+console.log(graph.elements.nodes.filter(x => x.data.gender === "Male")); // Homme
+console.log(graph.elements.nodes.filter(x => x.data.place_of_birth === "USA")); // Lieux de naissance
+console.log(graph.elements.nodes.filter(x => x.data.birthday >= "1974-11-11" && x.data.birthday <= "2000-11-11")); // Nés entre X et X
+console.log(graph.elements.nodes.filter(x => x.data.deathday === "")); // Vivants
+console.log(graph.elements.nodes.filter(x => x.data.deathday !== "")); // Morts
+
+
+graph.elements.edges.forEach(element => {
+  console.log(element)
+});*/
