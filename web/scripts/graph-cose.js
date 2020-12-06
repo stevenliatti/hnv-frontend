@@ -1,11 +1,11 @@
-function graphCose(sideTmdbId, sideId) {
+function graphCose(sideId, callBackData) {
   Promise.all([
       fetch('cy-style-cose.json')
       .then(function(res) {
         return res.json()
       }),
       // console.log(sideID),
-      getFriendsGraph(sideTmdbId, 10, 3)
+      callBackData
     ])
     .then(function(dataArray) {
       // console.log(dataArray[1].elements.nodes)

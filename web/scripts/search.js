@@ -76,21 +76,6 @@ function findInfos(tmdbId) {
 }
 
 function createSideViewSearch(actorInfos, cy) {
-
-  if ((document.getElementById('cy-cise').style.width == "80%") || (document.getElementById('cy-cise').style.width == "100%")) {
-    cy.panBy({
-      x: -230,
-      y: 0
-    });
-  }
-
-  document.getElementById('loading-slideshow').style.display = "none"
-  document.getElementById('cy-cise').setAttribute("style", "width: 50%; float: left;")
-  document.getElementById('cy-cose').style.display = "none"
-  document.getElementById('side-loading-icon').style.display = "block"
-  document.getElementById("side-loading-text").style.display = "block"
-  document.getElementById('side').setAttribute("style", "width: 50%; float: right;")
-
   let sideLink = actorInfos["tmdbId"]
   let sideID = actorInfos["id"]
   let sideName = actorInfos["name"]
@@ -100,23 +85,17 @@ function createSideViewSearch(actorInfos, cy) {
   let sideBiography = actorInfos["biography"];
   let sidePicture = actorInfos["profile_path"]
 
-  sideBirthday = sideBirthday.split("-")
-  sideBirthday = sideBirthday[2] + "." + sideBirthday[1] + "." + sideBirthday[0]
-  let sideTopInfo = sideName + " (" + sideBirthday
-  if (sideDeathday) {
-    sideDeathday = sideDeathday.split("-")
-    sideDeathday = sideDeathday[2] + "." + sideDeathday[1] + "." + sideDeathday[0]
-    sideTopInfo += " - " + sideDeathday + ")"
-  } else { sideTopInfo += ", " + (new Date().getFullYear() - sideBirthday.split(".")[2]) + ")" }
-  if (sidePlace) { sideTopInfo += ", " + sidePlace.split(",").slice(-1).pop() }
-
-  document.getElementById('side-top-info').innerHTML = sideTopInfo
-  document.getElementById('side-top-info').setAttribute("style", "text-align: center; font-size: 120%, font-weight: 900")
-  document.getElementById('side-picture').src = "https://image.tmdb.org/t/p/w154/" + sidePicture
-  document.getElementById('side-biography').innerHTML = sideBiography
-  document.getElementById("side-url").href = "https://www.themoviedb.org/person/" + sideLink
-
-  graphCose(sideLink, sideID.toString())
+  actorInfosSideView(
+    cy,
+    sideLink,
+    sideID,
+    sideName,
+    sideBirthday,
+    sideDeathday,
+    sidePlace,
+    sideBiography,
+    sidePicture
+  )
 }
 
 /*console.log(graph.elements.nodes.filter(x => x.data.gender === "Female")); // Femme
