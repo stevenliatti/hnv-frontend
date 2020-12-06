@@ -10,7 +10,7 @@ $('.basicAutoSelectSearch').autoComplete({
   formatResult: function(item) {
     return {
       value: item.tmdbId,
-      text: item.tmdbId+"",
+      text: item.tmdbId + "",
       html: [
         item.name, ' ',
         formatLabel(item.label)
@@ -31,7 +31,7 @@ $('.basicAutoSelectSearchPeopleOnly').autoComplete({
   formatResult: function(item) {
     return {
       value: item.id,
-      text: item.tmdbId+"",
+      text: item.tmdbId + "",
       html: [
         item.name
       ]
@@ -79,11 +79,11 @@ function searchRequest(query, limitActors, limitMovies, callback) {
 
 function getAllPlacesOfBirth() {
   fetch(env.API_BASE_URL + `/placesOfBirth`)
-  .then(res =>
-    res.json().then(json => {
-       placesOfBirth = json;
-    }))
-} 
+    .then(res =>
+      res.json().then(json => {
+        placesOfBirth = json;
+      }))
+}
 
 function formatLabel(label) {
   if (label === "Actor") {
@@ -101,11 +101,11 @@ $('.basicAutoSelectSearch').on('change', (event) => {
 
 function findInfos(tmdbId) {
   fetch(env.API_BASE_URL + `/actor/${tmdbId}`)
-  .then(res =>
-    res.json().then(json => {
-      console.log(json);
-      createSideViewSearch(json['actor'], cyCise);
-    }))
+    .then(res =>
+      res.json().then(json => {
+        console.log(json);
+        createSideViewSearch(json['actor'], cyCise);
+      }))
 }
 
 function createSideViewSearch(actorInfos, cy) {
@@ -118,17 +118,22 @@ function createSideViewSearch(actorInfos, cy) {
   let sideBiography = actorInfos["biography"];
   let sidePicture = actorInfos["profile_path"]
 
-  actorInfosSideView(
-    cy,
-    sideLink,
-    sideID,
-    sideName,
-    sideBirthday,
-    sideDeathday,
-    sidePlace,
-    sideBiography,
-    sidePicture
-  )
+  sideBirthday = sideBirthday.split("-")
+  sideBirthday = sideBirthday[2] + "." + sideBirthday[1] + "." + sideBirthday[0]
+  let sideTopInfo = sideName + " (" + sideBirthday
+  if (sideDeathday) {
+    sideDeathday = sideDeathday.split("-")
+    sideDeathday = sideDeathday[2] + "." + sideDeathday[1] + "." + sideDeathday[0]
+    sideTopInfo += " - " + sideDeathday + ")"
+  } else { sideTopInfo += ", " + (new Date().getFullYear() - sideBirthday.split(".")[2]) + ")" }
+  if (sidePlace) { sideTopInfo += ", " + sidePlace.split(",").slice(-1).pop() }
+
+  document.getElementById('side-top-info').innerHTML = sideTopInfo
+  document.getElementById('side-top-info').setAttribute("style", "text-align: center; font-size: 120%, font-weight: 900")
+  document.getElementById('side-picture').src = "https://image.tmdb.org/t/p/w154/" + sidePicture
+  document.getElementById('side-biography').innerHTML = sideBiography
+  document.getElementById("side-url").href = "https://www.themoviedb.org/person/" + sideLink
+
+  closeMoviesPopup(document.getElementById("movies-popup"))
+  graphCose(sideLink, sideID.toString())
 }
-
-

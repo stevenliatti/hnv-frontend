@@ -4,6 +4,7 @@ let sideLoading
 function showSideView(cy, sideViewFn) {
   cy.on("click", function (evt) {
     if ((currentNodeSelected) && (evt.target === cy)) {
+      currentNodeSelected = 'none'
       cy.elements().removeClass('unfocused')
       cy.elements().removeClass('focused')
     }

@@ -15,9 +15,9 @@
     "text-valign": "center",
     "text-halign": "center",
     "background-color": "#555",
-    "text-outline-color": "#555",
+    "text-outline-color": "#000",
     "text-outline-width": "2px",
-    "color": "#000000",
+    "color": "#fff",
     "overlay-padding": "6px",
     "z-index": "10"
   }

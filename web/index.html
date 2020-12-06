@@ -34,7 +34,8 @@
       </div>
 
       <ul class="list-unstyled components">
-        <span class="txtOnly ml-1"> Use this visualizer to explore and discover realtionships....</span>
+        <p class="menu-description">Use this visualizer to explore and discover relationships between actors based on communities built using the <a href=https://neo4j.com/docs/graph-data-science/current/algorithms/louvain/>Louvain</a> method. Hover over a node or edge to get more
+          information about a specific actor or movie. Click on a node to generate a new relationship graph focused on a specific actor.</p>
         <!-- ACTORS SECTION -->
         <li class="liStyle">
           <a aria-expanded="false" class="dropdown-toggle aHeader">
@@ -141,7 +142,7 @@
               To
               <select class="inputShortestPathSideMenu form-control basicAutoSelectSearchPeopleOnly" id="searchActorSP2" name="simple_select" placeholder="Search" autocomplete="off">
               </select>
-              <div class="alert alert-danger mt-3" id="errorSP"  style="font-size: 12px; display: none;" role="alert">
+              <div class="alert alert-danger mt-3" id="errorSP" style="font-size: 12px; display: none;" role="alert">
                 Please inquire the two fields
               </div>
             </li>
@@ -182,29 +183,26 @@
         <div class="container-fluid">
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- <input type="text" id="searchBar" style="margin-left: 70px; width: 1000px;" placeholder="Search" autocomplete=off> -->
-            <select 
-            class="form-control basicAutoSelectSearch mainSearchBar" 
-            name="simple_select" placeholder="Search" autocomplete="off" 
-            >
+            <select class="form-control basicAutoSelectSearch mainSearchBar" name="simple_select" placeholder="Search" autocomplete="off">
           </select>
-          <div class="graphSizeConfig">
-            <span style="color: blue; font-size: smaller;">Want a bigger graph ? </span>
-            <div class="slidecontainer">
-              Movies
-              <input type="range" min="1" max="100" value="50" class="slider" id="sliderNbMovies" oninput="sliderChange(this);">
+            <div class="graphSizeConfig">
+              <span style="color: blue; font-size: smaller;">Want a bigger graph ? </span>
+              <div class="slidecontainer">
+                Movies
+                <input type="range" min="1" max="100" value="50" class="slider" id="sliderNbMovies" oninput="sliderChange(this);">
+              </div>
+              <input type="number" min="1" max="100" value="50" id="input-sliderNbMovies" class="inputSlider" name="input-slider-buget" oninput="InputSliderChange(this);">
+              <div class="slidecontainer">
+                Acotrs
+                <input type="range" min="1" max="100" value="50" class="slider" id="sliderNbAcors" oninput="sliderChange(this);">
+              </div>
+              <input type="number" min="1" max="100" value="50" id="input-sliderNbAcors" class="inputSlider" name="input-slider-buget" oninput="InputSliderChange(this);">
+              <div class="slidecontainer">
+                Friends
+                <input type="range" min="1" max="100" value="50" class="slider" id="sliderNbFriends" oninput="sliderChange(this);">
+              </div>
+              <input type="number" min="1" max="100" value="50" id="input-sliderNbFriends" class="inputSlider" name="input-slider-buget" oninput="InputSliderChange(this);">
             </div>
-            <input type="number" min="1" max="100" value="50" id="input-sliderNbMovies" class="inputSlider" name="input-slider-buget" oninput="InputSliderChange(this);">
-            <div class="slidecontainer">
-              Acotrs
-              <input type="range" min="1" max="100" value="50" class="slider" id="sliderNbAcors" oninput="sliderChange(this);">
-            </div>
-            <input type="number" min="1" max="100" value="50" id="input-sliderNbAcors" class="inputSlider" name="input-slider-buget" oninput="InputSliderChange(this);">
-            <div class="slidecontainer">
-              Friends
-              <input type="range" min="1" max="100" value="50" class="slider" id="sliderNbFriends" oninput="sliderChange(this);">
-            </div>
-            <input type="number" min="1" max="100" value="50" id="input-sliderNbFriends" class="inputSlider" name="input-slider-buget" oninput="InputSliderChange(this);">
-          </div>
           </div>
         </div>
       </nav>

@@ -34,10 +34,17 @@ function graphCise(graph) {
 
   cyCise.style()
     .selector('node')
-    .style(
-      'background-color',
-      (e) => computeHSL(computeHue(e.data('knowsCommunity'), communities), s, l)
-    )
+    .style({
+      'background-color': (e) => computeHSL(computeHue(e.data('knowsCommunity'), communities), s, l),
+      "text-valign": "center",
+      "text-halign": "center",
+      'text-wrap': "wrap",
+      'content': (d) => {
+        arrayName = d.data('name').split(" ")
+        contentName = arrayName.shift() + '\n' + arrayName
+        return contentName
+      }
+    })
     .update()
 
   cyCise.style()
@@ -75,8 +82,6 @@ function graphCise(graph) {
       "line-color": "#c0c0c0",
       "opacity": "0.1"
     }).update()
-
-  // console.log(graph)
 
   popupNodeManagement(cyCise, (evt) => {
     popupAtNode(evt.target, evt.type, cyCise)
