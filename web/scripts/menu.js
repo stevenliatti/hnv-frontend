@@ -125,9 +125,7 @@ function clearSP() {
 }
 
 function spQuery(tmdbId1, tmdbId2) {
-  tmdbId1 = 85;
-  tmdbId2 = 287;
-  fetch(env.API_BASE_URL + `/shortestPath/graph/${tmdbId1}/${tmdbId2}`)
+  fetch(env.API_BASE_URL + `/graph/shortestPath/${tmdbId1}/${tmdbId2}`)
   .then(res =>
     res.json().then(json => {
       console.log(json);
