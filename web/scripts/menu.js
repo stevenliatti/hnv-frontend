@@ -15,10 +15,10 @@ const sliderAppearences = document.getElementById('slider-appearences');
 const inputSliderAppearences = document.getElementById('input-slider-appearences');
 // Navbar
 const sliderNbMovies = document.getElementById('sliderNbMovies');
-const sliderNbAcors = document.getElementById('sliderNbAcors');
+const sliderNbActors = document.getElementById('sliderNbActors');
 const sliderNbFriends = document.getElementById('sliderNbFriends');
 const inputSliderNbMovies = document.getElementById('input-sliderNbMovies');
-const inputSliderNbAcors = document.getElementById('input-sliderNbAcors');
+const inputSliderNbActors = document.getElementById('input-sliderNbActors');
 const inputSliderNbFriends = document.getElementById('input-sliderNbFriends');
 
 function sliderChange(slider) {
@@ -28,8 +28,8 @@ function sliderChange(slider) {
     inputSliderAppearences.value = slider.value;
   else if (slider.id === "sliderNbMovies")
     inputSliderNbMovies.value = slider.value;
-  else if (slider.id === "sliderNbAcors")
-    inputSliderNbAcors.value = slider.value;
+  else if (slider.id === "sliderNbActors")
+    inputSliderNbActors.value = slider.value;
   else if (slider.id === "sliderNbFriends")
     inputSliderNbFriends.value = slider.value;
 }
@@ -41,8 +41,8 @@ function InputSliderChange(input) {
     sliderAppearences.value = input.value;
   else if (input.id === "input-sliderNbMovies")
     sliderNbMovies.value = input.value;
-  else if (input.id === "input-sliderNbAcors")
-    sliderNbAcors.value = input.value;
+  else if (input.id === "input-sliderNbActors")
+    sliderNbActors.value = input.value;
   else if (input.id === "input-sliderNbFriends")
     sliderNbFriends.value = input.value;
 }

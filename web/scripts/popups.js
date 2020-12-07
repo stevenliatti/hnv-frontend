@@ -66,7 +66,7 @@ function closeMoviesPopup(popup) {
 function popupAtEdge(edge, cy) {
   if (divPopupEdge) { closeMoviesPopup(divPopupEdge) }
 
-  let moviesIds = cy.$id(edge.id()).data()["movieIds"]
+  const moviesIds = cy.$id(edge.id()).data()["movieIds"].join()
 
   getMovies(moviesIds)
     .then((moviesList) => {
@@ -254,7 +254,7 @@ function popupAtNode(node, type, cy) {
         let mainPicture = cy.$id(node.id()).data()["profile_path"]
 
         // Friends info
-        getFriends(mainTmdbId)
+        getActor(mainTmdbId)
         .then((result) => {
           actorFriends = result.friends
           actorRelations = result.knowsRelations

@@ -370,3 +370,11 @@ a.article:hover {
     transform: rotate(-45deg) translate(1px, -1px);
   }
 }
+
+/* ---------------------------------------------------
+    LIMITS NAVBAR STYLE
+----------------------------------------------------- */
+
+.btnApplyLimits {
+  background-color: #75a9f9;
+}
