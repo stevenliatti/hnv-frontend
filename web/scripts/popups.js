@@ -89,7 +89,7 @@ function popupAtEdge(edge, cy) {
           let actorsTable = document.createElement('table')
           actorsTable.setAttribute("id", "table-actors")
           actorsTable.style.width = "100%"
-          actorsTable.style.background = "rgb(117,169,249, 0.6)"
+          actorsTable.style.background = "rgb(117,169,249, 1)"
           let actorsTopRow = actorsTable.insertRow()
           let actorsCollaborationsRow = actorsTable.insertRow()
           let actorsCloseRow = actorsTable.insertRow()
@@ -179,7 +179,7 @@ function popupAtEdge(edge, cy) {
           let moviesTable = document.createElement('table')
           moviesTable.setAttribute("id", "table-movies")
           moviesTable.style.width = "100%"
-          moviesTable.style.background = "rgb(249,170,117, 0.6)"
+          moviesTable.style.background = "rgb(249,170,117, 1)"
           moviesTable.style.display = "block"
           moviesTable.style.overflowX = "scroll"
           let moviesTopRow = moviesTable.insertRow()

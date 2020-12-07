@@ -96,6 +96,8 @@ function formatLabel(label) {
 $('.basicAutoSelectSearch').on('change', (event) => {
   console.log(event.target.value);
   findInfos(event.target.value);
+  // Little hack
+  document.getElementById("mainSearchBar").value = "";
   // createSideView(node, cy)
 });
 
@@ -118,22 +120,15 @@ function createSideViewSearch(actorInfos, cy) {
   let sideBiography = actorInfos["biography"];
   let sidePicture = actorInfos["profile_path"]
 
-  sideBirthday = sideBirthday.split("-")
-  sideBirthday = sideBirthday[2] + "." + sideBirthday[1] + "." + sideBirthday[0]
-  let sideTopInfo = sideName + " (" + sideBirthday
-  if (sideDeathday) {
-    sideDeathday = sideDeathday.split("-")
-    sideDeathday = sideDeathday[2] + "." + sideDeathday[1] + "." + sideDeathday[0]
-    sideTopInfo += " - " + sideDeathday + ")"
-  } else { sideTopInfo += ", " + (new Date().getFullYear() - sideBirthday.split(".")[2]) + ")" }
-  if (sidePlace) { sideTopInfo += ", " + sidePlace.split(",").slice(-1).pop() }
-
-  document.getElementById('side-top-info').innerHTML = sideTopInfo
-  document.getElementById('side-top-info').setAttribute("style", "text-align: center; font-size: 120%, font-weight: 900")
-  document.getElementById('side-picture').src = "https://image.tmdb.org/t/p/w154/" + sidePicture
-  document.getElementById('side-biography').innerHTML = sideBiography
-  document.getElementById("side-url").href = "https://www.themoviedb.org/person/" + sideLink
-
-  closeMoviesPopup(document.getElementById("movies-popup"))
-  graphCose(sideLink, sideID.toString())
+  actorInfosSideView(
+    cy,
+    sideLink,
+    sideID,
+    sideName,
+    sideBirthday,
+    sideDeathday,
+    sidePlace,
+    sideBiography,
+    sidePicture
+  )
 }
