@@ -55,7 +55,8 @@ function textExtract(textDescription, descriptionLength) {
 
 // Main fuction, load name, description, url and picture
 function loadingSlideshow(graph) {
-  let arrayActors = graph.elements.nodes
+  // let arrayActors = graph.elements.nodes
+  let arrayActors = graph.nodes
 
   let descriptionLength = 200
   let loadingSlideshowActor = arrayActors[randInt(0, arrayActors.length)]
