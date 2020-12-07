@@ -192,17 +192,17 @@
             <select class="form-control basicAutoSelectSearch mainSearchBar" name="simple_select" placeholder="Search" autocomplete="off" id="mainSearchBar">
           </select>
             <div class="graphSizeConfig">
-              <span style="color: blue; font-size: smaller;">Want a bigger graph ? </span>
+              <button type="button" class="btn btn-sm rounded-sm btnApplyLimits" onclick="reloadMain();">Want a bigger graph ?</button>
               <div class="slidecontainer">
                 Movies
                 <input type="range" min="1" max="100" value="50" class="slider" id="sliderNbMovies" oninput="sliderChange(this);">
               </div>
               <input type="number" min="1" max="100" value="50" id="input-sliderNbMovies" class="inputSlider" name="input-slider-buget" oninput="InputSliderChange(this);">
               <div class="slidecontainer">
-                Acotrs
-                <input type="range" min="1" max="100" value="50" class="slider" id="sliderNbAcors" oninput="sliderChange(this);">
+                Actors
+                <input type="range" min="1" max="100" value="50" class="slider" id="sliderNbActors" oninput="sliderChange(this);">
               </div>
-              <input type="number" min="1" max="100" value="50" id="input-sliderNbAcors" class="inputSlider" name="input-slider-buget" oninput="InputSliderChange(this);">
+              <input type="number" min="1" max="100" value="50" id="input-sliderNbActors" class="inputSlider" name="input-slider-buget" oninput="InputSliderChange(this);">
               <div class="slidecontainer">
                 Friends
                 <input type="range" min="1" max="100" value="50" class="slider" id="sliderNbFriends" oninput="sliderChange(this);">
