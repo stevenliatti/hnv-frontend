@@ -68,8 +68,8 @@
               <span class="txtOnly">Born between  and</span>
             </li>
             <li class="ml-1">
-              <input type="date" id="bornBetweenStartFilter" name="bornBetweenStartFilter" min="2020-01-01" max="2020-12-31" class="picker">
-              <input type="date" id="bornBetweenEndFilter" name="bornBetweenEndFilter" min="2020-01-01" max="2020-12-31" class="picker">
+              <input type="date" id="bornBetweenStartFilter" name="bornBetweenStartFilter" min="1900-01-01" max="2020-12-07" class="picker">
+              <input type="date" id="bornBetweenEndFilter" name="bornBetweenEndFilter" min="1900-01-01" max="2020-12-07" class="picker">
             </li>
             <li class="ml-1 mt-2 txtOnly">
               Still alive
@@ -82,22 +82,28 @@
             </li>
             <hr width="100%" style="margin: inherit">
             <li class="ml-1 mt-1">
-              <span class="txtOnly">Collaborations</span>
+              <span class="txtOnly">Min collaborations</span>
             </li>
             <li class="ml-1">
               <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="slider-collab" oninput="sliderChange(this);">
+                <input type="range" min="1" max="500" value="20" class="slider" id="slider-collab" oninput="sliderChange(this);">
               </div>
-              <input type="number" min="1" max="100" value="50" id="input-slider-collab" class="inputSlider" name="input-slider-buget" oninput="InputSliderChange(this);">
+              <input type="number" min="1" max="500" id="input-slider-collab" class="inputSlider" name="input-slider-buget" oninput="InputSliderChange(this);">
             </li>
             <li class="ml-1">
-              <span class="txtOnly">Appearences</span>
+              <span class="txtOnly">Min Appearences</span>
             </li>
             <li class="ml-1 pb-2">
               <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="slider-appearences" oninput="sliderChange(this);">
+                <input type="range" min="1" max="80" value="5" class="slider" id="slider-appearences" oninput="sliderChange(this);">
               </div>
-              <input type="number" min="1" max="100" value="50" id="input-slider-appearences" class="inputSlider" name="input-slider-revenue" value="test" oninput="InputSliderChange(this);">
+              <input type="number" min="1" max="80" id="input-slider-appearences" class="inputSlider" name="input-slider-revenue" value="test" oninput="InputSliderChange(this);">
+            </li>
+            <li>
+              <button type="button" class="btn btn-sm rounded-sm btnResetFilters" onclick="backFilter();">
+                <span style="font-size: 13px;">Back</span>
+                <i class="fas fa-undo fa-xs"></i>
+              </button>
             </li>
           </ul>
         </li>

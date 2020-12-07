@@ -56,19 +56,23 @@ let bornBetweenStartFilter = $('#bornBetweenStartFilter')[0];
 let bornBetweenEndFilter = $('#bornBetweenEndFilter')[0];
 
 let tmp_graph = [];
+let tmp_filters = [];
+
+function save_graph_filters_state(current_graph, current_config) {
+  tmp_graph.push(JSON.parse( JSON.stringify( current_graph ) ));
+  tmp_filters.push(current_config);
+}
 
 function peopleFilters() {
   let rbStillAliveChoice = $('[name ="rbStillAliveChoice"]:checked')[0];
   let searchCountryFilter = $('#searchCountryFilter')[0];
-  if(tmp_graph.length === 0 ) {
-    tmp_graph.push(JSON.parse( JSON.stringify( graph ) ));
-    // console.log("SAVE FIRST");
-  }
-  else {
-    graph = (JSON.parse( JSON.stringify( tmp_graph[0] ) ));
-    // console.log("USE EXISTING");
-  }
+
+  if(tmp_graph.length === 0)
+    save_graph_filters_state(graph, {});
+
   let all_ids_to_take = []
+  let filters_config = {};
+  graph = JSON.parse( JSON.stringify( tmp_graph[0] ) );
 
   /*
   
@@ -84,10 +88,12 @@ console.log(graph.elements.nodes.filter(x => x.data.deathday !== "")); // Morts
     all_ids_to_take = all_ids_to_take
     .concat(graph.elements.nodes
       .filter(x => x.data.gender === "Male").map(x => x.data.id));
+    filters_config.actors = true;
   }
   if (cbxActressesFilter.checked) {
     all_ids_to_take = all_ids_to_take.concat(graph.elements.nodes
       .filter(x => x.data.gender === "Female").map(x => x.data.id));
+    filters_config.actresses = true;  
   }
   if (searchCountryFilter.value) {
     all_ids_to_take = all_ids_to_take
@@ -96,15 +102,18 @@ console.log(graph.elements.nodes.filter(x => x.data.deathday !== "")); // Morts
         let pobFormat = x.data.place_of_birth.split(' ');
         return pobFormat[pobFormat.length-1] === searchCountryFilter.value
       }).map(x => x.data.id));
+    filters_config.country = searchCountryFilter.value;
   }
   if (bornBetweenStartFilter.value) {
     all_ids_to_take = all_ids_to_take.concat(graph.elements.nodes
     .filter(x => x.data.birthday > bornBetweenStartFilter.value).map(x => x.data.id));
     console.log(graph.elements.nodes.filter(x => x.data.birthday > bornBetweenStartFilter.value));
+    filters_config.bornStart = bornBetweenStartFilter.value;
   }
   if (bornBetweenEndFilter.value) {
     all_ids_to_take = all_ids_to_take.concat(graph.elements.nodes
     .filter(x => x.data.birthday < bornBetweenStartFilter.value).map(x => x.data.id));
+    filters_config.bornEnd = bornBetweenEndFilter.value;
   }
   if (rbStillAliveChoice) {
     if(rbStillAliveChoice.value === "yes")
@@ -113,23 +122,61 @@ console.log(graph.elements.nodes.filter(x => x.data.deathday !== "")); // Morts
     else if (rbStillAliveChoice.value === "no")
       all_ids_to_take = all_ids_to_take.concat(graph.elements.nodes
       .filter(x => x.data.deathday !== "").map(x => x.data.id));
+    filters_config.stillAlive = rbStillAliveChoice;
   }
   if (inputSliderCollab.value) {
     console.log("INPUT COLLAB : " + inputSliderCollab.value);
+    filters_config.collab = inputSliderCollab.value;
+    all_ids_to_take = all_ids_to_take.concat(graph.elements.nodes
+      .filter(x => x.data.knowsDegree >= inputSliderCollab.value).map(x => x.data.id));
+    filters_config.collab = bornBetweenEndFilter.value;
   }
   if (inputSliderAppearences.value) {
     console.log("INPUT APPARENCES : " + inputSliderAppearences.value);
+    filters_config.apparences = inputSliderAppearences.value;
   }
+
 
 
   if(all_ids_to_take.length > 0) {
     graph.elements.nodes = graph.elements.nodes.filter(x => all_ids_to_take.includes(x.data.id));
     graph.elements.edges = graph.elements.edges.filter(x => all_ids_to_take.includes(x.data.source) && all_ids_to_take.includes(x.data.target))
-  
-    // console.log(graph);
+    
+    save_graph_filters_state(graph, filters_config);
     graphCise(graph);
   }
 
+}
+
+function backFilter() {
+  console.log("BACK to version : " + (tmp_graph.length-1).toString());
+  if(tmp_graph.length > 1) {
+    tmp_graph.pop(); // Quitte état courant
+    graphCise(tmp_graph[tmp_graph.length-1]);
+    tmp_filters.pop(); // Quitte état courant
+    restoreFiltersToState(tmp_filters[tmp_filters.length-1]);
+  }
+  console.log("NEW LENGTH : " + tmp_graph.length);
+}
+
+function restoreFiltersToState(state) {
+  let searchCountryFilter = $('#searchCountryFilter')[0];
+  state.actors ? cbxActorsFilter.checked = true : cbxActorsFilter.checked = false;
+  state.actresses ? cbxActressesFilter.checked = true : cbxActressesFilter.checked = false;
+  state.country ? searchCountryFilter.value = state.country : searchCountryFilter.value = "";
+  state.bornStart ? bornBetweenStartFilter.value = state.bornStart : bornBetweenStartFilter.value = null;
+  state.bornEnd ? bornBetweenEndFilter.value = state.bornEnd :   bornBetweenEndFilter.value = null;
+  state.stillAlive ? state.stillAlive.checked = true : state.stillAlive.checked = false;
+}
+
+function resetGraph() {
+  if(tmp_graph.length > 0) {
+    graphCise(tmp_graph[0]);
+    graph = tmp_graph[0];
+    tmp_graph = [];
+    restoreFiltersToState(tmp_filters[0]);
+    tmp_filters = [];
+  }
 }
 
 function resetPeopleFilters() {
@@ -143,15 +190,12 @@ function resetPeopleFilters() {
   bornBetweenEndFilter.value = null;
   if (rbStillAliveChoice)
     rbStillAliveChoice.checked = false;
-  inputSliderCollab.value = 50;
-  sliderCollab.value = 50;
-  inputSliderAppearences.value = 50;
-  sliderAppearences.value = 50;
+  inputSliderCollab.value = null;
+  sliderCollab.value = 20;
+  inputSliderAppearences.value = null;
+  sliderAppearences.value = 5;
 
-  if(tmp_graph[0]) {
-    graphCise(tmp_graph[0]);
-    graph = tmp_graph[0];
-  }
+  resetGraph();
 }
 
 //// Shortest path
@@ -161,6 +205,7 @@ function sleep(ms) {
 }
 
 function computeSP() {
+  save_restore_graph_state(graph);
   let searchActorSP1 = $('#searchActorSP1')[0];
   let searchActorSP2 = $('#searchActorSP2')[0];
   let errorSP = $('#errorSP')[0];
@@ -182,6 +227,10 @@ function clearSP() {
 
   searchActorSP1.value = "";
   searchActorSP2.value = "";
+  if(tmp_graph[0]) {
+    graphCise(tmp_graph[0]);
+    graph = tmp_graph[0];
+  }
 }
 
 function spQuery(tmdbId1, tmdbId2) {
