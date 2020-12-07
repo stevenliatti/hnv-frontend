@@ -38,15 +38,8 @@
           information about a specific actor or movie. Click on a node to generate a new relationship graph focused on a specific actor.</p>
         <!-- ACTORS SECTION -->
         <li class="liStyle">
-          <a aria-expanded="false" class="dropdown-toggle aHeader">
+          <a aria-expanded="false" class="aHeader">
             People filters
-            <button type="button" class="btn btn-sm rounded-sm btnApplyFilters" onclick="peopleFilters();">
-              <i class="fas fa-check fa-xs"></i>
-            </button>
-            <button type="button" class="btn btn-sm rounded-sm btnResetFilters" onclick="resetPeopleFilters();">
-              <span style="font-size: 13px;">Reset</span>
-              <i class="fas fa-times fa-xs"></i>
-            </button>
           </a>
           <ul class="list-unstyled ulContent" id="movieSubmenu">
             <li class="ml-1">
@@ -100,9 +93,17 @@
               <input type="number" min="1" max="80" id="input-slider-appearences" class="inputSlider" name="input-slider-revenue" value="test" oninput="InputSliderChange(this);">
             </li>
             <li>
-              <button type="button" class="btn btn-sm rounded-sm btnResetFilters" onclick="backFilter();">
+              <button type="button" class="btn btn-sm rounded-sm btnApplyFilters" onclick="peopleFilters();">
+                <span style="font-size: 13px;">Apply</span>
+                <i class="fas fa-check fa-xs"></i>
+              </button>
+              <button type="button" class="btn btn-sm rounded-sm btnBackFilters" onclick="backFilter();">
                 <span style="font-size: 13px;">Back</span>
                 <i class="fas fa-undo fa-xs"></i>
+              </button>
+              <button type="button" class="btn btn-sm rounded-sm btnResetFilters" onclick="resetPeopleFilters();">
+                <span style="font-size: 13px;">Reset</span>
+                <i class="fas fa-times fa-xs"></i>
               </button>
             </li>
           </ul>
@@ -128,15 +129,8 @@
 
         <!-- SHORTEST PATH SECTION -->
         <li class="liStyle">
-          <a aria-expanded="false" class="dropdown-toggle aHeader">
+          <a aria-expanded="false" class="aHeader">
             Shortest path
-            <button type="button" class="btn btn-sm rounded-sm btnApplyFilters" onclick="computeSP();">
-              <i class="fas fa-check fa-xs"></i>
-            </button>
-            <button type="button" class="btn btn-sm rounded-sm btnResetFilters" onclick="clearSP();">
-              <span style="font-size: 13px;">Clear</span>
-              <i class="fas fa-times fa-xs"></i>
-            </button>
           </a>
           <ul class="list-unstyled ulContent" id="movieSubmenu">
             <li class="ml-1">
@@ -148,8 +142,21 @@
               To
               <select class="inputShortestPathSideMenu form-control basicAutoSelectSearchPeopleOnly" id="searchActorSP2" name="simple_select" placeholder="Search" autocomplete="off">
               </select>
+            </li>
+            <li>
+              <button type="button" class="btn btn-sm rounded-sm btnApplyFilters" onclick="computeSP();">
+                <span style="font-size: 13px;">Apply</span>
+                <i class="fas fa-check fa-xs"></i>
+              </button>
+              <button type="button" class="btn btn-sm rounded-sm btnBacksFilters" onclick="clearSP();">
+                <span style="font-size: 13px;">Back to graph</span>
+                <i class="fas fa-times fa-xs"></i>
+              </button>
               <div class="alert alert-danger mt-3" id="errorSP" style="font-size: 12px; display: none;" role="alert">
                 Please inquire the two fields
+              </div>
+              <div class="alert alert-danger mt-3" id="errorQSP" style="font-size: 12px; display: none;" role="alert">
+                This two actors not have a shortest path
               </div>
             </li>
           </ul>
@@ -158,7 +165,7 @@
         <!-- MORE INFO SECTION -->
 
         <li class="liStyle">
-          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle aHeader">
+          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="aHeader">
             More info
           </a>
           <ul class="collapse list-unstyled ulContent" id="pageSubmenu">

@@ -124,6 +124,10 @@ p {
   background-color: rgb(45, 248, 42);
 }
 
+.btnBackFilters:hover {
+  background-color: rgb(30, 162, 219);
+}
+
 .btnResetFilters:hover {
   background-color: red;
 }
@@ -296,14 +300,6 @@ p {
 
 .aHeader[data-toggle="collapse"] {
   position: relative;
-}
-
-.dropdown-toggle::after {
-  display: block;
-  position: absolute;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
 }
 
 ul ul .aHeader {
