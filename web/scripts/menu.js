@@ -228,18 +228,17 @@ function clearSP() {
 function spQuery(tmdbId1, tmdbId2) {
   fetch(env.API_BASE_URL + `/graph/shortestPath/${tmdbId1}/${tmdbId2}`)
   .then(res => {
-    if(res.nodes) {
+    console.log(res);
       res.json().then(json => {
         console.log(json);
         graphCise(json);
+      }).catch(err => {
+        let errorQSP = $('#errorQSP')[0];
+        errorQSP.style.display = 'block';
+        sleep(3000).then(() => {
+          errorQSP.style.display = 'none';
+        })
       })
-    } else {
-      let errorQSP = $('#errorQSP')[0];
-      errorQSP.style.display = 'block';
-      sleep(3000).then(() => {
-        errorQSP.style.display = 'none';
-      })
-    }
   })
 }
 
