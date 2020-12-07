@@ -10,7 +10,9 @@ $('.basicAutoSelectSearch').autoComplete({
   formatResult: function(item) {
     return {
       value: item.tmdbId,
-      text: item.tmdbId + "",
+      text: JSON.stringify({
+        label: item.label, tmdbId: item.tmdbId
+      }),
       html: [
         item.name, ' ',
         formatLabel(item.label)
@@ -94,23 +96,34 @@ function formatLabel(label) {
 }
 
 $('.basicAutoSelectSearch').on('change', (event) => {
-  console.log(event.target.value);
-  findInfos(event.target.value);
+  const result = JSON.parse(event.target.value);
+  console.log("in change:", result);
+  findInfos(result.tmdbId, result.label);
   // Little hack
   document.getElementById("mainSearchBar").value = "";
-  // createSideView(node, cy)
 });
 
-function findInfos(tmdbId) {
-  fetch(env.API_BASE_URL + `/actor/${tmdbId}`)
-    .then(res =>
-      res.json().then(json => {
-        console.log(json);
-        createSideViewSearch(json['actor'], cyCise);
-      }))
+function findInfos(tmdbId, label) {
+  switch (label) {
+    case 'Actor':
+      getActor(tmdbId)
+        .then(actor => {
+          createSideViewSearchActor(actor['actor'], cyCise);
+        })
+      break;
+    case 'Movie':
+      getMovieGraph(tmdbId)
+        .then(graph => {
+          const movieData = graph.elements.nodes.map(n => n.data).find(n => n.tmdbId == tmdbId);
+          createSideViewSearchMovie(movieData, graph, cyCise);
+        })
+      break;
+    default:
+      break;
+  }
 }
 
-function createSideViewSearch(actorInfos, cy) {
+function createSideViewSearchActor(actorInfos, cy) {
   let sideLink = actorInfos["tmdbId"]
   let sideID = actorInfos["id"]
   let sideName = actorInfos["name"]
@@ -121,6 +134,30 @@ function createSideViewSearch(actorInfos, cy) {
   let sidePicture = actorInfos["profile_path"]
 
   actorInfosSideView(
+    cy,
+    sideLink,
+    sideID,
+    sideName,
+    sideBirthday,
+    sideDeathday,
+    sidePlace,
+    sideBiography,
+    sidePicture
+  )
+}
+
+function createSideViewSearchMovie(movieData, graph, cy) {
+  let sideLink = movieData["tmdbId"];
+  let sideID = movieData["id"];
+  let sideName = movieData["title"];
+  let sideBirthday = movieData["tagline"];
+  let sideDeathday = movieData["release_date"];
+  let sidePlace = movieData["runtime"].toString();
+  let sideBiography = movieData["overview"];
+  let sidePicture = movieData["poster_path"];
+
+  movieInfosSideView(
+    graph,
     cy,
     sideLink,
     sideID,

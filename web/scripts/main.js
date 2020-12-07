@@ -5,7 +5,7 @@ function reloadMain() {
   const limitActor = document.getElementById('input-sliderNbActors').value;
   const limitActorFriends = document.getElementById('input-sliderNbFriends').value;
 
-  getActors(limitMovie, limitActor, limitActorFriends)
+  getActorsGraph(limitMovie, limitActor, limitActorFriends)
     .then(result => {
       graph = result;
       graphCise(graph);
@@ -25,7 +25,7 @@ function main() {
   document.getElementById('sliderNbActors').value = limitActor;
   document.getElementById('sliderNbFriends').value = limitActorFriends;
 
-  getActors(limitMovie, limitActor, limitActorFriends)
+  getActorsGraph(limitMovie, limitActor, limitActorFriends)
     .then((result) => {
       graph = result
       loadingSlideshow(graph)
