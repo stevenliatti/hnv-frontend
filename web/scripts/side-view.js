@@ -53,7 +53,7 @@ function actorInfosSideView(
   sideBiography,
   sidePicture
 ) {
-  if ((document.getElementById('cy-cise').style.width == "80%") || (document.getElementById('cy-cise').style.width == "100%")) {
+  if (cy._private.container.offsetWidth > 1000) {
     cy.panBy({
       x: -230,
       y: 0
@@ -125,7 +125,7 @@ function movieInfosSideView(
   sideBudget,
   sideRevenue
 ) {
-  if ((document.getElementById('cy-cise').style.width == "80%") || (document.getElementById('cy-cise').style.width == "100%")) {
+  if (cy._private.container.offsetWidth > 1000) {
     cy.panBy({
       x: -230,
       y: 0
