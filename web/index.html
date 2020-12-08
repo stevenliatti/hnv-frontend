@@ -14,11 +14,11 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/style-menu.css">
+  <link rel="stylesheet" href="styles/style-hover.css">
 
   <!-- Font Awesome JS -->
   <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-
 
 </head>
 
@@ -263,44 +263,14 @@
       <div style="text-align: center; width: 20%; float: right;" id="loading-slideshow">
         <p style="font-size: 80%;">While you wait, learn about</p>
         <p id="loading-slideshow-name">{...}</p>
-        <!-- <p style="font-size: 60%;">Click on the picture to see someone else</p> -->
-        <img id="loading-slideshow-picture" src="loading-icon.gif" onclick="loadingAnother()" width="154" height="auto">
+        <p>
+          <a class="hovertextactor" target="_blank" id="loading-slideshow-url" ref="https://www.themoviedb.org/" title="Go to their TMDb page">
+            <img id="loading-slideshow-picture" src="loading-icon.gif" width="154" height="auto" title=""></a>
+        </p>
         <p style="text-align: justify; font-size: 50%;" id="loading-slideshow-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
           dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <a style="font-size: 80%;" target="_blank" href="https://www.themoviedb.org/" id="loading-slideshow-url">Go to their TMDb page</a>
       </div>
 
-      <!-- <div style="display:none;height:200px;width:200px;border:3px solid green;" id="popup">Hi</div> -->
-
-      <style type="text/css">
-        a.hovertext {
-          position: relative;
-          font-size: 50%;
-          text-decoration: none !important;
-          text-align: center;
-        }
-        
-        a.hovertext::after {
-          content: attr(title);
-          position: absolute;
-          left: 0;
-          top: 500%;
-          width: 154px;
-          background: rgba(117, 169, 249, 0.8);
-          text-decoration: none !important;
-          color: #000;
-          opacity: 0;
-          -webkit-transition: 0.5s;
-          -moz-transition: 0.5s;
-          -o-transition: 0.5s;
-          -ms-transition: 0.5s;
-        }
-        
-        a.hovertext:hover::after,
-        a.hovertext:focus::after {
-          opacity: 1.0;
-        }
-      </style>
 
       <!-- Second panel -->
       <div style="width: 0%; height: 50%; float: right; overflow: hidden;" id="side">
@@ -308,12 +278,9 @@
           <tr>
             <td valign="top">
               <p>
-                <a class="hovertext" target="_blank" id="side-url" ref="https://www.themoviedb.org/" title="Go to their TMDb">
+                <a class="hovertextactor" target="_blank" id="side-url" href="https://www.themoviedb.org/" title="Go to their TMDb page">
                   <img id="side-picture" src="favicon-32x32.png" width="154" height="auto" title=""></a>
               </p>
-              <!-- <img id="side-picture" src="favicon-32x32.png" width="154" height="auto">
-              <div style="position: absolute; text-align: center; left: 50%; font-size: 60%">Go to their TMDb</div>
-              <p><a style="font-size: 50%; display: block; text-align: center;" target="_blank" href="https://www.themoviedb.org/" id="side-url">Go to their TMDb page</a></p> -->
             </td>
             <td valign="top">
               <p style="text-align: center; font-size: 50%;" id="side-top-info">NAME</p>

@@ -82,9 +82,10 @@ function actorGraphCose(sideId, sideLink) {
           'width': (e) => e.data('playInDegree'),
           'height': (e) => e.data('playInDegree'),
           'text-wrap': "wrap",
-          'content': (d) => {
-            arrayName = d.data('name').split(" ")
-            contentName = arrayName.shift() + '\n' + arrayName
+          'content': (n) => {
+            arrayName = n.data('name').split(" ")
+            contentName = arrayName.shift() + '\n'
+            for (a of arrayName) { contentName += a + " " }
             return contentName
           }
         }).update()

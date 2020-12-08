@@ -107,64 +107,88 @@ function popupAtEdge(edge, cy) {
           rightPicture.style.width = "100px"
 
           topName.style.backgroundColor = "#c0c0c0"
-          topName.style.height = "30px"
+          topName.style.height = "40px"
           topName.style.lineHeight = "0.6"
           topName.style.fontSize = "80%"
           topName.style.paddingLeft = "10px"
           topName.style.textAlign = "left"
 
-          let sourceActorBirthday = sourceActor.birthday.split("-")
-          sourceActorBirthday = sourceActorBirthday[2] + "." + sourceActorBirthday[1] + "." + sourceActorBirthday[0]
-          let sourceActorText = sourceActor.name + " (" + sourceActorBirthday
-          let sourceActorDeathday = sourceActor.deathday
-          if (sourceActorDeathday) {
-            sourceActorDeathday = sourceActorDeathday.split("-")
-            sourceActorDeathday = sourceActorDeathday[2] + "." + sourceActorDeathday[1] + "." + sourceActorDeathday[0]
-            sourceActorText += " - " + sourceActorDeathday + ")"
-          } else { sourceActorText += ", " + (new Date().getFullYear() - sourceActorBirthday.split(".")[2]) + ")" }
+          let sourceActorText = sourceActor.name
+          let sourceActorBirthday = sourceActor.birthday
+          if (sourceActorBirthday) {
+            sourceActorBirthday = sourceActorBirthday.split("-")
+            sourceActorBirthday = sourceActorBirthday[2] + "." + sourceActorBirthday[1] + "." + sourceActorBirthday[0]
+            sourceActorText += " (" + sourceActorBirthday
+            let sourceActorDeathday = sourceActor.deathday
+            if (sourceActorDeathday) {
+              sourceActorDeathday = sourceActorDeathday.split("-")
+              sourceActorDeathday = sourceActorDeathday[2] + "." + sourceActorDeathday[1] + "." + sourceActorDeathday[0]
+              sourceActorText += " - " + sourceActorDeathday + ")"
+            } else { sourceActorText += ", " + (new Date().getFullYear() - sourceActorBirthday.split(".")[2]) + ")" }
+          }
           if (sourceActor.place_of_birth) { sourceActorText += ", " + sourceActor.place_of_birth.split(",").slice(-1).pop() }
           topName.innerHTML = sourceActorText
 
           bottomName.style.backgroundColor = "#ebebeb"
-          bottomName.style.height = "30px"
+          bottomName.style.height = "40px"
           bottomName.style.lineHeight = "0.6"
           bottomName.style.fontSize = "80%"
           bottomName.style.paddingRight = "10px"
           bottomName.style.textAlign = "right"
           bottomName.innerHTML = targetActor.name
 
-          let targetActorBirthday = targetActor.birthday.split("-")
-          targetActorBirthday = targetActorBirthday[2] + "." + targetActorBirthday[1] + "." + targetActorBirthday[0]
-          let targetActorText = targetActor.name + " (" + targetActorBirthday
-          let targetActorDeathday = targetActor.deathday
-          if (targetActorDeathday) {
-            targetActorDeathday = targetActorDeathday.split("-")
-            targetActorDeathday = targetActorDeathday[2] + "." + targetActorDeathday[1] + "." + targetActorDeathday[0]
-            targetActorText += " - " + targetActorDeathday + ")"
-          } else { targetActorText += ", " + (new Date().getFullYear() - targetActorBirthday.split(".")[2]) + ")" }
+          let targetActorText = targetActor.name
+          let targetActorBirthday = targetActor.birthday
+          if (targetActorBirthday) {
+            targetActorBirthday = targetActorBirthday.split("-")
+            targetActorBirthday = targetActorBirthday[2] + "." + targetActorBirthday[1] + "." + targetActorBirthday[0]
+            targetActorText += " (" + targetActorBirthday
+            let targetActorDeathday = targetActor.deathday
+            if (targetActorDeathday) {
+              targetActorDeathday = targetActorDeathday.split("-")
+              targetActorDeathday = targetActorDeathday[2] + "." + targetActorDeathday[1] + "." + targetActorDeathday[0]
+              targetActorText += " - " + targetActorDeathday + ")"
+            } else { targetActorText += ", " + (new Date().getFullYear() - targetActorBirthday.split(".")[2]) + ")" }
+          }
           if (targetActor.place_of_birth) { targetActorText += ", " + targetActor.place_of_birth.split(",").slice(-1).pop() }
           bottomName.innerHTML = targetActorText
 
+          let sourceActorP = document.createElement('p')
+          sourceActorP.style.margin = "0px"
+          let sourceActorA = document.createElement('a')
+          sourceActorA.className = "hovertextactor"
+          sourceActorA.target = "_blank"
+          sourceActorA.href = "https://www.themoviedb.org/person/" + sourceActor.tmdbId
+          sourceActorA.title = "TMDb page"
           let sourceActorPicture = document.createElement('img')
           sourceActorPicture.setAttribute("src", "https://image.tmdb.org/t/p/w154/" + sourceActor.profile_path)
-          sourceActorPicture.style.height = "150px"
           sourceActorPicture.style.width = "100px"
           sourceActorPicture.style.objectPosition = "center"
           sourceActorPicture.style.verticalAlign = "top"
-          sourceActorPicture.style.float = "left"
+            // sourceActorPicture.style.float = "left"
+          sourceActorA.appendChild(sourceActorPicture)
+          sourceActorP.appendChild(sourceActorA)
 
+          let targetActorP = document.createElement('p')
+          targetActorP.style.margin = "0px"
+          let targetActorA = document.createElement('a')
+          targetActorA.className = "hovertextactor"
+          targetActorA.target = "_blank"
+          targetActorA.href = "https://www.themoviedb.org/person/" + targetActor.tmdbId
+          targetActorA.title = "TMDb page"
           let targetActorPicture = document.createElement('img')
           targetActorPicture.setAttribute("src", "https://image.tmdb.org/t/p/w154/" + targetActor.profile_path)
-          targetActorPicture.style.height = "150px"
           targetActorPicture.style.width = "100px"
           targetActorPicture.style.objectPosition = "center"
           targetActorPicture.style.verticalAlign = "top"
-          targetActorPicture.style.float = "right"
+            // targetActorPicture.style.float = "left"
+          targetActorA.appendChild(targetActorPicture)
+          targetActorP.appendChild(targetActorA)
 
-          leftPicture.appendChild(sourceActorPicture)
-          rightPicture.appendChild(targetActorPicture)
+          leftPicture.appendChild(sourceActorP)
+          rightPicture.appendChild(targetActorP)
 
-          middleCollaborations.style.height = "20px"
+          middleCollaborations.style.height = "10px"
           middleCollaborations.style.fontSize = "60%"
           middleCollaborations.style.textAlign = "center"
           middleCollaborations.style.fontWeight = "900"
@@ -194,12 +218,29 @@ function popupAtEdge(edge, cy) {
             currentMovieTop.appendChild(currentMovieName)
 
             let currentMovieBottom = moviesBottomRow.insertCell()
+
+            let currentMovieP = document.createElement('p')
+            currentMovieP.style.margin = "0px"
+            let currentMovieA = document.createElement('a')
+            currentMovieA.className = "hovertextmovie"
+            currentMovieA.target = "_blank"
+            currentMovieA.href = "https://www.themoviedb.org/movie/" + movie.movie.tmdbId
+            currentMovieA.title = "TMDb page"
             let currentMoviePicture = document.createElement('img')
             currentMoviePicture.setAttribute("src", "https://image.tmdb.org/t/p/w154/" + movie.movie.poster_path)
             currentMoviePicture.style.display = "block"
             currentMoviePicture.style.marginLeft = "auto"
             currentMoviePicture.style.marginRight = "auto"
-            currentMovieBottom.appendChild(currentMoviePicture)
+            currentMovieA.appendChild(currentMoviePicture)
+            currentMovieP.appendChild(currentMovieA)
+
+            // let currentMoviePicture = document.createElement('img')
+            // currentMoviePicture.setAttribute("src", "https://image.tmdb.org/t/p/w154/" + movie.movie.poster_path)
+            // currentMoviePicture.style.display = "block"
+            // currentMoviePicture.style.marginLeft = "auto"
+            // currentMoviePicture.style.marginRight = "auto"
+            // currentMovieBottom.appendChild(currentMoviePicture)
+            currentMovieBottom.appendChild(currentMovieA)
 
             if (moviesList.length < 5) {
               currentMovieTop.style.width = customWidth + "px"
@@ -221,7 +262,7 @@ function popupAtEdge(edge, cy) {
           closeButton.innerHTML = "Close"
           closeButton.style.fontSize = "60%"
           closeButton.style.width = "100px"
-          closeButton.style.height = "30px"
+            // closeButton.style.height = "30px"
           closeButton.style.display = "block"
           closeButton.style.margin = "auto"
           closeButton.onclick = function() { closeMoviesPopup(divPopupEdge) }

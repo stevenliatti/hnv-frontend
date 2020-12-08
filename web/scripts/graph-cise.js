@@ -25,23 +25,40 @@ function graphCise(graph) {
   const s = 60
   const l = 70
 
+  let source
+  let target
   cyCise.style()
     .selector('edge')
     .style({
       "curve-style": "unbundled-bezier",
-      'width': (e) => Math.pow(e.data('movieIds').length, 1.2)
-    }).update()
+      'width': (e) => Math.pow(e.data('movieIds').length, 1.2),
+      'line-color': (e) => {
+        source = graph.elements.nodes.find(node => { return node.data.id == e._private.data.target })
+        target = graph.elements.nodes.find(node => { return node.data.id == e._private.data.source })
+        if (source.data.knowsCommunity == target.data.knowsCommunity) {
+          return computeHSL(computeHue(source.data.knowsCommunity, communities), 70, 70)
+        } else { return '#bbb' }
+      },
+      'opacity': (e) => {
+        source = graph.elements.nodes.find(node => { return node.data.id == e._private.data.target })
+        target = graph.elements.nodes.find(node => { return node.data.id == e._private.data.source })
+        if (source.data.knowsCommunity == target.data.knowsCommunity) {
+          return '0.7'
+        } else { return '0.4' }
+      }
+    }).update
 
   cyCise.style()
     .selector('node')
     .style({
-      'background-color': (e) => computeHSL(computeHue(e.data('knowsCommunity'), communities), s, l),
+      'background-color': (n) => computeHSL(computeHue(n.data('knowsCommunity'), communities), 40, 60),
       "text-valign": "center",
       "text-halign": "center",
       'text-wrap': "wrap",
-      'content': (d) => {
-        arrayName = d.data('name').split(" ")
-        contentName = arrayName.shift() + '\n' + arrayName
+      'content': (n) => {
+        arrayName = n.data('name').split(" ")
+        contentName = arrayName.shift() + '\n'
+        for (a of arrayName) { contentName += a + " " }
         return contentName
       }
     })
