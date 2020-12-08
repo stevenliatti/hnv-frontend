@@ -91,7 +91,8 @@ function graphCise(graph) {
           'text-wrap': "wrap",
           'content': (n) => {
             arrayName = n.data('name').split(" ")
-            contentName = arrayName.shift() + '\n' + arrayName
+            contentName = arrayName.shift() + '\n'
+            for (a of arrayName) { contentName += a + " " }
             return contentName
           }
         })
