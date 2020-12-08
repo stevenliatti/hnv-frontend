@@ -30,7 +30,8 @@ a.hovertextactor:focus::after {
 
 a.hovertextmovie {
   position: relative;
-  font-size: 70%;
+  font-weight: bold;
+  font-size: 50%;
   text-decoration: none !important;
   text-align: center;
 }
