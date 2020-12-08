@@ -1,9 +1,10 @@
 let placesOfBirth = [];
 getAllPlacesOfBirth();
 
-let cyCise = cytoscape({
-  container: document.getElementById('cy-cise')
-})
+// let cyCise = cytoscape({
+// cyCise = cytoscape({
+//   container: document.getElementById('cy-cise')
+// })
 
 $('.basicAutoSelectSearch').autoComplete({
   resolver: 'custom',
@@ -11,7 +12,8 @@ $('.basicAutoSelectSearch').autoComplete({
     return {
       value: item.tmdbId,
       text: JSON.stringify({
-        label: item.label, tmdbId: item.tmdbId
+        label: item.label,
+        tmdbId: item.tmdbId
       }),
       html: [
         item.name, ' ',
@@ -97,7 +99,7 @@ function formatLabel(label) {
 
 $('.basicAutoSelectSearch').on('change', (event) => {
   const result = JSON.parse(event.target.value);
-  console.log("in change:", result);
+  // console.log("in change:", result);
   findInfos(result.tmdbId, result.label);
   // Little hack
   document.getElementById("mainSearchBar").value = "";
@@ -130,7 +132,7 @@ function createSideViewSearchActor(actorInfos, cy) {
   let sideBirthday = actorInfos["birthday"]
   let sideDeathday = actorInfos["deathday"]
   let sidePlace = actorInfos["place_of_birth"]
-  let sideBiography = actorInfos["biography"];
+  let sideBiography = textExtract(actorInfos["biography"], 500);
   let sidePicture = actorInfos["profile_path"]
 
   actorInfosSideView(
