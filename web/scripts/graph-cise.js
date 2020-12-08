@@ -30,14 +30,14 @@ function graphCise(graph) {
           animationEasing: undefined,
           fit: true,
           padding: 100,
-          nodeSeparation: 20,
-          idealInterClusterEdgeLengthCoefficient: 5,
-          allowNodesInsideCircle: true,
-          maxRatioOfNodesInsideCircle: 0.9,
-          springCoeff: 0.1,
-          nodeRepulsion: 100,
-          gravity: 0.1,
-          gravityRange: 1,
+          nodeSeparation: 2,
+          idealInterClusterEdgeLengthCoefficient: 4,
+          allowNodesInsideCircle: false,
+          maxRatioOfNodesInsideCircle: 0.1,
+          springCoeff: 0.45,
+          nodeRepulsion: 4500,
+          gravity: 0.25,
+          gravityRange: 3.8,
           ready: function() {}, // on layoutready
           stop: function() {}, // on layoutstop
         }
@@ -61,15 +61,36 @@ function graphCise(graph) {
           'width': (e) => Math.pow(e.data('movieIds').length, 1.2)
         }).update()
 
+      let source
+      let target
+      cyCise.style()
+        .selector('edge')
+        .style({
+          'line-color': (e) => {
+            source = graph.nodes.find(node => { return node.data.id == e._private.data.target })
+            target = graph.nodes.find(node => { return node.data.id == e._private.data.source })
+            if (source.data.knowsCommunity == target.data.knowsCommunity) {
+              return computeHSL(computeHue(source.data.knowsCommunity, communities), s, l)
+            } else { return '#bbb' }
+          },
+          'opacity': (e) => {
+            source = graph.nodes.find(node => { return node.data.id == e._private.data.target })
+            target = graph.nodes.find(node => { return node.data.id == e._private.data.source })
+            if (source.data.knowsCommunity == target.data.knowsCommunity) {
+              return '0.7'
+            } else { return '0.4' }
+          }
+        }).update
+
       cyCise.style()
         .selector('node')
         .style({
-          'background-color': (e) => computeHSL(computeHue(e.data('knowsCommunity'), communities), s, l),
+          'background-color': (n) => computeHSL(computeHue(n.data('knowsCommunity'), communities), s, l),
           "text-valign": "center",
           "text-halign": "center",
           'text-wrap': "wrap",
-          'content': (d) => {
-            arrayName = d.data('name').split(" ")
+          'content': (n) => {
+            arrayName = n.data('name').split(" ")
             contentName = arrayName.shift() + '\n' + arrayName
             return contentName
           }

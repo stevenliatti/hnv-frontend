@@ -14,8 +14,8 @@ function reloadMain() {
 }
 
 function main() {
-  const limitMovie = 3;
-  const limitActor = 20;
+  const limitMovie = 20;
+  const limitActor = 5;
   const limitActorFriends = 5;
 
   document.getElementById('input-sliderNbMovies').value = limitMovie;

@@ -11,7 +11,7 @@
     "width": "data(playInDegree)",
     "height": "data(playInDegree)",
     "content": "data(name)",
-    "font-size": "12px",
+    "font-size": "10px",
     "text-valign": "center",
     "text-halign": "center",
     "background-color": "#555",
