@@ -30,102 +30,109 @@
     <!-- Sidebar Holder -->
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h5 class="mt-1">Hollywood Network Visualizer</h5>
+        The Hollywood Network Visualizer HNV
       </div>
 
       <ul class="list-unstyled components">
-        <p class="menu-description">Use this visualizer to explore and discover relationships between actors based on communities built using the <a href=https://neo4j.com/docs/graph-data-science/current/algorithms/louvain/>Louvain</a> method. Hover over a node or edge to get more
-          information about a specific actor or movie. Click on a node to generate a new relationship graph focused on a specific actor.</p>
+        <p class="menu-description">Use this visualizer to explore and discover relationships between actors based on communities built using the <a href=https://neo4j.com/docs/graph-data-science/current/algorithms/modularity-optimization>modularity optimization</a> method. Hover
+          over a node, or click on an edge to get more information about a specific actor or link between actors.</br>Click on a node to generate a new relationship graph focused on a specific actor. Try to use the filters or the search bar directly,
+          and above all else have fun playing around with the visualizer !</p>
         <!-- ACTORS SECTION -->
         <li class="liStyle">
           <a aria-expanded="false" class="aHeader">
-            People filters
+            Filters
           </a>
           <ul class="list-unstyled ulContent" id="movieSubmenu">
             <li class="ml-1">
               <label class="check">
-                <input type="checkbox" name="cbxActorsFilter" id="cbxActorsFilter">   Actors
+                <input type="checkbox" checked="checked" name="cbxActorsFilter" id="cbxActorsFilter" style="vertical-align: middle; margin-bottom: 4px;">   Actors
                 <span class="checkmark"></span>
               </label>
               <span class="txtOnly" style="margin-left: 38px;">Country of origin:</span>
             </li>
             <li class="ml-1">
               <label class="check">
-                <input type="checkbox" name="cbxActressesFilter" id="cbxActressesFilter">   Actresses
+                <input type="checkbox" checked="checked" name="cbxActressesFilter" id="cbxActressesFilter" style="vertical-align: middle; margin-bottom: 4px;">   Actresses
                 <span class="checkmark"></span>
               </label>
-              <select class="inputSearchCountry form-control basicAutoSelectSearchCountry" id="searchCountryFilter" name="searchCountryFilter" placeholder="USA" autocomplete="off">
+              <select class="inputSearchCountry form-control basicAutoSelectSearchCountry" id="searchCountryFilter" name="searchCountryFilter" placeholder="USA" autocomplete="off" style="margin-left: 10px;">
               </select>
             </li>
-            <li class="ml-1">
-              <span class="txtOnly">Born between  and</span>
-            </li>
-            <li class="ml-1">
-              <input type="date" id="bornBetweenStartFilter" name="bornBetweenStartFilter" min="1900-01-01" max="2020-12-07" class="picker">
-              <input type="date" id="bornBetweenEndFilter" name="bornBetweenEndFilter" min="1900-01-01" max="2020-12-07" class="picker">
-            </li>
-            <li class="ml-1 mt-2 txtOnly">
-              Still alive
-              <input type="radio" id="rbDontCare" name="rbStillAliveChoice" value="dontCare">
-              <label for="rbDontCare"> Don't care</label>
-              <input type="radio" id="rbYes" name="rbStillAliveChoice" value="yes">
-              <label for="rbYes">Yes</label>
-              <input type="radio" id="rbNo" name="rbStillAliveChoice" value="no">
-              <label for="rbNo">No</label>
-            </li>
-            <hr width="100%" style="margin: inherit">
-            <li class="ml-1 mt-1">
-              <span class="txtOnly">Min collaborations</span>
-            </li>
-            <li class="ml-1">
-              <div class="slidecontainer">
-                <input type="range" min="10" max="500" value="20" step="10" class="slider" id="slider-collab" oninput="sliderChange(this);">
-              </div>
-              <input type="number" min="10" max="500" step="10" id="input-slider-collab" class="inputSlider" name="input-slider-buget" oninput="InputSliderChange(this);">
-            </li>
-            <li class="ml-1">
-              <span class="txtOnly">Min Appearences</span>
-            </li>
-            <li class="ml-1 pb-2">
-              <div class="slidecontainer">
-                <input type="range" min="1" max="80" value="5" class="slider" id="slider-appearences" oninput="sliderChange(this);">
-              </div>
-              <input type="number" min="1" max="80" id="input-slider-appearences" class="inputSlider" name="input-slider-revenue" value="test" oninput="InputSliderChange(this);">
-            </li>
+
+            <hr width="100%" style="margin-top: 4px; margin-bottom: 0px;">
+
             <li>
-              <button type="button" class="btn btn-sm rounded-sm btnApplyFilters" onclick="peopleFilters();">
-                <span style="font-size: 13px;">Apply</span>
-                <i class="fas fa-check fa-xs"></i>
-              </button>
-              <button type="button" class="btn btn-sm rounded-sm btnBackFilters" onclick="backFilter();">
-                <span style="font-size: 13px;">Back</span>
-                <i class="fas fa-undo fa-xs"></i>
-              </button>
-              <button type="button" class="btn btn-sm rounded-sm btnResetFilters" onclick="resetPeopleFilters();">
-                <span style="font-size: 13px;">Reset</span>
-                <i class="fas fa-times fa-xs"></i>
-              </button>
+              <table>
+                <tr>
+                  <td style="text-align: center; width: 130px; font-size: 13px;">Born between</td>
+                  <td style="text-align: center; width: 130px; font-size: 13px;">and</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center; width: 130px;">
+                    <input type="date" id="bornBetweenStartFilter" name="bornBetweenStartFilter" min="1900-01-01" max="2000-01-01" value="1930-01-01" class="picker">
+                  </td>
+                  <td style="text-align: center; width: 130px;">
+                    <input type="date" id="bornBetweenEndFilter" name="bornBetweenEndFilter" min="1900-01-01" max="2000-01-01" value="1980-01-01" class="picker">
+                  </td>
+                </tr>
+              </table>
             </li>
+
+            <li class="ml-1 mt-1 txtOnly">
+              <span style="vertical-align: top; margin-left: 5px; margin-right: 6px;">Still alive:</span>
+              <input type="radio" id="rbDontCare" name="rbStillAliveChoice" value="dontCare" checked="checked">
+              <label for="rbDontCare" style="vertical-align: middle;"> Don't care</label>
+              <input type="radio" id="rbYes" name="rbStillAliveChoice" value="yes">
+              <label for="rbYes" style="vertical-align: middle;">Yes</label>
+              <input type="radio" id="rbNo" name="rbStillAliveChoice" value="no">
+              <label for="rbNo" style="vertical-align: middle;">No</label>
+            </li>
+
+            <hr width="100%" style="margin-top: 4px; margin-bottom: 0px;">
+
+            <table>
+              <tr>
+                <td class="txtOnly" colspan="2" style="text-align: center !important;">Collaborations</td>
+                <td class="txtOnly" colspan="2" style="text-align: center !important;">Appearences</td>
+              </tr>
+              <tr>
+                <td class="txtOnly" style="width: 45px; text-align: right !important;">min</td>
+                <td><input type="number" min="10" max="500" step="10" id="input-slider-collab" class="inputSlider" placeholder="10" name="input-slider-buget" oninput="InputSliderChange(this);"></td>
+                <td class="txtOnly" style="width: 45px; text-align: right !important;">min</td>
+                <td><input type="number" min="5" max="80" id="input-slider-appearences" class="inputSlider" placeholder="5" name="input-slider-revenue" value="test" oninput="InputSliderChange(this);"></td>
+              </tr>
+              <tr>
+                <td colspan="2"><input type="range" min="10" max="500" value="10" step="10" class="slider" id="slider-collab" oninput="sliderChange(this);"></td>
+                <td colspan="2"><input type="range" min="5" max="80" value="5" class="slider" id="slider-appearences" oninput="sliderChange(this);"></td>
+              </tr>
+            </table>
+
+            <hr width="100%" style="margin-top: 4px; margin-bottom: 0px;">
+
+            <table>
+              <tr>
+                <td style="width: 85px; text-align: center">
+                  <button type="button" class="btn btn-sm rounded-sm btnApplyFilters" onclick="peopleFilters();">
+                    <span style="font-size: 13px;">Apply</span>
+                    <i class="fas fa-check fa-xs"></i>
+                  </button>
+                </td>
+                <td style="width: 85px; text-align: center">
+                  <button type="button" class="btn btn-sm rounded-sm btnBackFilters" onclick="backFilter();">
+                    <span style="font-size: 13px;">Back</span>
+                    <i class="fas fa-undo fa-xs"></i>
+                  </button>
+                </td>
+                <td style="width: 85px; text-align: center">
+                  <button type="button" class="btn btn-sm rounded-sm btnResetFilters" onclick="resetPeopleFilters();">
+                    <span style="font-size: 13px;">Reset</span>
+                    <i class="fas fa-times fa-xs"></i>
+                  </button>
+                </td>
+              </tr>
+            </table>
           </ul>
         </li>
-
-        <!-- MOVIE SECTION -->
-        <!-- <li class="liStyle">
-          <a aria-expanded="false" class="dropdown-toggle aHeader">
-            Movie filters
-            <button type="button" class="btn btn-sm rounded-sm btnApplyFilters" onclick="movieFilters();">
-              <i class="fas fa-check fa-xs"></i>
-            </button>
-            <button type="button" class="btn btn-sm rounded-sm btnResetFilters" onclick="resetMovieFilters();">
-              <span style="font-size: 13px;">Reset</span>
-              <i class="fas fa-times fa-xs"></i>
-            </button>
-          </a>
-          <ul class="list-unstyled ulContent" id="movieSubmenu">
-          </ul>
-        </li> -->
-
-
 
         <!-- SHORTEST PATH SECTION -->
         <li class="liStyle">
@@ -133,38 +140,63 @@
             Shortest path
           </a>
           <ul class="list-unstyled ulContent" id="movieSubmenu">
-            <li class="ml-1">
-              From
-              <select class="inputShortestPathSideMenu form-control basicAutoSelectSearchPeopleOnly" id="searchActorSP1" name="simple_select" placeholder="Search" autocomplete="off">
-              </select>
-            </li>
-            <li class="ml-1 pb-2">
-              To
-              <select class="inputShortestPathSideMenu form-control basicAutoSelectSearchPeopleOnly" id="searchActorSP2" name="simple_select" placeholder="Search" autocomplete="off">
-              </select>
-            </li>
+            <table>
+              <tr>
+                <td style="width: 40px; font-size: 13px; padding-left: 4px;">From</td>
+                <td><select class="inputShortestPathSideMenu form-control basicAutoSelectSearchPeopleOnly" id="searchActorSP1" name="simple_select" placeholder="Search" autocomplete="off">
+              </select></td>
+              </tr>
+              <tr>
+                <td style="width: 40px; font-size: 13px; padding-left: 4px;">To</td>
+                <td><select class="inputShortestPathSideMenu form-control basicAutoSelectSearchPeopleOnly" id="searchActorSP2" name="simple_select" placeholder="Search" autocomplete="off">
+              </select></td>
+              </tr>
+            </table>
+
             <li>
-              <button type="button" class="btn btn-sm rounded-sm btnApplyFilters" onclick="computeSP();">
-                <span style="font-size: 13px;">Apply</span>
-                <i class="fas fa-check fa-xs"></i>
-              </button>
-              <button type="button" class="btn btn-sm rounded-sm btnBacksFilters" onclick="clearSP();">
-                <span style="font-size: 13px;">Back to graph</span>
-                <i class="fas fa-times fa-xs"></i>
-              </button>
-              <div class="alert alert-danger mt-3" id="errorSP" style="font-size: 12px; display: none;" role="alert">
+              <table style="width: 260px">
+                <tr>
+                  <td style="width: 40%; text-align: center;">
+                    <button type="button" class="btn btn-sm rounded-sm btnApplyFilters" onclick="computeSP();">
+                      <span style="font-size: 13px;">Apply</span>
+                      <i class="fas fa-check fa-xs"></i>
+                    </button>
+                  </td>
+                  <td style="width: 60%; text-align: center">
+                    <button type="button" class="btn btn-sm rounded-sm btnBackFilters" onclick="clearSP();">
+                      <span style="font-size: 13px;">Back to graph</span>
+                      <i class="fas fa-undo fa-xs"></i>
+                    </button>
+                  </td>
+                </tr>
+              </table>
+              <div class="alert alert-danger" id="errorSP" style="font-size: 12px; text-align: center; padding: 4px !important; margin-bottom: 4px !important; display: none;" role="alert">
                 Please inquire the two fields
               </div>
-              <div class="alert alert-danger mt-3" id="errorQSP" style="font-size: 12px; display: none;" role="alert">
-                This two actors not have a shortest path
+              <div class="alert alert-danger" id="errorQSP" style="font-size: 12px; padding: 2px !important; margin-bottom: 4px !important; display: none;" role="alert">
+                No connection found between these two actors
               </div>
             </li>
           </ul>
         </li>
 
         <!-- MORE INFO SECTION -->
-
         <li class="liStyle">
+          <a aria-expanded="false" class="aHeader">
+            More info
+          </a>
+          <ul class="list-unstyled ulContent" id="movieSubmenu">
+            <table>
+              <tr>
+                <td style="font-size: 12px;">Using the <a href="https://www.themoviedb.org">TMDb</a> data &#8226; Backed by <a href="https://neo4j.com">Neo4j</a></td>
+              </tr>
+              <tr>
+                <td style="font-size: 12px;">Based on <a href="https://js.cytoscape.org/">Cytoscape.js</a> &#8226; Code on <a href="https://github.com/stevenliatti/hollywood-network-visualizer">Github</a></td>
+              </tr>
+            </table>
+          </ul>
+        </li>
+        <!-- <li class="liStyle">
           <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="aHeader">
             More info
           </a>
@@ -176,7 +208,7 @@
               Based on the Cytoscape <a href="https://js.cytoscape.org/">Cytoscape.js</a> library - Code on <a href="https://github.com/stevenliatti/hollywood-network-visualizer">Github</a>
             </li>
           </ul>
-        </li>
+        </li> -->
       </ul>
     </nav>
 
