@@ -149,23 +149,27 @@ function createSideViewSearchActor(actorInfos, cy) {
 function createSideViewSearchMovie(movieData, graph, cy) {
   let sideLink = movieData["tmdbId"];
   let sideID = movieData["id"];
-  let sideName = movieData["title"];
-  let sideBirthday = movieData["tagline"];
-  let sideDeathday = movieData["release_date"];
-  let sidePlace = movieData["runtime"].toString();
-  let sideBiography = movieData["overview"];
+  let sideTitle = movieData["title"];
+  let sideTagline = movieData["tagline"];
+  let sideReleaseDate = movieData["release_date"];
+  let sideRuntime = movieData["runtime"].toString();
+  let sideOverview = movieData["overview"];
   let sidePicture = movieData["poster_path"];
+  let sideBudget = movieData["budget"];
+  let sideRevenue = movieData["revenue"];
 
   movieInfosSideView(
     graph,
     cy,
     sideLink,
     sideID,
-    sideName,
-    sideBirthday,
-    sideDeathday,
-    sidePlace,
-    sideBiography,
-    sidePicture
+    sideTitle,
+    sideTagline,
+    sideReleaseDate,
+    sideRuntime,
+    sideOverview,
+    sidePicture,
+    sideBudget,
+    sideRevenue
   )
 }
