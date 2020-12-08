@@ -205,6 +205,7 @@
                 <td style="font-size: 12px;">Based on <a href="https://js.cytoscape.org/">Cytoscape.js</a> &#8226; Code on <a href="https://github.com/stevenliatti/hollywood-network-visualizer">Github</a></td>
               </tr>
             </table>
+            <button data-toggle="modal" data-target="#exampleModalLong">Tutorial</button>
           </ul>
         </li>
         <!-- <li class="liStyle">
@@ -311,6 +312,33 @@
     </div>
   </div>
 
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Tutorial</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="modal-body">
+              <img class="fit-picture"
+              id="tutoImg"
+              src="./img/img1.png"
+              alt="Grapefruit slice atop a pile of other slices">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btnBack" onclick="back();">Back</button>
+                <button type="button" class="btn btn-secondary" id="btnNext" onclick="next();">Next</button>
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="resetTuto();">Close</button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
   <!-- jQuery CDN - Slim version (=without AJAX) -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <!-- Popper.JS -->
@@ -349,6 +377,7 @@
   <script src="scripts/main.js"></script>
   <script src="scripts/menu.js"></script>
   <script src="scripts/search.js"></script>
+  <script src="scripts/tuto.js"></script>
 </body>
 
 </html>
