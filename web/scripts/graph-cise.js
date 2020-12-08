@@ -48,10 +48,13 @@ function graphCise(graph) {
       cyCise.center()
 
       const communities = Array.from(
-        // new Set(graph.elements.nodes.map(n => n.data.knowsCommunity))
-        new Set(graph.nodes.map(n => n.data.knowsCommunity))
-      )
+          // new Set(graph.elements.nodes.map(n => n.data.knowsCommunity))
+          new Set(graph.nodes.map(n => n.data.knowsCommunity))
+        )
+        // const s = 60
       const s = 60
+
+      // const l = 70
       const l = 70
 
       cyCise.style()
@@ -70,7 +73,7 @@ function graphCise(graph) {
             source = graph.nodes.find(node => { return node.data.id == e._private.data.target })
             target = graph.nodes.find(node => { return node.data.id == e._private.data.source })
             if (source.data.knowsCommunity == target.data.knowsCommunity) {
-              return computeHSL(computeHue(source.data.knowsCommunity, communities), s, l)
+              return computeHSL(computeHue(source.data.knowsCommunity, communities), 70, 70)
             } else { return '#bbb' }
           },
           'opacity': (e) => {
@@ -85,7 +88,7 @@ function graphCise(graph) {
       cyCise.style()
         .selector('node')
         .style({
-          'background-color': (n) => computeHSL(computeHue(n.data('knowsCommunity'), communities), s, l),
+          'background-color': (n) => computeHSL(computeHue(n.data('knowsCommunity'), communities), 40, 60),
           "text-valign": "center",
           "text-halign": "center",
           'text-wrap': "wrap",
