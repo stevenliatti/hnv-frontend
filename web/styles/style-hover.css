@@ -1,0 +1,60 @@
+a.hovertextactor {
+  position: relative;
+  font-weight: bold;
+  font-size: 50%;
+  text-decoration: none !important;
+  text-align: center;
+}
+
+a.hovertextactor::after {
+  content: attr(title);
+  position: absolute;
+  left: 0;
+  top: 500%;
+  width: 100%;
+  background: rgba(117, 169, 249, 0.8);
+  text-decoration: none !important;
+  /* padding-bottom: 5px; */
+  color: #000;
+  opacity: 0;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
+  -ms-transition: 0.5s;
+}
+
+a.hovertextactor:hover::after,
+a.hovertextactor:focus::after {
+  opacity: 1.0;
+}
+
+a.hovertextmovie {
+  position: relative;
+  font-size: 70%;
+  text-decoration: none !important;
+  text-align: center;
+}
+
+a.hovertextmovie::after {
+  content: attr(title);
+  position: absolute;
+  left: 0;
+  top: 300%;
+  width: 154px;
+  /* height: 30px; */
+  background: rgba(249, 170, 117, 0.8);
+  text-decoration: none !important;
+  color: #000;
+  opacity: 0;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
+  -ms-transition: 0.5s;
+  display: inline;
+  vertical-align: middle;
+}
+
+a.hovertextmovie:hover::after,
+a.hovertextmovie:focus::after {
+  opacity: 1.0;
+}

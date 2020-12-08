@@ -2,14 +2,14 @@ let sideLoading
 
 // Create sideview on click
 function showSideView(cy, sideViewFn) {
-  cy.on("click", function (evt) {
+  cy.on("click", function(evt) {
     if ((currentNodeSelected) && (evt.target === cy)) {
       currentNodeSelected = 'none'
       cy.elements().removeClass('unfocused')
       cy.elements().removeClass('focused')
     }
   })
-  cy.on("click", "node", function (evt) {
+  cy.on("click", "node", function(evt) {
     let sel = evt.target
     currentNodeSelected = sel
     cy.elements()
@@ -23,13 +23,10 @@ function showSideView(cy, sideViewFn) {
       .addClass('focused')
     sideViewFn(evt)
   })
-  // cy.on("cxttapstart", "node", function(evt) {
-  //   sideViewFn(evt)
-  // })
 }
 
 function hideSideView(cy, sideViewFn) {
-  cy.on("cxttapstart", "node", function (evt) {
+  cy.on("cxttapstart", "node", function(evt) {
     sideViewFn(evt)
   })
 }

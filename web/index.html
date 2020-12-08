@@ -231,7 +231,7 @@
             <select class="form-control basicAutoSelectSearch mainSearchBar" name="simple_select" placeholder="Search" autocomplete="off" id="mainSearchBar">
           </select>
             <div class="graphSizeConfig">
-              <button type="button" class="btn btn-sm rounded-sm btnApplyLimits" onclick="reloadMain();">Want a bigger graph ?</button>
+              <button type="button" class="btn btn-sm rounded-sm btnApplyLimits" onclick="reloadMain();">Load a different graph</button>
               <div class="slidecontainer">
                 Movies
                 <input type="range" min="1" max="30" value="10" class="slider" id="sliderNbMovies" oninput="sliderChange(this);">
@@ -253,11 +253,11 @@
       </nav>
 
       <!-- CiSE graph -->
-      <div style="width: 80%; height: 700px; float: left;" id="main-loading">
+      <div style="width: 80%; height: 85%; float: left;" id="main-loading">
         <p id="main-loading-text" style="text-align: center; font-size: 60%; margin-top: 100px">Building the relations graph...</p>
         <img id="main-loading-icon" src="loading-icon.gif" style="display: block; width: 20%; margin-right: auto; margin-left: auto; margin-top: 50px">
       </div>
-      <div style="width: 80%; height: 700px; float: left; display: none;" id="cy-cise"></div>
+      <div style="width: 80%; height: 85%; float: left; display: none;" id="cy-cise"></div>
 
       <!-- Loading side bar -->
       <div style="text-align: center; width: 20%; float: right;" id="loading-slideshow">

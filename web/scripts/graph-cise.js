@@ -100,6 +100,10 @@ function graphCise(graph) {
       "opacity": "0.1"
     }).update()
 
+  popupEdgeManagement(cyCise, (evt) => {
+    popupAtEdge(evt.target, cyCise)
+  })
+
   popupNodeManagement(cyCise, (evt) => {
     popupAtNode(evt.target, evt.type, cyCise)
   }, 400)

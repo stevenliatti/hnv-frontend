@@ -140,8 +140,8 @@ p {
 }
 
 .graphSizeConfig {
-  margin-left: 25px;
-  font-size: 20px;
+  margin-left: 40px;
+  font-size: 15px;
 }
 
 
@@ -387,5 +387,6 @@ a.article:hover {
 ----------------------------------------------------- */
 
 .btnApplyLimits {
+  font-size: 16px;
   background-color: #75a9f9;
 }

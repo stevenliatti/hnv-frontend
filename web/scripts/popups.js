@@ -78,6 +78,11 @@ function popupAtEdge(edge, cy) {
       let sourceActor = actorsFirstMovie.find(actor => { return actor.id == sourceActorId })
       let targetActor = actorsFirstMovie.find(actor => { return actor.id == targetActorId })
 
+      let popupEdgePosX = (cy._private.container.id == 'cy-cise') ? 105 : (cy._private.container.id == 'cy-cose') ? 400 : 0
+      let popupEdgePosY = (cy._private.container.id == 'cy-cise') ? 840 : (cy._private.container.id == 'cy-cose') ? 0 : 0
+      let popupEdgeRenderX = (cy._private.container.id == 'cy-cise') ? 515 : (cy._private.container.id == 'cy-cose') ? 0 : 0
+      let popupEdgeRenderY = (cy._private.container.id == 'cy-cise') ? 10 : (cy._private.container.id == 'cy-cose') ? 0 : 0
+
       edge.popper({
         content: () => {
           divPopupEdge = document.createElement("div")
@@ -165,7 +170,6 @@ function popupAtEdge(edge, cy) {
           sourceActorPicture.style.width = "100px"
           sourceActorPicture.style.objectPosition = "center"
           sourceActorPicture.style.verticalAlign = "top"
-            // sourceActorPicture.style.float = "left"
           sourceActorA.appendChild(sourceActorPicture)
           sourceActorP.appendChild(sourceActorA)
 
@@ -181,7 +185,6 @@ function popupAtEdge(edge, cy) {
           targetActorPicture.style.width = "100px"
           targetActorPicture.style.objectPosition = "center"
           targetActorPicture.style.verticalAlign = "top"
-            // targetActorPicture.style.float = "left"
           targetActorA.appendChild(targetActorPicture)
           targetActorP.appendChild(targetActorA)
 
@@ -211,8 +214,11 @@ function popupAtEdge(edge, cy) {
 
           for (movie of moviesList) {
             let customWidth = 700 / moviesList.length
+            let customMargin = (700 - 154 * moviesList.length) / (moviesList.length * 2) - 1
+
             let currentMovieTop = moviesTopRow.insertCell()
             currentMovieTop.style.textAlign = "center"
+            currentMovieTop.style.verticalAlign = "middle"
             currentMovieTop.style.fontSize = "70%"
             let currentMovieName = document.createTextNode(movie.movie.title + " (" + movie.movie.release_date.split("-")[0] + ")")
             currentMovieTop.appendChild(currentMovieName)
@@ -222,36 +228,30 @@ function popupAtEdge(edge, cy) {
             let currentMovieP = document.createElement('p')
             currentMovieP.style.margin = "0px"
             let currentMovieA = document.createElement('a')
+            currentMovieA.style.verticalAlign = "middle"
             currentMovieA.className = "hovertextmovie"
             currentMovieA.target = "_blank"
             currentMovieA.href = "https://www.themoviedb.org/movie/" + movie.movie.tmdbId
             currentMovieA.title = "TMDb page"
             let currentMoviePicture = document.createElement('img')
             currentMoviePicture.setAttribute("src", "https://image.tmdb.org/t/p/w154/" + movie.movie.poster_path)
-            currentMoviePicture.style.display = "block"
             currentMoviePicture.style.marginLeft = "auto"
             currentMoviePicture.style.marginRight = "auto"
-            currentMovieA.appendChild(currentMoviePicture)
-            currentMovieP.appendChild(currentMovieA)
-
-            // let currentMoviePicture = document.createElement('img')
-            // currentMoviePicture.setAttribute("src", "https://image.tmdb.org/t/p/w154/" + movie.movie.poster_path)
-            // currentMoviePicture.style.display = "block"
-            // currentMoviePicture.style.marginLeft = "auto"
-            // currentMoviePicture.style.marginRight = "auto"
-            // currentMovieBottom.appendChild(currentMoviePicture)
-            currentMovieBottom.appendChild(currentMovieA)
 
             if (moviesList.length < 5) {
               currentMovieTop.style.width = customWidth + "px"
               currentMovieBottom.style.width = customWidth + "px"
+              currentMovieA.style.marginLeft = customMargin + "px"
             } else {
               currentMovieTop.style.width = 700 / 4 + "px"
               currentMovieBottom.style.width = 700 / 4 + "px"
             }
+
+            currentMovieA.appendChild(currentMoviePicture)
+            currentMovieP.appendChild(currentMovieA)
+            currentMovieBottom.appendChild(currentMovieP)
           }
 
-          // let textTop = document.createTextNode('Furuba')
           divPopupEdge.appendChild(actorsTable)
           divPopupEdge.appendChild(moviesTable)
 
@@ -262,7 +262,6 @@ function popupAtEdge(edge, cy) {
           closeButton.innerHTML = "Close"
           closeButton.style.fontSize = "60%"
           closeButton.style.width = "100px"
-            // closeButton.style.height = "30px"
           closeButton.style.display = "block"
           closeButton.style.margin = "auto"
           closeButton.onclick = function() { closeMoviesPopup(divPopupEdge) }
@@ -273,7 +272,8 @@ function popupAtEdge(edge, cy) {
         popper: {
           removeOnDestroy: true
         },
-        renderedPosition: () => ({ x: 400, y: 0 })
+        renderedPosition: () => ({ x: popupEdgePosX, y: popupEdgePosY }),
+        renderedDimensions: () => ({ w: popupEdgeRenderX, h: popupEdgeRenderY })
       })
     })
 }
@@ -403,7 +403,7 @@ function popupAtNode(node, type, cy) {
           popper: {
             removeOnDestroy: true
           },
-          renderedPosition: () => ({ x: 0, y: 0 }),
+          renderedPosition: () => ({ x: -30, y: 0 }),
           renderedDimensions: () => ({ w: 515, h: 10 }),
         })
         break

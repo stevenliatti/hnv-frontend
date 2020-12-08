@@ -95,14 +95,11 @@ function actorGraphCose(sideId, sideLink) {
       popupEdgeManagement(cyCose, (evt) => {
         popupAtEdge(evt.target, cyCose)
       })
-    })
-    //   let cyCose = cytoscape({
-    //     container: document.getElementById('cy-cose')
-    //   })
 
-  //   cyCose.json(graph)
-  //   cyCose.zoom(1)
-  //   cyCose.center()
+      showSideView(cyCose, (evt) => {
+        createSideView(evt.target, cyCose)
+      })
+    })
 }
 
 function movieGraphCose(sideId, graph) {
@@ -167,6 +164,13 @@ function movieGraphCose(sideId, graph) {
 
       popupEdgeManagement(cyCose, (evt) => {
         popupAtEdge(evt.target, cyCose)
+      })
+
+      showSideView(cyCose, (evt) => {
+        console.log(evt.target)
+        if (evt.target._private.data.biography) {
+          createSideView(evt.target, cyCose)
+        }
       })
     })
 }
