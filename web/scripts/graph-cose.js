@@ -4,7 +4,7 @@ function actorGraphCose(sideId, sideLink) {
       .then(function(res) {
         return res.json()
       }),
-      getFriendsGraph(sideLink, 10, 3)
+      getFriendsGraph(sideLink, 10, 5)
     ])
     .then(function(dataArray) {
 
