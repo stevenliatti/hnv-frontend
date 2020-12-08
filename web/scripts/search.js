@@ -114,7 +114,7 @@ function findInfos(tmdbId, label) {
     case 'Movie':
       getMovieGraph(tmdbId)
         .then(graph => {
-          const movieData = graph.elements.nodes.map(n => n.data).find(n => n.tmdbId == tmdbId);
+          const movieData = graph.nodes.map(n => n.data).find(n => n.tmdbId == tmdbId);
           createSideViewSearchMovie(movieData, graph, cyCise);
         })
       break;

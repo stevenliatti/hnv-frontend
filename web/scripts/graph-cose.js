@@ -7,27 +7,9 @@ function actorGraphCose(sideId, sideLink) {
       getFriendsGraph(sideLink, 10, 3)
     ])
     .then(function(dataArray) {
-
-      let dataActors = dataArray[1].elements.nodes.map((dataActor) => { return { data: dataActor.data } })
-
-      let centerActor = dataActors.find(actor => { return actor.data.id == sideId })
-
       document.getElementById("side-loading-icon").style.display = "none"
       document.getElementById("side-loading-text").style.display = "none"
       document.getElementById('cy-cose').style.display = "block"
-
-      //   let cyCose = cytoscape({
-      //     container: document.getElementById('cy-cose')
-      //   })
-
-      //   cyCose.json(dataArray[1])
-      //   cyCose.zoom(1)
-      //   cyCose.center()
-
-      //   cyCose.style()
-      //     .selector('node')
-      //     .style('background-color', (ele) => `hsl(${ele.data('knowsCommunity') % 360}, 100%, 50%)`)
-      //     .update()
 
       let cyCose = cytoscape({
         container: document.getElementById('cy-cose'),
@@ -65,7 +47,7 @@ function actorGraphCose(sideId, sideLink) {
         },
 
         style: dataArray[0],
-        elements: dataArray[1].elements // with api-cache
+        elements: dataArray[1]
       })
 
       let mainNode
@@ -170,7 +152,7 @@ function movieGraphCose(sideId, graph) {
         },
 
         style: style,
-        elements: graph.elements // with api-cache
+        elements: graph
       })
 
       let mainNode
