@@ -59,7 +59,7 @@ let tmp_graph = [];
 let tmp_filters = [];
 
 function save_graph_filters_state(current_graph, current_config) {
-  tmp_graph.push(JSON.parse( JSON.stringify( current_graph ) ));
+  tmp_graph.push(JSON.parse(JSON.stringify(current_graph)));
   tmp_filters.push(current_config);
 }
 
@@ -67,12 +67,12 @@ function peopleFilters() {
   let rbStillAliveChoice = $('[name ="rbStillAliveChoice"]:checked')[0];
   let searchCountryFilter = $('#searchCountryFilter')[0];
 
-  if(tmp_graph.length === 0)
+  if (tmp_graph.length === 0)
     save_graph_filters_state(graph, {});
 
   let all_ids_to_remove = [];
   let filters_config = {};
-  graph = JSON.parse( JSON.stringify( tmp_graph[0] ) );
+  graph = JSON.parse(JSON.stringify(tmp_graph[0]));
 
   if (cbxActorsFilter.checked && !cbxActressesFilter.checked) {
     let ids = graph.elements.nodes.filter(x => x.data.gender !== "Male").map(x => x.data.id);
@@ -82,18 +82,18 @@ function peopleFilters() {
   if (cbxActressesFilter.checked && !cbxActorsFilter.checked) {
     let ids = graph.elements.nodes.filter(x => x.data.gender !== "Female").map(x => x.data.id);
     all_ids_to_remove = all_ids_to_remove.concat(ids);
-    filters_config.actresses = true;  
+    filters_config.actresses = true;
   }
   if (searchCountryFilter.value) {
     let ids = graph.elements.nodes.filter(x => {
       let pobFormat = x.data.place_of_birth.split(' ');
-      return pobFormat[pobFormat.length-1] !== searchCountryFilter.value
+      return pobFormat[pobFormat.length - 1] !== searchCountryFilter.value
     }).map(x => x.data.id);
     all_ids_to_remove = all_ids_to_remove.concat(ids);
     filters_config.country = searchCountryFilter.value;
   }
   if (bornBetweenStartFilter.value) {
-    let ids =  graph.elements.nodes.filter(x => x.data.birthday < bornBetweenStartFilter.value).map(x => x.data.id);
+    let ids = graph.elements.nodes.filter(x => x.data.birthday < bornBetweenStartFilter.value).map(x => x.data.id);
     all_ids_to_remove = all_ids_to_remove.concat(ids);
     filters_config.bornStart = bornBetweenStartFilter.value;
   }
@@ -103,11 +103,10 @@ function peopleFilters() {
     filters_config.bornEnd = bornBetweenEndFilter.value;
   }
   if (rbStillAliveChoice) {
-    if(rbStillAliveChoice.value === "yes") {
+    if (rbStillAliveChoice.value === "yes") {
       let ids = graph.elements.nodes.filter(x => x.data.deathday !== "").map(x => x.data.id);
       all_ids_to_remove = all_ids_to_remove.concat(ids);
-    }
-    else if (rbStillAliveChoice.value === "no") {
+    } else if (rbStillAliveChoice.value === "no") {
       let ids = graph.elements.nodes.filter(x => x.data.deathday === "").map(x => x.data.id);
       all_ids_to_remove = all_ids_to_remove.concat(ids);
     }
@@ -123,23 +122,23 @@ function peopleFilters() {
     all_ids_to_remove = all_ids_to_remove.concat(ids);
     filters_config.apparences = inputSliderAppearences.value;
   }
-  
 
-    graph.elements.nodes = graph.elements.nodes.filter(x => !all_ids_to_remove.includes(x.data.id));
-    graph.elements.edges = graph.elements.edges.filter(x => !all_ids_to_remove.includes(x.data.source) && !all_ids_to_remove.includes(x.data.target))
-    
-    save_graph_filters_state(graph, filters_config);
-    graphCise(graph);
+
+  graph.elements.nodes = graph.elements.nodes.filter(x => !all_ids_to_remove.includes(x.data.id));
+  graph.elements.edges = graph.elements.edges.filter(x => !all_ids_to_remove.includes(x.data.source) && !all_ids_to_remove.includes(x.data.target))
+
+  save_graph_filters_state(graph, filters_config);
+  graphCise(graph);
 
 }
 
 function backFilter() {
-  console.log("BACK to version : " + (tmp_graph.length-1).toString());
-  if(tmp_graph.length > 1) {
+  // console.log("BACK to version : " + (tmp_graph.length-1).toString());
+  if (tmp_graph.length > 1) {
     tmp_graph.pop(); // Quitte état courant
-    graphCise(tmp_graph[tmp_graph.length-1]);
+    graphCise(tmp_graph[tmp_graph.length - 1]);
     tmp_filters.pop(); // Quitte état courant
-    restoreFiltersToState(tmp_filters[tmp_filters.length-1]);
+    restoreFiltersToState(tmp_filters[tmp_filters.length - 1]);
   }
 }
 
@@ -150,7 +149,7 @@ function restoreFiltersToState(state) {
   state.actresses ? cbxActressesFilter.checked = true : cbxActressesFilter.checked = false;
   state.country ? searchCountryFilter.value = state.country : searchCountryFilter.value = "";
   state.bornStart ? bornBetweenStartFilter.value = state.bornStart : bornBetweenStartFilter.value = null;
-  state.bornEnd ? bornBetweenEndFilter.value = state.bornEnd :   bornBetweenEndFilter.value = null;
+  state.bornEnd ? bornBetweenEndFilter.value = state.bornEnd : bornBetweenEndFilter.value = null;
   state.stillAlive ? state.stillAlive.checked = true : rbStillAliveChoice.checked = false;
   state.collab ? inputSliderCollab.value = state.collab : inputSliderCollab.value = "";
   state.collab ? sliderCollab.value = state.collab : sliderCollab.value = 20;
@@ -160,7 +159,7 @@ function restoreFiltersToState(state) {
 }
 
 function resetGraph() {
-  if(tmp_graph.length > 0) {
+  if (tmp_graph.length > 0) {
     graphCise(tmp_graph[0]);
     graph = tmp_graph[0];
     tmp_graph = [];
@@ -197,15 +196,15 @@ function sleep(ms) {
 let tmp_g;
 
 function computeSP() {
-  tmp_g = tmp_graph.length > 0 ? tmp_graph[tmp_graph.length-1] : graph;
+  tmp_g = tmp_graph.length > 0 ? tmp_graph[tmp_graph.length - 1] : graph;
 
   let searchActorSP1 = $('#searchActorSP1')[0];
   let searchActorSP2 = $('#searchActorSP2')[0];
   let errorSP = $('#errorSP')[0];
 
-  if(searchActorSP1.value && searchActorSP2.value)
+  if (searchActorSP1.value && searchActorSP2.value)
     spQuery(searchActorSP1.value, searchActorSP2.value);
-  else{
+  else {
     errorSP.style.display = 'block';
     sleep(3000).then(() => {
       errorSP.style.display = 'none';
@@ -219,18 +218,18 @@ function clearSP() {
 
   searchActorSP1.value = "";
   searchActorSP2.value = "";
-  console.log(tmp_g);
-  if(tmp_g) {
+  // console.log(tmp_g);
+  if (tmp_g) {
     graphCise(tmp_g);
   }
 }
 
 function spQuery(tmdbId1, tmdbId2) {
   fetch(env.API_BASE_URL + `/graph/shortestPath/${tmdbId1}/${tmdbId2}`)
-  .then(res => {
-    console.log(res);
+    .then(res => {
+      // console.log(res);
       res.json().then(json => {
-        console.log(json);
+        // console.log(json);
         graphCise(json);
       }).catch(err => {
         let errorQSP = $('#errorQSP')[0];
@@ -239,7 +238,7 @@ function spQuery(tmdbId1, tmdbId2) {
           errorQSP.style.display = 'none';
         })
       })
-  })
+    })
 }
 
 

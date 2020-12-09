@@ -86,9 +86,9 @@ function getAllPlacesOfBirth() {
 
 function formatLabel(label) {
   if (label === "Actor") {
-    return $("<span>").append(label).css("color", "green").css("float", "right");
+    return $("<span>").append(label).css("color", "rgb(117,169,249, 1)").css("float", "right");
   } else {
-    return $("<span>").append(label).css("color", "blue").css("float", "right");
+    return $("<span>").append(label).css("color", "rgb(249,170,117, 1)").css("float", "right");
   }
 }
 

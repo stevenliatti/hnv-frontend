@@ -247,6 +247,7 @@ function popupAtEdge(edge, cy) {
             currentMovieSideButton.style.display = "block"
             currentMovieSideButton.style.margin = "auto"
             currentMovieSideButton.onclick = function() {
+              if (cy._private.container.id == 'cy-cose') { closeMoviesPopup(divPopupEdge) }
               getMovieGraph(movie.movie.tmdbId).then(graph => {
                 movieInfosSideView(
                   graph,

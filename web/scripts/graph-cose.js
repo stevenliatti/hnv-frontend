@@ -52,43 +52,55 @@ function actorGraphCose(sideId, sideLink) {
 
       let mainNode
       for (node of cyCose.nodes()) {
-        if (node._private.data.id == sideId) { mainNode = node }
+        if (node.data('id') == sideId) { mainNode = node }
       }
-      mainNode.style('background-color', 'red')
+      mainNode.style({
+        'background-color': '#0b65d3',
+        'font-size': '20px'
+      })
 
       cyCose.zoom(2)
       cyCose.center()
 
       cyCose.style()
         .selector('edge')
-        .style(
-          'width',
-          (e) => e.data('movieIds').length
-          // (e) => Math.pow(e.data('movieIds').length, 2)
-        ).update()
-
-      cyCose.style()
-        .selector('edge')
-        .style(
-          'line-color',
-          '#75a9f9'
-        ).update()
+        .style({
+          'width': (e) => e.data('movieIds').length,
+          'line-color': (e) => {
+              if (e.data('target') == mainNode.data('id')) {
+                return '#f9aa75'
+              } else if (e.data('source') == mainNode.data('id')) {
+                return '#f9aa75'
+              } else {
+                return '#bbb'
+              }
+            }
+            // (e) => Math.pow(e.data('movieIds').length, 2)
+        }).update()
 
       cyCose.style()
         .selector('node')
         .style({
-          'width': (e) => e.data('playInDegree'),
-          'height': (e) => e.data('playInDegree'),
+          'width': (e) => e.data('playInDegree') * 1.4,
+          'height': (e) => e.data('playInDegree') * 1.4,
           'text-wrap': "wrap",
           'content': (n) => {
             let arrayName = n.data('name').split(" ")
             let contentName = arrayName.shift() + '\n'
             for (a of arrayName) { contentName += a + " " }
             return contentName
+          },
+          'background-color': (n) => {
+            let linkedEdgeTarget = cyCose.edges().find(e => { return ((e.data('source') == mainNode.data('id')) && (e.data('target') == n.data('id'))) })
+            let linkedEdgeSource = cyCose.edges().find(e => { return ((e.data('target') == mainNode.data('id')) && (e.data('source') == n.data('id'))) })
+            if (linkedEdgeTarget) {
+              if (linkedEdgeTarget.data('source') == mainNode.data('id')) { return '#75a9f9' }
+            }
+            if (linkedEdgeSource) {
+              if (linkedEdgeSource.data('target') == mainNode.data('id')) { return '#75a9f9' }
+            }
           }
         }).update()
-
-      // cyCose.json(dataArray[1])
 
       popupEdgeManagement(cyCose, (evt) => {
         popupAtEdge(evt.target, cyCose)
@@ -158,7 +170,9 @@ function movieGraphCose(sideId, graph) {
 
       cyCose.on('mouseover', 'edge', evt => {
         let edge = evt.target;
-        edge.style('label', edge.data('character'));
+        edge.style({
+          'label': edge.data('character')
+        });
       });
 
       cyCose.on('mouseout', 'edge', evt => {
@@ -179,7 +193,7 @@ function movieGraphCose(sideId, graph) {
             if (n.data('name')) {
               arrayName = n.data('name').split(' ');
             } else {
-              console.log('movie', n.data('title'));
+              // console.log('movie', n.data('title'));
               arrayName = n.data('title').split(' ');
             }
             let contentName = arrayName.shift() + '\n';
@@ -220,12 +234,7 @@ function movieGraphCose(sideId, graph) {
       cyCose.zoom(5)
       cyCose.center()
 
-      popupEdgeManagement(cyCose, (evt) => {
-        popupAtEdge(evt.target, cyCose)
-      })
-
       showSideView(cyCose, (evt) => {
-        console.log(evt.target)
         if (evt.target._private.data.biography) {
           createSideView(evt.target, cyCose)
         }

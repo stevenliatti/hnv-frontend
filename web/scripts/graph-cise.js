@@ -34,15 +34,15 @@ function graphCise(graph) {
       "curve-style": "unbundled-bezier",
       'width': (e) => Math.pow(e.data('movieIds').length, 1.2),
       'line-color': (e) => {
-        source = graph.elements.nodes.find(node => { return node.data.id == e._private.data.target })
-        target = graph.elements.nodes.find(node => { return node.data.id == e._private.data.source })
+        source = graph.elements.nodes.find(node => { return node.data.id == e.data('target') })
+        target = graph.elements.nodes.find(node => { return node.data.id == e.data('source') })
         if (source.data.knowsCommunity == target.data.knowsCommunity) {
           return computeHSL(computeHue(source.data.knowsCommunity, communities), 70, 70)
         } else { return '#bbb' }
       },
       'opacity': (e) => {
-        source = graph.elements.nodes.find(node => { return node.data.id == e._private.data.target })
-        target = graph.elements.nodes.find(node => { return node.data.id == e._private.data.source })
+        source = graph.elements.nodes.find(node => { return node.data.id == e.data('target') })
+        target = graph.elements.nodes.find(node => { return node.data.id == e.data('source') })
         if (source.data.knowsCommunity == target.data.knowsCommunity) {
           return '0.7'
         } else { return '0.4' }
@@ -114,6 +114,6 @@ function graphCise(graph) {
   })
 
   hideSideView(cyCise, (evt) => {
-    closeSideView(evt.target, cyCise)
+    closeSideView(cyCise)
   })
 }

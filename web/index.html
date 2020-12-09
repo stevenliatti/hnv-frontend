@@ -162,7 +162,7 @@
               </div>
             </li>
 
-           
+
 
             <li>
               <table style="width: 260px">
@@ -246,17 +246,24 @@
         <p id="main-loading-text" style="text-align: center; font-size: 60%; margin-top: 100px">Building the relations graph...</p>
         <img id="main-loading-icon" src="loading-icon.gif" style="display: block; width: 20%; margin-right: auto; margin-left: auto; margin-top: 50px">
       </div>
-      <div style="width: 80%; height: 85%; float: left; display: none;" id="cy-cise"></div>
+      <div style="width: 80%; height: 85%; float: left; display: none;" id="cy-cise">
+        <!-- <button id="open-side-button" oninput="closeSideView(document.getElementById('cy-cise'))">
+          <i class="fas fa-plus"></i>
+      </button>
+        <button id="close-side-button" style="display: none;">
+          <i class="fas fa-project-diagram"></i>
+    </button> -->
+      </div>
 
       <!-- Loading side bar -->
       <div style="text-align: center; width: 20%; float: right;" id="loading-slideshow">
-        <p style="font-size: 80%;">While you wait, learn about</p>
-        <p id="loading-slideshow-name">{...}</p>
+        <p style="font-size: 80%;">Did you know about</p>
+        <p class="description-title" id="loading-slideshow-name">{...}</p>
         <p>
           <a class="hovertextactor" target="_blank" id="loading-slideshow-url" ref="https://www.themoviedb.org/" title="Go to their TMDb page">
             <img id="loading-slideshow-picture" src="loading-icon.gif" width="154" height="auto" title=""></a>
         </p>
-        <p style="text-align: justify; font-size: 50%;" id="loading-slideshow-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+        <p class="descrption-text" id="loading-slideshow-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
           dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
 
@@ -267,14 +274,14 @@
           <tr>
             <td valign="top">
               <p>
-                <a class="hovertextactor" target="_blank" id="side-url" href="https://www.themoviedb.org/" title="Go to their TMDb page">
+                <a class="hovertextactor" target="_blank" id="side-url" href="https://www.themoviedb.org/" title="To the TMDb page">
                   <img id="side-picture" src="favicon-32x32.png" width="154" height="auto" title=""></a>
               </p>
             </td>
             <td valign="top">
-              <p style="text-align: center; font-size: 50%;" id="side-top-info">NAME</p>
-              <p style="text-align: center; font-size: 50%;" id="side-middle-info">MIDDLE</p>
-              <p style="font-size: 60%; text-align: justify" id="side-biography">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+              <p class="description-title" id="side-top-info">NAME</p>
+              <p class="descrption-middle-text" id="side-middle-info">MIDDLE</p>
+              <p class="descrption-text" id="side-biography">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
                 aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
               </p>
             </td>
@@ -292,26 +299,23 @@
   <!-- Modal -->
   <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Tutorial</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Tutorial</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
-            <div id="modal-body">
-              <img class="fit-picture"
-              id="tutoImg"
-              src="./img/img1.png"
-              alt="Grapefruit slice atop a pile of other slices">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="btnBack" onclick="back();">Back</button>
-                <button type="button" class="btn btn-secondary" id="btnNext" onclick="next();">Next</button>
-
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="resetTuto();">Close</button>
-            </div>
         </div>
+        <div id="modal-body">
+          <img class="fit-picture" id="tutoImg" src="./img/img1.png" alt="Grapefruit slice atop a pile of other slices">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="btnBack" onclick="back();">Back</button>
+          <button type="button" class="btn btn-secondary" id="btnNext" onclick="next();">Next</button>
+
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="resetTuto();">Close</button>
+        </div>
+      </div>
     </div>
   </div>
 

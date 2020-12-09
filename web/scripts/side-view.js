@@ -31,7 +31,8 @@ function hideSideView(cy, sideViewFn) {
   })
 }
 
-function closeSideView(node, cy) {
+function closeSideView(cy) {
+  console.log('yes')
   if (document.getElementById('cy-cise').style.width == "50%") {
     cy.panBy({
       x: 230,

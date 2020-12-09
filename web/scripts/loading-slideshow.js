@@ -62,7 +62,7 @@ function loadingSlideshow(graph) {
   while (loadingSlideshowActor.data.biography.length < descriptionLength) {
     loadingSlideshowActor = arrayActors[randInt(0, arrayActors.length)]
   }
-  descriptionLength = 500
+  descriptionLength = 300
 
   document.getElementById("loading-slideshow-name").innerHTML = loadingSlideshowActor.data.name
   document.getElementById("loading-slideshow-description").innerHTML = textExtract(loadingSlideshowActor.data.biography, descriptionLength)
