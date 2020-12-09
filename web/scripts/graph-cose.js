@@ -111,7 +111,6 @@ function movieGraphCose(sideId, graph) {
       document.getElementById("side-loading-text").style.display = "none"
       document.getElementById('cy-cose').style.display = "block"
 
-      // TODO: create new cytoscape style for cose movie
       let cyCose = cytoscape({
         container: document.getElementById('cy-cose'),
 
@@ -153,10 +152,19 @@ function movieGraphCose(sideId, graph) {
 
       cyCose.style()
         .selector('edge')
-        .style(
-          'line-color',
-          '#bbb'
-        ).update()
+        .style({
+          'line-color': '#bbb',
+        }).update()
+
+      cyCose.on('mouseover', 'edge', evt => {
+        let edge = evt.target;
+        edge.style('label', edge.data('character'));
+      });
+
+      cyCose.on('mouseout', 'edge', evt => {
+        let edge = evt.target;
+        edge.style('label', '');
+      });
 
       cyCose.style()
         .selector('node')
