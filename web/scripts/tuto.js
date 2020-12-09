@@ -37,7 +37,7 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function autoChange() {
+/*function autoChange() {
     sleep(3000).then(() => {
         next();
         if(currentIdx === tutoImg.length-1)
@@ -45,4 +45,4 @@ function autoChange() {
         else
             autoChange();
     });
- }
+ }*/
