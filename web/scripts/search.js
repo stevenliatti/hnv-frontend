@@ -1,11 +1,6 @@
 let placesOfBirth = [];
 getAllPlacesOfBirth();
 
-// let cyCise = cytoscape({
-// cyCise = cytoscape({
-//   container: document.getElementById('cy-cise')
-// })
-
 $('.basicAutoSelectSearch').autoComplete({
   resolver: 'custom',
   formatResult: function(item) {
@@ -154,11 +149,9 @@ function createSideViewSearchMovie(movieData, graph, cy) {
   let sideTitle = movieData["title"];
   let sideTagline = movieData["tagline"];
   let sideReleaseDate = movieData["release_date"];
-  let sideRuntime = movieData["runtime"].toString();
+  let sideRuntime = movieData["runtime"];
   let sideOverview = movieData["overview"];
   let sidePicture = movieData["poster_path"];
-  let sideBudget = movieData["budget"];
-  let sideRevenue = movieData["revenue"];
 
   movieInfosSideView(
     graph,
@@ -170,8 +163,6 @@ function createSideViewSearchMovie(movieData, graph, cy) {
     sideReleaseDate,
     sideRuntime,
     sideOverview,
-    sidePicture,
-    sideBudget,
-    sideRevenue
+    sidePicture
   )
 }

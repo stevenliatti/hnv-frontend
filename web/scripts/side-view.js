@@ -121,9 +121,7 @@ function movieInfosSideView(
   sideReleaseDate,
   sideRuntime,
   sideOverview,
-  sidePicture,
-  sideBudget,
-  sideRevenue
+  sidePicture
 ) {
   if (cy._private.container.offsetWidth > 1000) {
     cy.panBy({

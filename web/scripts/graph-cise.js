@@ -12,7 +12,6 @@ function graphCise(graph) {
   document.getElementById('cy-cise').style.display = "block"
   document.getElementById('cy-cise').setAttribute("style", "width: 80%; height: 85%; float: left;")
 
-  // let cyCise = cytoscape({
   cyCise = cytoscape({
     container: document.getElementById('cy-cise')
   })

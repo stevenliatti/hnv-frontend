@@ -210,9 +210,10 @@ function popupAtEdge(edge, cy) {
           moviesTable.style.display = "block"
           moviesTable.style.overflowX = "scroll"
           let moviesTopRow = moviesTable.insertRow()
+          let moviesMiddleRow = moviesTable.insertRow()
           let moviesBottomRow = moviesTable.insertRow()
 
-          for (movie of moviesList) {
+          for (let movie of moviesList) {
             let customWidth = 700 / moviesList.length
             let customMargin = (700 - 154 * moviesList.length) / (moviesList.length * 2) - 1
 
@@ -223,7 +224,7 @@ function popupAtEdge(edge, cy) {
             let currentMovieName = document.createTextNode(movie.movie.title + " (" + movie.movie.release_date.split("-")[0] + ")")
             currentMovieTop.appendChild(currentMovieName)
 
-            let currentMovieBottom = moviesBottomRow.insertCell()
+            let currentMovieMiddle = moviesMiddleRow.insertCell()
 
             let currentMovieP = document.createElement('p')
             currentMovieP.style.margin = "0px"
@@ -238,18 +239,43 @@ function popupAtEdge(edge, cy) {
             currentMoviePicture.style.marginLeft = "auto"
             currentMoviePicture.style.marginRight = "auto"
 
+            let currentMovieBottom = moviesBottomRow.insertCell()
+            let currentMovieSideButton = document.createElement('button')
+            currentMovieSideButton.innerHTML = "Open Side Graph"
+            currentMovieSideButton.style.fontSize = "60%"
+            currentMovieSideButton.style.width = "154px"
+            currentMovieSideButton.style.display = "block"
+            currentMovieSideButton.style.margin = "auto"
+            currentMovieSideButton.onclick = function() {
+              getMovieGraph(movie.movie.tmdbId).then(graph => {
+                movieInfosSideView(
+                  graph,
+                  cyCise,
+                  movie.movie.tmdbId,
+                  movie.movie.id,
+                  movie.movie.title,
+                  movie.movie.tagline,
+                  movie.movie.release_date,
+                  movie.movie.runtime,
+                  movie.movie.overview,
+                  movie.movie.poster_path
+                )
+              })
+            }
+
             if (moviesList.length < 5) {
               currentMovieTop.style.width = customWidth + "px"
-              currentMovieBottom.style.width = customWidth + "px"
+              currentMovieMiddle.style.width = customWidth + "px"
               currentMovieA.style.marginLeft = customMargin + "px"
             } else {
               currentMovieTop.style.width = 700 / 4 + "px"
-              currentMovieBottom.style.width = 700 / 4 + "px"
+              currentMovieMiddle.style.width = 700 / 4 + "px"
             }
 
             currentMovieA.appendChild(currentMoviePicture)
             currentMovieP.appendChild(currentMovieA)
-            currentMovieBottom.appendChild(currentMovieP)
+            currentMovieMiddle.appendChild(currentMovieP)
+            currentMovieBottom.appendChild(currentMovieSideButton)
           }
 
           divPopupEdge.appendChild(actorsTable)
