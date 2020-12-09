@@ -32,3 +32,17 @@ function resetTuto() {
     btnBack.style.visibility = 'hidden';
     btnNext.style.visibility = 'visible';
 }
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function autoChange() {
+    sleep(3000).then(() => {
+        next();
+        if(currentIdx === tutoImg.length-1)
+            return;
+        else
+            autoChange();
+    });
+ }
