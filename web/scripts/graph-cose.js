@@ -74,8 +74,6 @@ function actorGraphCose(sideId, sideLink) {
           '#75a9f9'
         ).update()
 
-      let arrayName
-      let contentName
       cyCose.style()
         .selector('node')
         .style({
@@ -83,8 +81,8 @@ function actorGraphCose(sideId, sideLink) {
           'height': (e) => e.data('playInDegree'),
           'text-wrap': "wrap",
           'content': (n) => {
-            arrayName = n.data('name').split(" ")
-            contentName = arrayName.shift() + '\n'
+            let arrayName = n.data('name').split(" ")
+            let contentName = arrayName.shift() + '\n'
             for (a of arrayName) { contentName += a + " " }
             return contentName
           }
@@ -131,12 +129,12 @@ function movieGraphCose(sideId, graph) {
           nodeOverlap: 20,
           refresh: 20,
           fit: true,
-          padding: 30,
+          padding: 10,
           randomize: true,
-          componentSpacing: 100,
+          componentSpacing: 60,
           // nodeRepulsion: 200000,
           nodeRepulsion: function(node) {
-            let repulsion = 700000
+            let repulsion = 500000
             if (node.id == sideId) { repulsion = 10 }
             return repulsion
           },
@@ -153,13 +151,65 @@ function movieGraphCose(sideId, graph) {
         elements: graph
       })
 
-      let mainNode
-      for (node of cyCose.nodes()) {
-        if (node._private.data.id == sideId) { mainNode = node }
-      }
-      mainNode.style('background-color', 'red')
+      cyCose.style()
+        .selector('edge')
+        .style(
+          'line-color',
+          '#bbb'
+        ).update()
 
-      cyCose.zoom(2)
+      cyCose.style()
+        .selector('node')
+        .style({
+          'width': 80,
+          'height': 80,
+          'text-valign': 'center',
+          'text-halign': 'center',
+          'text-wrap': 'wrap',
+          'content': (n) => {
+            let arrayName;
+            if (n.data('name')) {
+              arrayName = n.data('name').split(' ');
+            } else {
+              console.log('movie', n.data('title'));
+              arrayName = n.data('title').split(' ');
+            }
+            let contentName = arrayName.shift() + '\n';
+            for (a of arrayName) { contentName += a + ' ' }
+            return contentName;
+          },
+          'background-color': '#f79767'
+        })
+        .update()
+
+      for (node of cyCose.nodes()) {
+        // actor
+        if ('knowsDegree' in node._private.data) {
+          node.style({
+            'background-color': '#57c7e3',
+            'width': 60,
+            'height': 60,
+          })
+        }
+        // genre
+        else if ('knownForDegree' in node._private.data) {
+          node.style({
+            'background-color': '#8dcc93',
+            'width': 60,
+            'height': 60,
+          })
+        }
+        // country
+        else if ('iso_3166_1' in node._private.data) {
+          node.style({
+            'background-color': '#d9c8ae',
+            'width': 60,
+            'height': 60,
+          })
+        }
+      }
+
+      cyCose.zoom(5)
       cyCose.center()
 
       popupEdgeManagement(cyCose, (evt) => {
