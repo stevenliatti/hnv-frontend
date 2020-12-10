@@ -1,3 +1,156 @@
+let stack = [];
+
+function backToPrevious() {
+  let cyCose = cytoscape({
+    container: document.getElementById('cy-cose')
+  })
+
+  let toApply = stack[stack.length-2];
+  console.log(stack[stack.length-2]);
+
+  if(toApply.label === "actor") {
+    let mainNode
+      for (node of cyCose.nodes()) {
+        if (node.data('id') == sideId) { mainNode = node }
+      }
+      mainNode.style({
+        'background-color': '#0b65d3',
+        'font-size': '20px'
+      })
+
+      cyCose.zoom(2)
+      cyCose.center()
+
+      cyCose.style()
+        .selector('edge')
+        .style({
+          'width': (e) => e.data('movieIds').length,
+          'line-color': (e) => {
+              if (e.data('target') == mainNode.data('id')) {
+                return '#f9aa75'
+              } else if (e.data('source') == mainNode.data('id')) {
+                return '#f9aa75'
+              } else {
+                return '#bbb'
+              }
+            }
+            // (e) => Math.pow(e.data('movieIds').length, 2)
+        }).update()
+
+      cyCose.style()
+        .selector('node')
+        .style({
+          'width': (e) => e.data('playInDegree') * 1.4,
+          'height': (e) => e.data('playInDegree') * 1.4,
+          'text-wrap': "wrap",
+          'content': (n) => {
+            let arrayName = n.data('name').split(" ")
+            let contentName = arrayName.shift() + '\n'
+            for (a of arrayName) { contentName += a + " " }
+            return contentName
+          },
+          'background-color': (n) => {
+            let linkedEdgeTarget = cyCose.edges().find(e => { return ((e.data('source') == mainNode.data('id')) && (e.data('target') == n.data('id'))) })
+            let linkedEdgeSource = cyCose.edges().find(e => { return ((e.data('target') == mainNode.data('id')) && (e.data('source') == n.data('id'))) })
+            if (linkedEdgeTarget) {
+              if (linkedEdgeTarget.data('source') == mainNode.data('id')) { return '#75a9f9' }
+            }
+            if (linkedEdgeSource) {
+              if (linkedEdgeSource.data('target') == mainNode.data('id')) { return '#75a9f9' }
+            }
+          }
+        }).update()
+
+      popupEdgeManagement(cyCose, (evt) => {
+        popupAtEdge(evt.target, cyCose)
+      })
+
+      showSideView(cyCose, (evt) => {
+        createSideView(evt.target, cyCose)
+      })
+  } else {
+    cyCose.style()
+        .selector('edge')
+        .style({
+          'line-color': '#bbb',
+        }).update()
+
+      cyCose.on('mouseover', 'edge', evt => {
+        let edge = evt.target;
+        edge.style({
+          'label': edge.data('character')
+        });
+      });
+
+      cyCose.on('mouseout', 'edge', evt => {
+        let edge = evt.target;
+        edge.style('label', '');
+      });
+
+      cyCose.style()
+        .selector('node')
+        .style({
+          'width': 80,
+          'height': 80,
+          'text-valign': 'center',
+          'text-halign': 'center',
+          'text-wrap': 'wrap',
+          'content': (n) => {
+            let arrayName;
+            if (n.data('name')) {
+              arrayName = n.data('name').split(' ');
+            } else {
+              // console.log('movie', n.data('title'));
+              arrayName = n.data('title').split(' ');
+            }
+            let contentName = arrayName.shift() + '\n';
+            for (a of arrayName) { contentName += a + ' ' }
+            return contentName;
+          },
+          'background-color': '#f79767'
+        })
+        .update()
+
+      for (node of cyCose.nodes()) {
+        // actor
+        if ('knowsDegree' in node._private.data) {
+          node.style({
+            'background-color': '#57c7e3',
+            'width': 60,
+            'height': 60,
+          })
+        }
+        // genre
+        else if ('knownForDegree' in node._private.data) {
+          node.style({
+            'background-color': '#8dcc93',
+            'width': 60,
+            'height': 60,
+          })
+        }
+        // country
+        else if ('iso_3166_1' in node._private.data) {
+          node.style({
+            'background-color': '#d9c8ae',
+            'width': 60,
+            'height': 60,
+          })
+        }
+      }
+
+      cyCose.zoom(5)
+      cyCose.center()
+
+      showSideView(cyCose, (evt) => {
+        if (evt.target.data('gender')) {
+          createSideView(evt.target, cyCose)
+        }
+      });
+  }
+  
+
+}
+
 function actorGraphCose(sideId, sideLink) {
   Promise.all([
       fetch('cy-style-cose.json')
@@ -109,6 +262,8 @@ function actorGraphCose(sideId, sideLink) {
       showSideView(cyCose, (evt) => {
         createSideView(evt.target, cyCose)
       })
+
+      stack.push({graph: cyCose.json(), label: "actor"});
     })
 }
 
@@ -233,6 +388,8 @@ function movieGraphCose(sideId, graph) {
 
       cyCose.zoom(5)
       cyCose.center()
+
+      stack.push({graph: cyCose.json(), label: "movie"});
 
       showSideView(cyCose, (evt) => {
         if (evt.target.data('gender')) {
