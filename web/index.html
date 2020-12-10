@@ -208,10 +208,6 @@
                 <td style="font-size: 12px; padding-left: 3px">Based on <a href="https://js.cytoscape.org/">Cytoscape.js</a> &#8226; Code on <a href="https://github.com/stevenliatti/hollywood-network-visualizer">Github</a></td>
               </tr>
             </table>
-          <button type="button" class="btn btn-sm rounded-sm btnBackFilters" onclick="backToPrevious();">
-            <span style="font-size: 13px;">Backkkkkk</span>
-            <i class="fas fa-undo fa-xs"></i>
-          </button>
           </ul>
         </li>
       </ul>
@@ -291,6 +287,16 @@
                 aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
               </p>
             </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button" class="btn btn-sm rounded-sm btnResetFilters" onclick="clearStack(); closeSideView(cyCise); console.log(stack);">
+                <i class="fas fa-times fa-xs"></i>
+              </button>
+
+              <button type="button" class="btn btn-sm rounded-sm btnBackFilters" onclick="backToPrevious();">
+              <i class="fas fa-undo fa-xs"></i>
+            </button></td>
           </tr>
         </table>
 
