@@ -55,6 +55,7 @@ function actorInfosSideView(
   sidePicture
 ) {
   if (cy._private.container.offsetWidth > 1000) {
+    // console.log(cy)
     cy.panBy({
       x: -230,
       y: 0
@@ -90,6 +91,10 @@ function actorInfosSideView(
 }
 
 function createSideView(node, cy) {
+
+  // console.log("node")
+  // console.log(node)
+
   let sideLink = cy.$id(node.id()).data()["tmdbId"]
   let sideID = cy.$id(node.id()).data()["id"]
   let sideName = cy.$id(node.id()).data()["name"]
@@ -163,5 +168,5 @@ function movieInfosSideView(
   document.getElementById("side-url").href = "https://www.themoviedb.org/movie/" + sideLink
   document.getElementById("side-url").className = "hovertextmovie";
 
-  movieGraphCose(sideID, graph)
+  movieGraphCose(sideID, graph, sideLink)
 }

@@ -1,3 +1,27 @@
+let stack = [];
+
+function clearStack() { stack = [] }
+
+function backToPrevious() {
+  if (stack.length > 1) {
+    let toApply = stack[stack.length - 2];
+    stack.pop()
+    if (toApply.label == "actor") {
+      createSideView(toApply.mNode, toApply.graph)
+      stack.pop()
+    } else {
+      getMovieGraph(toApply.mMovie)
+        .then(graph => {
+          const movieData = graph.nodes.map(n => n.data).find(n => n.tmdbId == toApply.mMovie);
+          createSideViewSearchMovie(movieData, graph, cyCise);
+        })
+      stack.pop()
+    }
+  } else {
+    closeSideView(cyCise)
+  }
+}
+
 function actorGraphCose(sideId, sideLink) {
   Promise.all([
       fetch('cy-style-cose.json')
@@ -109,10 +133,13 @@ function actorGraphCose(sideId, sideLink) {
       showSideView(cyCose, (evt) => {
         createSideView(evt.target, cyCose)
       })
+
+      // stack.push({ graph: cyCose.json(), label: "actor", mNode: mainNode });
+      stack.push({ graph: cyCose, label: "actor", mNode: mainNode });
     })
 }
 
-function movieGraphCose(sideId, graph) {
+function movieGraphCose(sideId, graph, tmdbId) {
   fetch('cy-style-cose.json')
     .then(function(res) {
       return res.json()
@@ -193,7 +220,6 @@ function movieGraphCose(sideId, graph) {
             if (n.data('name')) {
               arrayName = n.data('name').split(' ');
             } else {
-              // console.log('movie', n.data('title'));
               arrayName = n.data('title').split(' ');
             }
             let contentName = arrayName.shift() + '\n';
@@ -233,6 +259,8 @@ function movieGraphCose(sideId, graph) {
 
       cyCose.zoom(5)
       cyCose.center()
+
+      stack.push({ graph: cyCose, label: "movie", mMovie: tmdbId });
 
       showSideView(cyCose, (evt) => {
         if (evt.target.data('gender')) {
