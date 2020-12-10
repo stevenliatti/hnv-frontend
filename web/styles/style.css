@@ -9,7 +9,7 @@ html,
   height: 100vh;
   /* border: 1px solid lightgray; */
   font: 22pt arial;
-  z-index: 99999;
+  /* z-index: 99999; */
 }
 
 h5 {

@@ -79,6 +79,7 @@ function findInfos(tmdbId, label) {
       getActor(tmdbId)
         .then(actor => {
           createSideViewSearchActor(actor['actor'], cyCise);
+          document.getElementById('mainSearchBar').blur();
         })
       break;
     case 'Movie':
@@ -86,6 +87,7 @@ function findInfos(tmdbId, label) {
         .then(graph => {
           const movieData = graph.nodes.map(n => n.data).find(n => n.tmdbId == tmdbId);
           createSideViewSearchMovie(movieData, graph, cyCise);
+          document.getElementById('mainSearchBar').blur();
         })
       break;
     default:
