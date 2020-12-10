@@ -15,7 +15,7 @@ function reloadMain() {
     })
     .then(() => {
       setTimeout(() => {
-        graphCise(graph)
+        graphCise(graph, 'main')
       }, 800)
     })
     .catch(err => console.error(err))
@@ -40,8 +40,8 @@ function main() {
     })
     .then(() => {
       setTimeout(() => {
-        graphCise(graph)
-      }, 300)
+        graphCise(graph, 'main')
+      }, 800)
     })
     .catch(err => console.error(err))
 }

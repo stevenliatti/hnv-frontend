@@ -7,10 +7,13 @@ function computeHSL(h, s, l) {
   return `hsl(${h}, ${s}%, ${l}%)`
 }
 
-function graphCise(graph) {
-  document.getElementById("main-loading").style.display = "none"
-  document.getElementById('cy-cise').style.display = "block"
-  document.getElementById('cy-cise').setAttribute("style", "width: 80%; height: 85%; float: left;")
+function graphCise(graph, origin) {
+  if (origin == 'main') {
+    console.log(origin)
+    document.getElementById("main-loading").style.display = "none"
+    document.getElementById('cy-cise').style.display = "block"
+    document.getElementById('cy-cise').setAttribute("style", "width: 80%; height: 85%; float: left;")
+  }
 
   cyCise = cytoscape({
     container: document.getElementById('cy-cise')
