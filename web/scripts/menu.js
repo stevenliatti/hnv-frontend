@@ -150,7 +150,7 @@ function restoreFiltersToState(state) {
   state.country ? searchCountryFilter.value = state.country : searchCountryFilter.value = "";
   state.bornStart ? bornBetweenStartFilter.value = state.bornStart : bornBetweenStartFilter.value = null;
   state.bornEnd ? bornBetweenEndFilter.value = state.bornEnd : bornBetweenEndFilter.value = null;
-  state.stillAlive ? state.stillAlive.checked = true : rbStillAliveChoice.checked = false;
+  state.stillAlive ? state.stillAlive.checked = true : rbStillAliveChoice ? rbStillAliveChoice.checked = false : null;
   state.collab ? inputSliderCollab.value = state.collab : inputSliderCollab.value = "";
   state.collab ? sliderCollab.value = state.collab : sliderCollab.value = 20;
   state.apparences ? inputSliderAppearences.value = state.apparences : inputSliderAppearences.value = "";
