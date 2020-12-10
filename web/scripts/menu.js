@@ -172,15 +172,16 @@ function resetPeopleFilters() {
   let rbStillAliveChoice = $('[name ="rbStillAliveChoice"]:checked')[0];
   let searchCountryFilter = $('#searchCountryFilter')[0];
 
-  cbxActorsFilter.checked = false;
-  cbxActressesFilter.checked = false;
+  cbxActorsFilter.checked = true;
+  cbxActressesFilter.checked = true;
   searchCountryFilter.value = "";
-  bornBetweenStartFilter.value = null;
-  bornBetweenEndFilter.value = null;
+  bornBetweenStartFilter.value = "1930-01-01";
+  bornBetweenEndFilter.value = "1980-01-01";
   if (rbStillAliveChoice)
     rbStillAliveChoice.checked = false;
+  document.getElementById('rbDontCare').checked = true;
   inputSliderCollab.value = null;
-  sliderCollab.value = 20;
+  sliderCollab.value = 10;
   inputSliderAppearences.value = null;
   sliderAppearences.value = 5;
 
