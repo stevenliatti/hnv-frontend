@@ -235,7 +235,7 @@ function movieGraphCose(sideId, graph) {
       cyCose.center()
 
       showSideView(cyCose, (evt) => {
-        if (evt.target._private.data.biography) {
+        if (evt.target.data('gender')) {
           createSideView(evt.target, cyCose)
         }
       })
