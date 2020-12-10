@@ -275,10 +275,16 @@
         <table style="width: 100%">
           <tr>
             <td valign="top">
-              <p>
+              <p style="margin: 0px;">
                 <a class="hovertextactor" target="_blank" id="side-url" href="https://www.themoviedb.org/" title="To the TMDb page">
                   <img id="side-picture" src="favicon-32x32.png" width="154" height="auto" title=""></a>
               </p>
+              <button style="float: left;" type="button" class="btn btn-sm rounded-sm btnResetFilters" onclick="clearStack(); closeSideView(cyCise);">
+                  <i class="fas fa-times fa-xs"></i>
+                </button>
+              <button style="float: right;" type="button" class="btn btn-sm rounded-sm btnBackFilters" onclick="backToPrevious();">
+                <i class="fas fa-undo fa-xs"></i>
+              </button></td>
             </td>
             <td valign="top">
               <p class="description-title" id="side-top-info">NAME</p>
@@ -287,16 +293,6 @@
                 aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
               </p>
             </td>
-          </tr>
-          <tr>
-            <td>
-              <button type="button" class="btn btn-sm rounded-sm btnResetFilters" onclick="clearStack(); closeSideView(cyCise); console.log(stack);">
-                <i class="fas fa-times fa-xs"></i>
-              </button>
-
-              <button type="button" class="btn btn-sm rounded-sm btnBackFilters" onclick="backToPrevious();">
-              <i class="fas fa-undo fa-xs"></i>
-            </button></td>
           </tr>
         </table>
 

@@ -17,9 +17,10 @@ function backToPrevious() {
         })
       stack.pop()
     }
-  } else {
-    closeSideView(cyCise)
   }
+  // else {
+  //   closeSideView(cyCise)
+  // }
 }
 
 function actorGraphCose(sideId, sideLink) {
