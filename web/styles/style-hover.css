@@ -40,7 +40,7 @@ a.hovertextmovie::after {
   content: attr(title);
   position: absolute;
   left: 0;
-  top: 300%;
+  top: 500%;
   width: 154px;
   /* height: 30px; */
   background: rgba(249, 170, 117, 0.8);
