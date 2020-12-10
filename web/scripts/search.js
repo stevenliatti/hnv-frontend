@@ -6,10 +6,7 @@ $('.basicAutoSelectSearch').autoComplete({
   formatResult: function(item) {
     return {
       value: item.tmdbId,
-      text: JSON.stringify({
-        label: item.label,
-        tmdbId: item.tmdbId
-      }),
+      text: item.name,
       html: [
         item.name, ' ',
         formatLabel(item.label)
@@ -20,26 +17,6 @@ $('.basicAutoSelectSearch').autoComplete({
     search: function(query, callback) {
       let limitActors = 5;
       let limitMovies = 5;
-      searchRequest(query, limitActors, limitMovies, callback);
-    }
-  }
-});
-
-$('.basicAutoSelectSearchPeopleOnly').autoComplete({
-  resolver: 'custom',
-  formatResult: function(item) {
-    return {
-      value: item.id,
-      text: item.tmdbId + "",
-      html: [
-        item.name
-      ]
-    };
-  },
-  events: {
-    search: function(query, callback) {
-      let limitActors = 5;
-      let limitMovies = 0;
       searchRequest(query, limitActors, limitMovies, callback);
     }
   }
@@ -92,12 +69,8 @@ function formatLabel(label) {
   }
 }
 
-$('.basicAutoSelectSearch').on('change', (event) => {
-  const result = JSON.parse(event.target.value);
-  // console.log("in change:", result);
-  findInfos(result.tmdbId, result.label);
-  // Little hack
-  document.getElementById("mainSearchBar").value = "";
+$('.basicAutoSelectSearch').on('autocomplete.select', function (evt, item) {
+  findInfos(item.tmdbId, item.label);
 });
 
 function findInfos(tmdbId, label) {

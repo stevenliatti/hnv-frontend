@@ -195,16 +195,44 @@ function sleep(ms) {
 }
 
 let tmp_g;
+let searchActorSP1 = null;
+let searchActorSP2 = null;
+
+$('.basicAutoSelectSearchPeopleOnly').autoComplete({
+  resolver: 'custom',
+  formatResult: function(item) {
+    return {
+      value: item.tmdbId,
+      text: item.name,
+      html: [
+        item.name
+      ]
+    };
+  },
+  events: {
+    search: function(query, callback) {
+      let limitActors = 5;
+      let limitMovies = 0;
+      searchRequest(query, limitActors, limitMovies, callback);
+    }
+  }
+});
+
+$('#searchActorSP1').on('autocomplete.select', function (evt, item) {
+  searchActorSP1 = item.tmdbId;
+});
+
+$('#searchActorSP2').on('autocomplete.select', function (evt, item) {
+  searchActorSP2 = item.tmdbId;
+});
 
 function computeSP() {
   tmp_g = tmp_graph.length > 0 ? tmp_graph[tmp_graph.length-1] : graph;
 
-  let searchActorSP1 = $('#searchActorSP1')[0];
-  let searchActorSP2 = $('#searchActorSP2')[0];
   let errorSP = $('#errorSP')[0];
 
-  if(searchActorSP1.value && searchActorSP2.value)
-    spQuery(searchActorSP1.value, searchActorSP2.value);
+  if(searchActorSP1 && searchActorSP2)
+    spQuery(searchActorSP1, searchActorSP2);
   else{
     errorSP.style.display = 'block';
     sleep(3000).then(() => {
@@ -217,8 +245,8 @@ function clearSP() {
   let searchActorSP1 = $('#searchActorSP1')[0];
   let searchActorSP2 = $('#searchActorSP2')[0];
 
-  searchActorSP1.value = "";
-  searchActorSP2.value = "";
+  searchActorSP1 = null;
+  searchActorSP2 = null;
   console.log(tmp_g);
   if(tmp_g) {
     graphCise(tmp_g);
@@ -228,9 +256,7 @@ function clearSP() {
 function spQuery(tmdbId1, tmdbId2) {
   fetch(env.API_BASE_URL + `/graph/shortestPath/${tmdbId1}/${tmdbId2}`)
   .then(res => {
-    console.log(res);
       res.json().then(json => {
-        console.log(json);
         graphCise(json);
       }).catch(err => {
         let errorQSP = $('#errorQSP')[0];
