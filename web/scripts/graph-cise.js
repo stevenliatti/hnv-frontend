@@ -9,7 +9,7 @@ function computeHSL(h, s, l) {
 
 function graphCise(graph, origin) {
   if (origin == 'main') {
-    console.log(origin)
+    // console.log(origin)
     document.getElementById("main-loading").style.display = "none"
     document.getElementById('cy-cise').style.display = "block"
     document.getElementById('cy-cise').setAttribute("style", "width: 80%; height: 85%; float: left;")
