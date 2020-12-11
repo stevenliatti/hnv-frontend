@@ -163,7 +163,6 @@ function resetGraph() {
     graphCise(tmp_graph[0]);
     graph = tmp_graph[0];
     tmp_graph = [];
-    restoreFiltersToState(tmp_filters[0]);
     tmp_filters = [];
   }
 }
