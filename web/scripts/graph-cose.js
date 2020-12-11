@@ -9,6 +9,7 @@ function backToPrevious() {
     if (toApply.label == "actor") {
       createSideView(toApply.mNode, toApply.graph)
       stack.pop()
+      if (stack.length < 2) { document.getElementById("stack-back").style.display = "none" }
     } else {
       getMovieGraph(toApply.mMovie)
         .then(graph => {
@@ -16,11 +17,9 @@ function backToPrevious() {
           createSideViewSearchMovie(movieData, graph, cyCise);
         })
       stack.pop()
+      if (stack.length < 2) { document.getElementById("stack-back").style.display = "none" }
     }
   }
-  // else {
-  //   closeSideView(cyCise)
-  // }
 }
 
 function actorGraphCose(sideId, sideLink) {
@@ -137,6 +136,7 @@ function actorGraphCose(sideId, sideLink) {
 
       // stack.push({ graph: cyCose.json(), label: "actor", mNode: mainNode });
       stack.push({ graph: cyCose, label: "actor", mNode: mainNode });
+      if (stack.length > 1) { document.getElementById("stack-back").style.display = "block" }
     })
 }
 
@@ -262,6 +262,7 @@ function movieGraphCose(sideId, graph, tmdbId) {
       cyCose.center()
 
       stack.push({ graph: cyCose, label: "movie", mMovie: tmdbId });
+      if (stack.length > 1) { document.getElementById("stack-back").style.display = "block" }
 
       showSideView(cyCose, (evt) => {
         if (evt.target.data('gender')) {
